@@ -1,12 +1,11 @@
 class Game {
 
-	Start(roundNumber) {
-		this.startChallenge(roundNumber || 1);
+	Start(lvlNumber) {
 		this.events = new GameEventManager();
-		this.events.on('start', () => {
-			console.log("xxx!");
+		this.events.on('load-level', (levelNumber, map) => {
+			this.setProperties(levelNumber, map);
 		});
-		this.events.trigger('start');
+		this.startChallenge(lvlNumber || 1);
 	}
 
 	Update() {
@@ -15,7 +14,10 @@ class Game {
 
 	startChallenge(roundNumber) {
 		let map = new Map(roundNumber);
-		this.setProperties(roundNumber, map);
+		Game.loadTextAsset(map.getURL(), (asset) => {
+			map.fromXML(asset);
+			this.events.trigger('load-level', [roundNumber, map]);
+		});
 	}
 
 	setProperties(roundNumber, map) {
@@ -42,7 +44,20 @@ class Game {
 
 	}
 
-	static loadAsset(uri, callback) {
-
+	static loadTextAsset(uri, callback) {
+		fetch(uri)
+			.then((response) => {
+				if (response.ok) {
+					return response.text().then((body) => {
+						callback(body);
+					});
+				} else {
+					console.error(response);
+					throw new Error("Response was not ok!");
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 }

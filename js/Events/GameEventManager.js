@@ -12,9 +12,9 @@ class GameEventManager {
     this.events[eventName].addEventListener(callback);
   }
 
-  trigger(eventName, params) {
+  trigger(eventName, args) {
     if (this.eventExists(eventName)) {
-      this.events[eventName].execute(params);
+      this.events[eventName].execute(args);
     }
   }
 

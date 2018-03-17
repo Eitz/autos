@@ -5,7 +5,7 @@ class GameEvent {
 
   execute(params) {
     for(let cb of this.listeners) {
-      cb(params);
+      cb.apply(this, params);
     }
   }
 
