@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Unnamed Game - v0.1</title>
+		<script type="text/javascript" src="js/GameObjects/Car.js"></script>
+		<script type="text/javascript" src="js/GameObjects/City.js"></script>
+		<script type="text/javascript" src="js/GameObjects/Map.js"></script>
+		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
+		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
+		<script type="text/javascript" src="js/Game.js"></script>
+		<script>
+			window.onload = function (){
+				let game = new Game();
+				game.Start();
+			};			
+		</script>
+		<link rel="stylesheet" href="css/game.css" />
+	</head>
+	<body>
+		<div class="game"><!--
+		--><section class="top-bar"><!--
+			--><div class="description"></div><!--
+			--><div class="progress-buttons"></div><!--
+		--></section><!--
+		--><section class="left-block"><!--
+			--><div class="map">
+					<canvas></canvas>
+			</div><!--
+			--><div class="event-log"></div><!--
+			--></section><!--
+		--><section class="right-block"><!--
+			--><div class="code-editor"></div><!--
+			--><div class="short-documentation"></div><!--
+		--></section><!--
+	--></div>
+	</body>
+</html>
