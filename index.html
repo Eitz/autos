@@ -3,9 +3,10 @@
 	<head>
 		<title>Autos - v0.1</title>
 		<script type="text/javascript" src="js/Util.js"></script>
+		<script type="text/javascript" src="js/MapController.js"></script>
 		<script type="text/javascript" src="js/GameObjects/Car.js"></script>
 		<script type="text/javascript" src="js/GameObjects/City.js"></script>
-		<script type="text/javascript" src="js/GameObjects/Map.js"></script>
+		<script type="text/javascript" src="js/GameObjects/Level.js"></script>
 		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
 		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
 		<script type="text/javascript" src="js/Game.js"></script>
@@ -18,20 +19,36 @@
 		<link rel="stylesheet" href="css/game.css" />
 	</head>
 	<body>
-		<div class="game"><!--
-		--><section class="top-bar"><!--
-			--><div class="description"></div><!--
-			--><div class="progress-buttons"></div><!--
+		<div id="game"><!--
+		--><section id="top-bar"><!--
+			--><div id="description">
+					<h1>Título do desafio</h1>
+					<h3>Descrição detalhada, entrando em alguns detalhes, etc.</h3>
+			</div><!--
+			--><div id="progress-buttons"><button>Start</button><button>Stop</button></div><!--
 		--></section><!--
-		--><section class="left-block"><!--
-			--><div class="map">
+		--><section id="left-block"><!--
+			--><div id="map">
 					<canvas></canvas>
 			</div><!--
-			--><div class="event-log"></div><!--
+			--><div id="event-log"></div><!--
 			--></section><!--
-		--><section class="right-block"><!--
-			--><div class="code-editor"></div><!--
-			--><div class="short-documentation"></div><!--
+		--><section id="right-block"><!--
+			--><div id="code-editor"><textarea>
+#game #left-block #map {
+	background: blue;
+	height: calc(100% - 100px);
+}
+#game #left-block #event-log {
+	background: darkblue;
+	height: 100px;
+}
+#game #right-block #code-editor {
+	background: darkgreen;
+	height: calc(100% - 150px);
+}
+			</textarea></div><!--
+			--><div id="short-documentation"></div><!--
 		--></section><!--
 	--></div>
 	</body>

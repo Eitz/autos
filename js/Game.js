@@ -1,35 +1,42 @@
 class Game {
 
-	Start(lvlNumber) {
+	constructor(root) {
+		if (!root) {
+			root = document;
+		}
+		this.elements = {
+			description: root.getElementById('description'),
+			progress_buttons: root.getElementById('progress-button'),
+			map: root.getElementById('map').getElementsByTagName('canvas')[0],
+			event_log: root.getElementById('event_log'),
+			code_editor: root.getElementById('code_editor'),
+			short_documentation: root.getElementById('short_documentation'),
+		};
+	}
+
+	Start() {
 		this.events = new GameEventManager();
-		this.events.on('load-level', (levelNumber, map) => {
-			this.setProperties(levelNumber, map);
+		this.world = new MapController(this.elements.map);
+		this.events.on('load-level', (levelNumber, level) => {
+			this.setProperties(levelNumber, level);
+			this.world.Start(level);
 		});
-		this.startChallenge(lvlNumber || 1);
+		this.startChallenge(1);
 	}
 
-	Update() {
-
-	}
-
-	startChallenge(roundNumber) {
-		let map = new Map(roundNumber);
-		Game.loadTextAsset(map.getURL(), (asset) => {
-			map.fromXML(asset);
-			this.events.trigger('load-level', [roundNumber, map]);
+	startChallenge(levelNumber) {
+		let level = new Level(levelNumber);
+		Game.loadTextAsset(level.getURL(), (asset) => {
+			level.fromXML(asset);
+			this.events.trigger('load-level', [levelNumber, level]);
 		});
 	}
 
-	setProperties(roundNumber, map) {
+	setProperties(roundNumber, level) {
 		this.currentRound = roundNumber;
-		this.setMap(map.create());
-		this.setDescription(map.name, map.description);
-		this.setCode(map.codeSample);
-		this.setShortDocumentation(map.shortDocumentation);
-	}
-
-	setMap(mapImage) {
-
+		this.setDescription(level.name, level.description);
+		this.setCode(level.codeSample);
+		this.setShortDocumentation(level.shortDocumentation);
 	}
 
 	setDescription(mapName, description) {
