@@ -3,10 +3,13 @@
 	<head>
 		<title>Autos - v0.1</title>
 		<script type="text/javascript" src="js/Util.js"></script>
-		<script type="text/javascript" src="js/MapController.js"></script>
+		<script type="text/javascript" src="js/Vector2.js"></script>
+		<script type="text/javascript" src="js/GameObjects/GameObject.js"></script>
+		<script type="text/javascript" src="js/GameObjects/Road.js"></script>
 		<script type="text/javascript" src="js/GameObjects/Car.js"></script>
 		<script type="text/javascript" src="js/GameObjects/City.js"></script>
 		<script type="text/javascript" src="js/GameObjects/Level.js"></script>
+		<script type="text/javascript" src="js/GameController.js"></script>
 		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
 		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
 		<script type="text/javascript" src="js/Game.js"></script>
@@ -14,7 +17,13 @@
 			window.onload = function (){
 				let game = new Game();
 				game.Start();
-			};			
+			};
+			
+			function ir(cidade) {
+				/** @type <GameController> */
+				let gameController = Game.Instance().controller;
+				gameController.getCarById("1").moveToCity(cidade);
+			}
 		</script>
 		<link rel="stylesheet" href="css/game.css" />
 	</head>
@@ -25,10 +34,10 @@
 					<h1>Título do desafio</h1>
 					<h3>Descrição detalhada, entrando em alguns detalhes, etc.</h3>
 			</div><!--
-			--><div id="progress-buttons"><button>Start</button><button>Stop</button></div><!--
+			--><div id="progress-buttons"><button onclick="ir('C')">IR C</button><button onclick="ir('B')">IR B</button><button onclick="ir('A')">IR A</button></div><!--
 		--></section><!--
 		--><section id="left-block"><!--
-			--><div id="map">
+			--><div id="gameArea">
 					<canvas></canvas>
 			</div><!--
 			--><div id="event-log"></div><!--

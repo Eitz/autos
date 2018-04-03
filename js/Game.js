@@ -1,3 +1,5 @@
+let game_instance;
+
 class Game {
 
 	constructor(root) {
@@ -7,27 +9,34 @@ class Game {
 		this.elements = {
 			description: root.getElementById('description'),
 			progress_buttons: root.getElementById('progress-button'),
-			map: root.getElementById('map').getElementsByTagName('canvas')[0],
+			gameArea: root.getElementById('gameArea').getElementsByTagName('canvas')[0],
 			event_log: root.getElementById('event_log'),
 			code_editor: root.getElementById('code_editor'),
 			short_documentation: root.getElementById('short_documentation'),
 		};
+		
+		game_instance = this;
+	}
+
+	static Instance() {
+		return game_instance;
 	}
 
 	Start() {
 		this.events = new GameEventManager();
-		this.world = new MapController(this.elements.map);
-		this.events.on('load-level', (levelNumber, level) => {
-			this.setProperties(levelNumber, level);
-			this.world.Start(level);
-		});
+		this.controller = new GameController(this.elements.gameArea);
 		this.startChallenge(1);
+		this.events.on('load-level', (levelNumber, level) => {
+			// this.controller.Reset();
+			this.setProperties(levelNumber, level);
+			this.controller.Start();
+		});
 	}
 
 	startChallenge(levelNumber) {
 		let level = new Level(levelNumber);
 		Game.loadTextAsset(level.getURL(), (asset) => {
-			level.fromXML(asset);
+			level.fromJSON(asset);
 			this.events.trigger('load-level', [levelNumber, level]);
 		});
 	}

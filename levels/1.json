@@ -1,0 +1,17 @@
+{
+  "name": "Round 1",
+  "description": "Bla bla bla",
+  "cities": [
+    { "id": "A", "name": "Itajaí", "x": 50, "y": 70 },
+    { "id": "B", "name": "Itapema", "x": 360, "y": 100 },
+    { "id": "C", "name": "Porto Belo", "x": 560, "y": 410 }
+  ],
+  "cars": [
+    { "id": "1", "type": "1", "city": "A" }
+  ],
+  "roads" : [
+    { "id": "1", "from": "A", "to": "B" },
+    { "id": "2", "from": "B", "to": "A" },
+    { "id": "3", "from": "C", "to": "A" }
+  ]
+}

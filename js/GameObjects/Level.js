@@ -1,10 +1,18 @@
-class Level {
+class Level extends GameObject {
+
   constructor(levelName) {
+    super(levelName);
     this.levelName = levelName;
-    this.levelURL = `levels/${this.levelName}.xml`
+    this.levelURL = `levels/${this.levelName}.json`
+    /** @type {City[]} */
+    this.cities = [];
+    /** @type {Car[]} */
+    this.cars = [];
+    /** @type {Road[]} */
+    this.roads = [];
   }
 
-  create() {
+  Render(ctx) {
     
   }
 
@@ -12,21 +20,22 @@ class Level {
     return this.levelURL;
   }
 
-  fromXML(xml) {
-    this.levelProps = Util.XMLtoJObject(xml);
+  fromJSON(json) {
+    this.levelProps = Util.JSONtoObject(json);
     this.setProperties({
       name: this.levelProps.name,
       description: this.levelProps.description,
       codeSample: this.levelProps.codeSample,
-      shortDocumentation: this.levelProps.shortDocumentation
+      shortDocumentation: this.levelProps.shortDocumentation,
+      cities: City.fromObject(this.levelProps.cities),
+      cars: Car.fromObject(this.levelProps.cars),
+      roads: Road.fromObject(this.levelProps.roads)
     });
   }
 
   setProperties(props) {
-    this.name = this.levelProps.name;
-    this.description = this.levelProps.description;
-    this.codeSample = this.levelProps.codeSample;
-    this.shortDocumentation = this.levelProps.shortDocumentation;
-    console.log(this);
+    for (let prop in props) {
+      this[prop] = props[prop];
+    }
   }
 }
