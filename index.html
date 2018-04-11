@@ -2,28 +2,43 @@
 <html>
 	<head>
 		<title>Autos - v0.1</title>
+
+		<!-- Vendor scripts -->
+		<!--
+			Ace editor 
+			<script src="/vendor/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>		
+			<script src="/vendor/ace-editor/mode-javascript.js"></script>
+			<script src="/vendor/ace-editor/ext-language_tools.js"></script>
+			<script src="/vendor/ace-editor/theme-monokai.js"></script>
+			<script src="/vendor/ace-editor/worker-javascript.js"></script>
+		-->
+		<!-- code-mirror editor-->
+		<script src="/vendor/code-mirror/lib/codemirror.js"></script>
+		<link rel="stylesheet" href="/vendor/code-mirror/lib/codemirror.css" />
+		<link rel="stylesheet" href="/vendor/code-mirror/theme/dracula.css" />
+		<script src="/vendor/code-mirror/mode/javascript/javascript.js"></script>
+		
 		<script type="text/javascript" src="js/Util.js"></script>
 		<script type="text/javascript" src="js/Vector2.js"></script>
+		<script type="text/javascript" src="js/Logger.js"></script>
+		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
+		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
 		<script type="text/javascript" src="js/GameObjects/GameObject.js"></script>
-		<script type="text/javascript" src="js/GameObjects/Road.js"></script>
-		<script type="text/javascript" src="js/GameObjects/Car.js"></script>
-		<script type="text/javascript" src="js/GameObjects/City.js"></script>
+		<script type="text/javascript" src="js/GameObjects/PassengerGO.js"></script>
+		<script type="text/javascript" src="js/GameObjects/RoadGO.js"></script>
+		<script type="text/javascript" src="js/GameObjects/VehicleGO.js"></script>
+		<script type="text/javascript" src="js/GameObjects/CityGO.js"></script>
 		<script type="text/javascript" src="js/GameObjects/Level.js"></script>
 		<script type="text/javascript" src="js/GameController.js"></script>
-		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
-		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
+		<script type="text/javascript" src="js/InterfaceObjects/Road.js"></script>
+		<script type="text/javascript" src="js/InterfaceObjects/Vehicle.js"></script>
+		<script type="text/javascript" src="js/InterfaceObjects/City.js"></script>
 		<script type="text/javascript" src="js/Game.js"></script>
 		<script>
 			window.onload = function (){
 				let game = new Game();
-				game.Start();
+				game.Setup();
 			};
-			
-			function ir(cidade) {
-				/** @type <GameController> */
-				let gameController = Game.Instance().controller;
-				gameController.getCarById("1").moveToCity(cidade);
-			}
 		</script>
 		<link rel="stylesheet" href="css/game.css" />
 	</head>
@@ -34,29 +49,16 @@
 					<h1>Título do desafio</h1>
 					<h3>Descrição detalhada, entrando em alguns detalhes, etc.</h3>
 			</div><!--
-			--><div id="progress-buttons"><button onclick="ir('C')">IR C</button><button onclick="ir('B')">IR B</button><button onclick="ir('A')">IR A</button></div><!--
+			--><div id="progress-buttons"><button onclick="Game.Instance().Start();">Start</button><button onclick="Game.Instance().Pause();">Pause</button><button onclick="Game.Instance().Reset();">Reset</button></div><!--
 		--></section><!--
 		--><section id="left-block"><!--
-			--><div id="gameArea">
+			--><div id="game-area">
 					<canvas></canvas>
 			</div><!--
 			--><div id="event-log"></div><!--
 			--></section><!--
 		--><section id="right-block"><!--
-			--><div id="code-editor"><textarea>
-#game #left-block #map {
-	background: blue;
-	height: calc(100% - 100px);
-}
-#game #left-block #event-log {
-	background: darkblue;
-	height: 100px;
-}
-#game #right-block #code-editor {
-	background: darkgreen;
-	height: calc(100% - 150px);
-}
-			</textarea></div><!--
+			--><div id="code-area"><textarea id="code-editor"></textarea></div><!--
 			--><div id="short-documentation"></div><!--
 		--></section><!--
 	--></div>

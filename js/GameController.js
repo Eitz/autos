@@ -27,7 +27,21 @@ class GameController {
     this.a++;
   }
 
-  Start (levelData) {
+  Start() {
+    this.isGameRunning = true;
+  }
+
+  Pause() {
+    this.isGameRunning = false;
+  }
+
+  Reset() {
+    this.gameObjects = [];
+    this.isGameRunning = false;
+    this.reset = true;
+  }
+
+  Prepare (levelData) {
     this.ReorderGameObjects();
     requestAnimationFrame(this.Frame.bind(this));
   }
@@ -57,10 +71,16 @@ class GameController {
     if (!this.last) {
       this.last = now;
     }
-    this.Update(now-this.last);
+    if (this.isGameRunning) {
+      this.Update(now-this.last);
+    }
     this.Render();
     this.last = now;
-    requestAnimationFrame(this.Frame.bind(this));
+    
+    if (!this.reset)
+      requestAnimationFrame(this.Frame.bind(this));
+    else
+      this.reset = false;    
   }
 
   getGameObjectById(id) {
@@ -72,14 +92,34 @@ class GameController {
   }
 
   getCityById(id) {
-		return this.getGameObjectById("city-" + id);
+    if (id.startsWith('city/')) {
+      return this.getGameObjectById(id);
+    } else {
+      return this.getGameObjectById("city/" + id);
+    }
 	}
 
-	getCarById(id) {
-		return this.getGameObjectById("car-" + id);
+	getVehicleById(id) {
+		if (id.startsWith('vehicle/')) {
+      return this.getGameObjectById(id);
+    } else {
+      return this.getGameObjectById("vehicle/" + id);
+    }
 	}
 
 	getRoadById(id) {
-		return this.getGameObjectById("road-" + id);
-	}
+		if (id.startsWith('road/')) {
+      return this.getGameObjectById(id);
+    } else {
+      return this.getGameObjectById("road/" + id);
+    }
+  }
+
+  getPassengerById(id) {
+		if (id.startsWith('passenger/')) {
+      return this.getGameObjectById(id);
+    } else {
+      return this.getGameObjectById("passenger/" + id);
+    }
+  }
 }

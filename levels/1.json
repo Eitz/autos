@@ -2,16 +2,92 @@
   "name": "Round 1",
   "description": "Bla bla bla",
   "cities": [
-    { "id": "A", "name": "Itajaí", "x": 50, "y": 70 },
-    { "id": "B", "name": "Itapema", "x": 360, "y": 100 },
-    { "id": "C", "name": "Porto Belo", "x": 560, "y": 410 }
+    {
+      "id": "A",
+      "name": "Itajaí",
+      "x": 50,
+      "y": 70
+    },
+    {
+      "id": "B",
+      "name": "Itapema",
+      "x": 470,
+      "y": 100
+    },
+    {
+      "id": "C",
+      "name": "Porto Belo",
+      "x": 350,
+      "y": 300
+    },
+    {
+      "id": "D",
+      "name": "Porto Belo",
+      "x": 50,
+      "y": 300
+    }
   ],
   "cars": [
-    { "id": "1", "type": "1", "city": "A" }
+    {
+      "id": "1",
+      "type": "1",
+      "city": "A"
+    }
   ],
-  "roads" : [
-    { "id": "1", "from": "A", "to": "B" },
-    { "id": "2", "from": "B", "to": "A" },
-    { "id": "3", "from": "C", "to": "A" }
-  ]
+  "roads": [
+    {
+      "id": "1",
+      "from": "A",
+      "to": "B"
+    },
+    {
+      "id": "2",
+      "from": "B",
+      "to": "A"
+    },
+    {
+      "id": "3",
+      "from": "A",
+      "to": "C"
+    },
+    {
+      "id": "4",
+      "from": "C",
+      "to": "A"
+    },
+    {
+      "id": "5",
+      "from": "B",
+      "to": "C"
+    },
+    {
+      "id": "6",
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "id": "7",
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "id": "8",
+      "from": "A",
+      "to": "D"
+    },
+    {
+      "id": "8",
+      "from": "D",
+      "to": "C"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "1",
+      "fromCity": "A",
+      "toCity": "B"
+    }
+  ],
+  "codeSample": "{\n    init : function (vehicles) {\n        let v = vehicles[0];\n        v.moveTo('B');\n        v.on('idle', function() {\n          v.moveTo('C');\n        })\n  },\n    update : function () {}\n}",
+  "shortDocumentation": "<strong>Hello</strong> World"
 }

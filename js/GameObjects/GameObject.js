@@ -1,15 +1,17 @@
-class GameObject {
+class GameObject extends GameEventManager {
 
   constructor() {
+    super();
     this.renderOrder = 0;
-    Game.Instance().controller.AddGameObject(this);
+    /** @type {Object.<string, GameEvent>} */
+    this.events = {};
+
+    Game.Instance().controller.AddGameObject(this);    
   }
 
   Start() {}
   
-  Update(dt) {
-    
-  }  
+  Update(dt) {}
 
   Render(ctx) {
     throw new Error("Render function must be implemented");

@@ -4,11 +4,11 @@ class Level extends GameObject {
     super(levelName);
     this.levelName = levelName;
     this.levelURL = `levels/${this.levelName}.json`
-    /** @type {City[]} */
+    /** @type {CityGO[]} */
     this.cities = [];
-    /** @type {Car[]} */
+    /** @type {VehicleGO[]} */
     this.cars = [];
-    /** @type {Road[]} */
+    /** @type {RoadGO[]} */
     this.roads = [];
   }
 
@@ -27,9 +27,10 @@ class Level extends GameObject {
       description: this.levelProps.description,
       codeSample: this.levelProps.codeSample,
       shortDocumentation: this.levelProps.shortDocumentation,
-      cities: City.fromObject(this.levelProps.cities),
-      cars: Car.fromObject(this.levelProps.cars),
-      roads: Road.fromObject(this.levelProps.roads)
+      cities: CityGO.fromObject(this.levelProps.cities),
+      cars: VehicleGO.fromObject(this.levelProps.cars),
+      roads: RoadGO.fromObject(this.levelProps.roads),
+      passengers: PassengerGO.fromObject(this.levelProps.passengers)
     });
   }
 

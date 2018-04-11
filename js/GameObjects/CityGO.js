@@ -1,12 +1,13 @@
-class City extends GameObject {
+class CityGO extends GameObject {
 
   constructor(props) {
     super(props);
-    this.id = 'city-' + props.id;
+    this.id = 'city/' + props.id;
     this.name = props.name;
     this.pos = new Vector2(props.x, props.y);
-    this.size = 20;
+    this.size = 25;
     this.renderOrder = 2;
+    Game.Instance().cities.push(new City(this));
   }
 
   Render(ctx) {
@@ -22,11 +23,11 @@ class City extends GameObject {
     if (object && object.constructor == Array) {
       let cities = [];
       for (let o of object) {
-        cities.push(new City(o));
+        cities.push(new CityGO(o));
       }
       return cities;
     } else {
-      return new City(object);
+      return new CityGO(object);
     }
   }
 }
