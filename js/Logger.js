@@ -30,6 +30,7 @@ class Logger {
    * @param {Error|string} text 
    */
   error(text) {
+    console.error(text);
     this.el.insertAdjacentHTML('beforeend', this.getLogHTML('error', text));
   }
   getLogHTML(status, text) {

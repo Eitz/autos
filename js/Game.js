@@ -22,6 +22,8 @@ class Game {
 		this.cities = [];
 		this.passengers = [];
 
+		this.gameStats = new GameStats();
+
 		game_instance = this;
 	}
 
@@ -32,11 +34,21 @@ class Game {
 	Setup() {
 		this.events = new GameEventManager();
 		this.controller = new GameController(this.elements.gameArea);
-		this.LoadChallenge(1);
+		this.LoadChallenge(this.GetLevelNumberFromHash());
 		this.events.on('load-level', (levelNumber, level) => {
 			this.setProperties(levelNumber, level);
 			this.controller.Prepare();
 		});
+	}
+
+	GetLevelNumberFromHash() {
+		let level = location.hash.replace('#', '');
+		console.log(level);
+		if (!level || isNaN(level) || parseInt(level) > 5 || parseInt(level) < 1) {
+			location.hash = "1";
+			level = 1;
+		}
+		return parseInt(level);
 	}
 
 	Start() {
@@ -46,15 +58,15 @@ class Game {
 	}
 
 	ParseGameCode(code) {
-		let gameCodeEval = {};
+		this.gameCode = {};
 		try {
-			gameCodeEval = eval('(' + code + ')');
+			this.gameCode = eval('(' + code + ')');
 		} catch(err) {
 			this.Pause();
 			this.log.error(err);
 		}
 		try {
-			gameCodeEval.init(this.vehicles, this.cities);
+			this.gameCode.init(this.vehicles, this.cities);
 		} catch (err) {
 			this.Pause();
 			this.log.error(err);
@@ -70,6 +82,7 @@ class Game {
 		this.cities = [];
 		this.passengers = [];
 		this.controller.Reset();
+		this.gameStats = new GameStats();
 		let level = new Level(this.currentLevelNumber);
 		level.fromJSON(this.currentLevelCache);
 		this.controller.Prepare();

@@ -7,6 +7,9 @@ class RoadGO extends GameObject {
     let gameController = Game.Instance().controller;
     this.from = gameController.getCityById(props.from);
     this.to = gameController.getCityById(props.to);
+    
+    this.roadIE = new Road(this);
+    this.from.addRoad(this.roadIE);
   }
 
   static fromObject(object) {

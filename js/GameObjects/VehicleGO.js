@@ -12,7 +12,11 @@ class VehicleGO extends GameObject {
     };    
     this.speed = 0.1;
     this._travelTo = [];
-    Game.Instance().vehicles.push(new Vehicle(this));
+    this.passengers = [];
+    this.lastCity = this.startingCity;
+
+    this.vehicleIE = new Vehicle(this);
+    Game.Instance().vehicles.push(this.vehicleIE);
   }
 
   static fromObject(object) {
@@ -52,6 +56,7 @@ class VehicleGO extends GameObject {
         this.pos.x = city.pos.x;
         this.pos.y = city.pos.y;
         // ARRIVED
+        this.lastCity = city;
         this.trigger('visitCity', [city]);
         this._travelTo.shift();
         if (this._travelTo.length == 0) {  
@@ -60,6 +65,24 @@ class VehicleGO extends GameObject {
         }
       }
     }
+  }
+
+  addPassenger(passenger) {
+    passenger._passengerGO.load(this);
+    this.passengers.push(passenger);
+    this.trigger('newPassenger', [passenger]);
+  }
+
+  removePassenger(passenger) {
+    if (passenger) {
+      passenger._passengerGO.unload(this.lastCity);  
+      this.passengers = this.passengers.filter(p => p !== passenger);
+    } else {
+      for (let p of this.passengers) {
+        p._passengerGO.unload(this.lastCity);
+      }
+      this.passengers = [];
+    }    
   }
 
   /** @param City */

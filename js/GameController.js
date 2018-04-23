@@ -15,6 +15,10 @@ class GameController {
     this.gameObjects.push(gameObject);
   }
 
+  RemoveGameObject(gameObject) {
+    this.gameObjects = this.gameObjects.filter(g => g !== gameObject);
+  }
+
   ReorderGameObjects() {
     this.gameObjects = this.gameObjects.sort(function (a, b) {
       if (a.renderOrder < b.renderOrder)
@@ -47,6 +51,13 @@ class GameController {
   }
 
   Update (dt) {
+    let game = Game.Instance();
+    try {
+      game.gameCode.update(dt, game.vehicles, game.cities);
+    } catch(err) {
+      console.err(err);
+      game.log.error(err);
+    }    
     for (let go of this.gameObjects) {
       go.Update(dt);
     }

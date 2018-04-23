@@ -7,7 +7,10 @@ class CityGO extends GameObject {
     this.pos = new Vector2(props.x, props.y);
     this.size = 25;
     this.renderOrder = 2;
-    Game.Instance().cities.push(new City(this));
+    this.roads = [];
+    this.passengers = [];
+    this.cityIE = new City(this);
+    Game.Instance().cities.push(this.cityIE);
   }
 
   Render(ctx) {
@@ -17,6 +20,19 @@ class CityGO extends GameObject {
 
   Update(dt) {
     
+  }
+
+  addPassenger(passenger) {
+    this.passengers.push(passenger);
+    this.trigger('newPassenger', [passenger]);
+  }
+
+  removePassenger(passenger) {
+    this.passengers = this.passengers.filter(p => p !== passenger);
+  }
+
+  addRoad(road) {
+    this.roads.push(road);
   }
 
   static fromObject(object) {

@@ -1,18 +1,22 @@
 class Vehicle {
 
-  constructor(_vehicleGO) {
-    this._vehicleGO = _vehicleGO;
+  constructor(vehicleGO) {
     /** @type {Passenger[]} Array contendo os passageiros atuais dentro do veículo. */     
-    this.passengers = [];
+    this.passengers = vehicleGO.passengers;
 
     /** @type {Integer} Inteiro que informa a quantidade máxima de passageiros que este veículo suporta. */
-    this.vehicleCapacity = this._vehicleGO.vehicleCapacity;
+    this.vehicleCapacity = vehicleGO.vehicleCapacity;
 
     /** @type {City} Última cidade que o veículo passou */
-    this.lastCity = undefined;
+    this.lastCity = vehicleGO.lastCity.cityIE;
 
     /** @type {City[]} Array de cidades contendo a rota de destino deste veículo. */
     this.currentRoute = [];
+
+    /**
+     * @private {VehicleGO}
+     */
+    this._vehicleGO = vehicleGO;
   }
 
   /** @param {City|City[]|String|String[]} targetCity Mover o veículo para uma cidade ou para várias cidades, através de uma rota. */
@@ -35,14 +39,14 @@ class Vehicle {
     }    
   }
 
-  /** @param {Passenger} */
+  /** @param {Passenger|Passenger[]} */
   load(passenger) {
-    
+    this._vehicleGO.addPassenger(passenger);
   }
 
   /** @param {Passenger} */
   unload(passenger) {
-    
+    this._vehicleGO.removePassenger(passenger);
   }
 
   on(eventName, fn) {

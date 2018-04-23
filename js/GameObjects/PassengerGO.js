@@ -13,17 +13,20 @@ class PassengerGO extends GameObject {
     
     this.waitingTime = 0;
     this.pos = new Vector2(this.fromCity.pos.x, this.fromCity.pos.y);
-    this.onBoard = false;
+    this.onBoard = undefined;
 
     /** Rendering */
-    this.renderOrder = 4;
+    this.renderOrder = 5;
     this.size = 5;
+    
+    this.passengerIE = new Passenger(this);
+    this.fromCity.addPassenger(this.passengerIE);
   }
 
   Render(ctx) {
     ctx.fillStyle = '#0F0';
     var path = new Path2D();
-    let angle = 45;
+    let angle = Math.PI / 6;
     let p1 = new Vector2(this.size * Math.cos(angle+0) + this.pos.x, this.size * Math.sin(angle+0) + this.pos.y);
     let p2 = new Vector2(this.size * Math.cos(angle+(1/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(1/3)*(2*Math.PI)) + this.pos.y);
     let p3 = new Vector2(this.size * Math.cos(angle+(2/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(2/3)*(2*Math.PI)) + this.pos.y);
@@ -34,7 +37,29 @@ class PassengerGO extends GameObject {
   }
 
   Update(dt) {
-    this.waitTime 
+    if (!this.onBoard)
+      this.waitingTime += dt;
+    else
+      this.pos = this.onBoard.pos;
+  }
+
+  load(vehicleGO) {
+    this.onBoard = vehicleGO;
+    this.fromCity.removePassenger(this.passengerIE);
+  }
+
+  unload(city) {
+    this.onBoard = false;
+    if (city == this.toCity) {
+      let game = Game.Instance();
+      game.gameStats.addPassenger();
+      game.controller.removeGameObject(this);
+    }
+    this.pos = city.pos;
+  }
+
+  getWaitingTimeInSeconds() {
+    return this.waitingTime / 1000;
   }
 
   static fromObject(object) {
