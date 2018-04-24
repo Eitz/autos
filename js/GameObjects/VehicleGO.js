@@ -57,12 +57,14 @@ class VehicleGO extends GameObject {
         this.pos.y = city.pos.y;
         // ARRIVED
         this.lastCity = city;
-        this.trigger('visitCity', [city]);
+        this.trigger('visitCity', [city.cityIE]);
         this._travelTo.shift();
-        if (this._travelTo.length == 0) {  
-          console.log('IDLE');
-          this.trigger('idle');
-        }
+        setTimeout(() => {
+          if (this._travelTo.length == 0) {  
+            console.log('IDLE');
+            this.trigger('idle');
+          }
+        }, 50);        
       }
     }
   }

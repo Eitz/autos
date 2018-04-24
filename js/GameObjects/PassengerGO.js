@@ -53,7 +53,7 @@ class PassengerGO extends GameObject {
     if (city == this.toCity) {
       let game = Game.Instance();
       game.gameStats.addPassenger();
-      game.controller.removeGameObject(this);
+      game.controller.RemoveGameObject(this);
     }
     this.pos = city.pos;
   }

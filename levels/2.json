@@ -1,18 +1,30 @@
 {
-  "name": "Desafio #2: Aprendendo a dirigir",
-  "description": "Uma introdução ao jogo: leve o veículo de “A” para “B” para concluir o objetivo e avançar para o próximo desafio.",
+  "name": "Round 1",
+  "description": "Bla bla bla",
   "cities": [
     {
       "id": "A",
       "name": "Itajaí",
-      "x": 100,
-      "y": 240
+      "x": 50,
+      "y": 70
     },
     {
       "id": "B",
       "name": "Itapema",
       "x": 470,
       "y": 100
+    },
+    {
+      "id": "C",
+      "name": "Porto Belo",
+      "x": 350,
+      "y": 300
+    },
+    {
+      "id": "D",
+      "name": "Porto Belo",
+      "x": 50,
+      "y": 300
     }
   ],
   "cars": [
@@ -27,9 +39,55 @@
       "id": "1",
       "from": "A",
       "to": "B"
+    },
+    {
+      "id": "2",
+      "from": "B",
+      "to": "A"
+    },
+    {
+      "id": "3",
+      "from": "A",
+      "to": "C"
+    },
+    {
+      "id": "4",
+      "from": "C",
+      "to": "A"
+    },
+    {
+      "id": "5",
+      "from": "B",
+      "to": "C"
+    },
+    {
+      "id": "6",
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "id": "7",
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "id": "8",
+      "from": "A",
+      "to": "D"
+    },
+    {
+      "id": "8",
+      "from": "D",
+      "to": "C"
     }
   ],
-  "passengers": [],
+  "passengers": [
+    {
+      "id": "1",
+      "fromCity": "B",
+      "toCity": "C"
+    }
+  ],
   "codeSample": "{\r\n    init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n      \tlet p = cities[0].passengers[0];\r\n      \tv.load(p);\r\n        v.moveTo('B');\r\n        v.on('idle', function() {\r\n          v.unload(p);\r\n          v.moveTo('C');\r\n        })\r\n  },\r\n    update () {}\r\n}",
   "shortDocumentation": "<strong>Hello</strong> World"
 }
