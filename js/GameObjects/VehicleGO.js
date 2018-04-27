@@ -1,6 +1,7 @@
 class VehicleGO extends GameObject {
   constructor(props) {
     super(props);
+    // tweak this while on city
     this.renderOrder = 3;
     this.id = props.id;
     this.type = props.type;
@@ -9,7 +10,8 @@ class VehicleGO extends GameObject {
     this.pos = {
       x: this.startingCity.pos.x,
       y: this.startingCity.pos.y,
-    };    
+    };
+    this.realPos = this.pos;
     this.speed = 0.1;
     this._travelTo = [];
     this.passengers = [];
@@ -54,18 +56,23 @@ class VehicleGO extends GameObject {
         this._travelTo.shift();
         return;
       }
+
       this.isIdle = false;
+      this.pos = this.realPos;
+      
       let dir = (new Vector2(city.pos.x - this.pos.x, city.pos.y - this.pos.y)).normalize();
       
       if (isNaN(dir.x) || isNaN(dir.y))
         return;
       
-      this.pos = new Vector2(
+      this.realPos = new Vector2(
         this.pos.x + dt * dir.x * this.speed,
         this.pos.y + dt * dir.y * this.speed
       );
+
+      this.pos = this.shiftToRightLane(city.pos);
       
-      if (Math.abs(this.pos.x-city.pos.x) <= 1 && Math.abs(this.pos.y-city.pos.y) <= 1) {
+      if (Math.abs(this.realPos.x-city.pos.x) <= 1 && Math.abs(this.realPos.y-city.pos.y) <= 1) {
         this.pos.x = city.pos.x;
         this.pos.y = city.pos.y;
         // ARRIVED
@@ -84,6 +91,22 @@ class VehicleGO extends GameObject {
         }, 10);
       }
     }
+  }
+  /**
+   * @param {Vector2} position
+   * @param {Vector2} dir
+  */
+  shiftToRightLane(targetCityPos) {
+    let angle = Math.atan2(
+      targetCityPos.y - this.realPos.y,
+      targetCityPos.x - this.realPos.x
+    );
+    let rotated_angle = angle + Math.PI/2;
+    let distance = 6;
+    return new Vector2(
+      this.realPos.x + Math.cos(rotated_angle) * distance,
+      this.realPos.y + Math.sin(rotated_angle) * distance,
+    );
   }
 
   addPassenger(passenger) {

@@ -88,6 +88,6 @@
       "toCity": "C"
     }
   ],
-  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        v.moveTo('D');aaaa\r\n        v.on('idle', function() {\r\n          v.moveTo('B');\r\n        })\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
+  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        v.on('idle', function() {\r\n        \tv.moveTo(['D', 'C', 'B', 'A']);  \r\n        });\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
   "shortDocumentation": "<strong>Hello</strong> World"
 }

@@ -31,7 +31,6 @@ class RoadGO extends GameObject {
     
     ctx.setLineDash([]);
     
-
     let angle = 
       Math.atan2(
         this.to.pos.y-this.from.pos.y,
@@ -49,7 +48,7 @@ class RoadGO extends GameObject {
     ctx.moveTo(this.from.pos.x+rotate_from_city_x, this.from.pos.y+rotate_from_city_y);
     ctx.lineTo(this.to.pos.x+rotate_from_city_x, this.to.pos.y+rotate_from_city_y);
     ctx.setLineDash([]);
-    ctx.strokeStyle = '#999';
+    ctx.strokeStyle = '#CCC';
     ctx.stroke();
     
     ctx.beginPath();
@@ -87,7 +86,9 @@ class RoadGO extends GameObject {
       var x;
       var y;
 
-      ctx.fillStyle = '#FFF'  
+      let arrowColor = '#000';//'#FFF';
+
+      ctx.fillStyle = arrowColor;
       ctx.beginPath();
 
       
@@ -111,7 +112,7 @@ class RoadGO extends GameObject {
       ctx.fill();
 
       // Ending line
-      ctx.strokeStyle = '#FFF';
+      ctx.strokeStyle = arrowColor;
       ctx.beginPath();      
       ctx.lineWidth = 1;
       ctx.moveTo(x_center, y_center);
