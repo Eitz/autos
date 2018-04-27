@@ -1,6 +1,8 @@
-class Passenger {
+class Passenger extends GameInterface {
 
   constructor(passengerGO) {
+    super();
+
     /** @type {string} Id do passageiro. */
     this.id = passengerGO.id;
 
@@ -8,22 +10,22 @@ class Passenger {
     this.name = passengerGO.name;
     
     /** @type {City} Última cidade que este passageiro esteve. */
-    this.lastCity = passengerGO.lastCity.cityIE;
+    this.lastCity = passengerGO.lastCity.IEObject;
 
     /** @type {City} Cidade que este passageiro se originou. */
-    this.fromCity = passengerGO.fromCity.cityIE;
+    this.fromCity = passengerGO.fromCity.IEObject;
 
     /** @type {City} Cidade que este passageiro tem como destino. */
-    this.toCity = passengerGO.toCity.cityIE;
+    this.toCity = passengerGO.toCity.IEObject;
 
     /**
      * @private {PassengerGO}
      */
-    this._passengerGO = passengerGO;
+    this.gameObject = passengerGO;
   }
 
   /** @type {Integer} Tempo que este passageiro já esteve esperando um veículo, em segundos. Só conta enquanto o passageiro estiver fora de um veículo. */
   get waitingTime() {
-    return parseInt(this._passengerGO.getWaitingTimeInSeconds());
+    return parseInt(this.gameObject.getWaitingTimeInSeconds());
   }
 }

@@ -55,12 +55,17 @@ class GameController {
     try {
       game.gameCode.update(dt, game.vehicles, game.cities);
     } catch(err) {
-      console.err(err);
+      err = new ImplementationError(err);
+      console.error(err);
       game.log.error(err);
+      // FIXME change to Stop
+      this.Pause();
+      return;
     }    
     for (let go of this.gameObjects) {
       go.Update(dt);
     }
+    game.gameStats.addTime(dt);
   }
 
   Render() {
@@ -94,43 +99,28 @@ class GameController {
       this.reset = false;    
   }
 
-  getGameObjectById(id) {
+  getGameObjectByTypeAndId(type, id) {
+    type += 'GO';
     for (let go of this.gameObjects) {
-      if (go.id == id) {
+      if (go.constructor.name == type && go.id == id) {
         return go;
       }
     }
   }
 
   getCityById(id) {
-    if (id.startsWith('city/')) {
-      return this.getGameObjectById(id);
-    } else {
-      return this.getGameObjectById("city/" + id);
-    }
+    return this.getGameObjectByTypeAndId('City', id);
 	}
 
 	getVehicleById(id) {
-		if (id.startsWith('vehicle/')) {
-      return this.getGameObjectById(id);
-    } else {
-      return this.getGameObjectById("vehicle/" + id);
-    }
+		return this.getGameObjectByTypeAndId('Vehicle', id);
 	}
 
 	getRoadById(id) {
-		if (id.startsWith('road/')) {
-      return this.getGameObjectById(id);
-    } else {
-      return this.getGameObjectById("road/" + id);
-    }
+		return this.getGameObjectByTypeAndId('Road', id);
   }
 
   getPassengerById(id) {
-		if (id.startsWith('passenger/')) {
-      return this.getGameObjectById(id);
-    } else {
-      return this.getGameObjectById("passenger/" + id);
-    }
+		return this.getGameObjectByTypeAndId('Passenger', id);
   }
 }

@@ -16,10 +16,18 @@
 		<script src="vendor/code-mirror/lib/codemirror.js"></script>
 		<link rel="stylesheet" href="vendor/code-mirror/lib/codemirror.css" />
 		<link rel="stylesheet" href="vendor/code-mirror/theme/dracula.css" />
+		<link rel="stylesheet" href="vendor/code-mirror/addon/lint/lint.css" />
 		<script src="vendor/code-mirror/mode/javascript/javascript.js"></script>
+		<script src="vendor/jshint-2-9-5.min.js"></script>
+		<script src="vendor/code-mirror/addon/lint/lint.js"></script>
+		<script src="vendor/code-mirror/addon/lint/javascript-lint.js"></script>
+		
 		
 		<script type="text/javascript" src="js/Util.js"></script>
 		<script type="text/javascript" src="js/Vector2.js"></script>
+		<script type="text/javascript" src="js/Errors/CommandError.js"></script>
+		<script type="text/javascript" src="js/Errors/ImplementationError.js"></script>
+		<script type="text/javascript" src="js/Errors/LexicalError.js"></script>
 		<script type="text/javascript" src="js/Logger.js"></script>
 		<script type="text/javascript" src="js/Events/GameEventManager.js"></script>
 		<script type="text/javascript" src="js/Events/GameEvent.js"></script>
@@ -31,6 +39,7 @@
 		<script type="text/javascript" src="js/GameObjects/Level.js"></script>
 		<script type="text/javascript" src="js/GameObjects/GameStats.js"></script>
 		<script type="text/javascript" src="js/GameController.js"></script>
+		<script type="text/javascript" src="js/InterfaceObjects/GameInterface.js"></script>
 		<script type="text/javascript" src="js/InterfaceObjects/Passenger.js"></script>
 		<script type="text/javascript" src="js/InterfaceObjects/Road.js"></script>
 		<script type="text/javascript" src="js/InterfaceObjects/Vehicle.js"></script>
@@ -51,7 +60,17 @@
 					<h1></h1>
 					<h3></h3>
 			</div><!--
-			--><div id="progress-buttons"><button onclick="Game.Instance().Start();">Start</button><button onclick="Game.Instance().Pause();">Pause</button><button onclick="Game.Instance().Reset();">Reset</button></div><!--
+			--><div id="progress-buttons">
+				<div class="buttons">
+					<button onclick="Game.Instance().Start();">Start</button>
+					<button onclick="Game.Instance().Pause();">Pause</button>
+					<button onclick="Game.Instance().Reset();">Reset</button>
+				</div>
+				<div class="stats">
+					P: <span id="passengers-delivered-count">0</span><br />
+					T: <span id="time-count">0</span>
+				</div>
+			</div><!--
 		--></section><!--
 		--><section id="left-block"><!--
 			--><div id="game-area">

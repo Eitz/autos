@@ -8,7 +8,7 @@ class Game {
 		}
 		this.elements = {
 			description: root.getElementById('description'),
-			progress_buttons: root.getElementById('progress-button'),
+			progress_buttons: root.getElementById('progress-buttons'),
 			gameArea: root.getElementById('game-area').getElementsByTagName('canvas')[0],
 			event_log: root.getElementById('event-log'),
 			code_editor: root.getElementById('code-editor'),
@@ -16,13 +16,13 @@ class Game {
 		};
 
 		this.log = new Logger(this.elements.event_log);
-		this.log.success("The game has started!");
+		this.log.debug("The game has loaded!");
 
 		this.vehicles = [];
 		this.cities = [];
 		this.passengers = [];
 
-		this.gameStats = new GameStats();
+		this.gameStats = new GameStats(this.elements.progress_buttons);
 
 		game_instance = this;
 	}
@@ -36,6 +36,7 @@ class Game {
 		this.controller = new GameController(this.elements.gameArea);
 		this.LoadChallenge(this.GetLevelNumberFromHash());
 		this.events.on('load-level', (levelNumber, level) => {
+			this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
 			this.setProperties(levelNumber, level);
 			this.controller.Prepare();
 		});
@@ -52,6 +53,7 @@ class Game {
 	}
 
 	Start() {
+		this.log.debug(`The game has started!`);
 		this.controller.Start();
 		let gameCode = this.GetCode();
 		this.ParseGameCode(gameCode);
@@ -60,16 +62,21 @@ class Game {
 	ParseGameCode(code) {
 		this.gameCode = {};
 		try {
-			this.gameCode = eval('(' + code + ')');
+			code = new Function ('{ try {' + code + '; return { init: init, update: update }} catch (err) { throw err; }}');
+			this.gameCode = code();
 		} catch(err) {
 			this.Pause();
+			err = new ImplementationError(err, undefined, err.lineNumber?err.lineNumber-2:undefined, err.columnNumber);
 			this.log.error(err);
+			return;
 		}
 		try {
 			this.gameCode.init(this.vehicles, this.cities);
 		} catch (err) {
 			this.Pause();
-			this.log.error(err);
+			let numbers = Util.GetErrorNumbers(err.stack);
+			err = new ImplementationError(err, 'init', numbers.line, numbers.column);
+      this.log.error(err);
 		}
 	}
 
@@ -77,12 +84,13 @@ class Game {
 		this.controller.Pause();
 	}
 
+	// todo execute Setup() again with cached values
 	Reset() {
 		this.vehicles = [];
 		this.cities = [];
 		this.passengers = [];
 		this.controller.Reset();
-		this.gameStats = new GameStats();
+		this.gameStats = new GameStats(this.elements.progress_buttons);
 		let level = new Level(this.currentLevelNumber);
 		level.fromJSON(this.currentLevelCache);
 		this.controller.Prepare();
@@ -128,12 +136,15 @@ class Game {
 		this.editor = CodeMirror.fromTextArea(this.elements.code_editor, {
 			lineNumbers: true,
 			theme: "dracula",
-			mode: "javascript"
+			mode: "javascript",
+			gutters: ["CodeMirror-lint-markers"],
+			lint: {
+				esversion: 6
+			}
 		});
 	}
 
 	GetCode() {
-		this.log.debug(this.editor.getValue());
 		return this.editor.getValue();
 	}
 

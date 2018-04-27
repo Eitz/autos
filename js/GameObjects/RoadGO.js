@@ -8,8 +8,8 @@ class RoadGO extends GameObject {
     this.from = gameController.getCityById(props.from);
     this.to = gameController.getCityById(props.to);
     
-    this.roadIE = new Road(this);
-    this.from.addRoad(this.roadIE);
+    this.IEObject = new Road(this);
+    this.from.addRoad(this.IEObject);
   }
 
   static fromObject(object) {

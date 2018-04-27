@@ -19,8 +19,8 @@ class PassengerGO extends GameObject {
     this.renderOrder = 5;
     this.size = 5;
     
-    this.passengerIE = new Passenger(this);
-    this.fromCity.addPassenger(this.passengerIE);
+    this.IEObject = new Passenger(this);
+    this.fromCity.addPassenger(this.IEObject);
   }
 
   Render(ctx) {
@@ -45,7 +45,7 @@ class PassengerGO extends GameObject {
 
   load(vehicleGO) {
     this.onBoard = vehicleGO;
-    this.fromCity.removePassenger(this.passengerIE);
+    this.fromCity.removePassenger(this.IEObject);
   }
 
   unload(city) {

@@ -1,6 +1,8 @@
-class City {
+class City extends GameInterface {
 
   constructor(cityGO) {
+    super();
+
     /** @type {string} Id da cidade. */
     this.id = cityGO.id;
 
@@ -16,10 +18,6 @@ class City {
     /**
      * @private {CityGO}
      */
-    this._cityGO = cityGO;
-  }
-
-  on(eventName, fn) {
-    this._cityGO.on(eventName, fn);
+    this.gameObject = cityGO;
   }
 }

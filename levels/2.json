@@ -88,6 +88,6 @@
       "toCity": "C"
     }
   ],
-  "codeSample": "{\r\n    init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n      \tlet p = cities[0].passengers[0];\r\n      \tv.load(p);\r\n        v.moveTo('B');\r\n        v.on('idle', function() {\r\n          v.unload(p);\r\n          v.moveTo('C');\r\n        })\r\n  },\r\n    update () {}\r\n}",
+  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        v.moveTo('D');aaaa\r\n        v.on('idle', function() {\r\n          v.moveTo('B');\r\n        })\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
   "shortDocumentation": "<strong>Hello</strong> World"
 }

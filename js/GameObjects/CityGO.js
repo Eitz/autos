@@ -2,15 +2,15 @@ class CityGO extends GameObject {
 
   constructor(props) {
     super(props);
-    this.id = 'city/' + props.id;
+    this.id = props.id;
     this.name = props.name;
     this.pos = new Vector2(props.x, props.y);
     this.size = 25;
     this.renderOrder = 2;
     this.roads = [];
     this.passengers = [];
-    this.cityIE = new City(this);
-    Game.Instance().cities.push(this.cityIE);
+    this.IEObject = new City(this);
+    Game.Instance().cities.push(this.IEObject);
   }
 
   Render(ctx) {
@@ -45,5 +45,5 @@ class CityGO extends GameObject {
     } else {
       return new CityGO(object);
     }
-  }
+  }  
 }
