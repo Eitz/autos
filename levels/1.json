@@ -5,19 +5,24 @@
     {
       "id": "A",
       "name": "Itajaí",
-      "x": 100,
+      "x": 150,
       "y": 240
     },
     {
       "id": "B",
       "name": "Itapema",
-      "x": 470,
-      "y": 100
+      "x": 550,
+      "y": 240
     }
   ],
   "cars": [
     {
       "id": "1",
+      "type": "1",
+      "city": "A"
+    },
+    {
+      "id": "2",
       "type": "1",
       "city": "A"
     }
@@ -29,7 +34,11 @@
       "to": "B"
     }
   ],
-  "passengers": [],
-  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        v.moveTo('D');aaaa\r\n        v.on('idle', function() {\r\n          v.moveTo('B');\r\n        })\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
+  "passengers": [{
+    "id": "1",
+    "fromCity": "A",
+    "toCity": "B"
+  }],
+  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        \r\n        v.on('idle', function() {\r\n          v.moveTo('B');\r\n        })\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
   "shortDocumentation": "<strong>Hello</strong> World"
 }

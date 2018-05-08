@@ -18,6 +18,6 @@ class City extends GameInterface {
     /**
      * @private {CityGO}
      */
-    this.gameObject = cityGO;
+    this.__gameObject__ = cityGO;
   }
 }

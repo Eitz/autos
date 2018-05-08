@@ -2,13 +2,28 @@ class RoadGO extends GameObject {
 
   constructor(props) {
     super(props);
-    this.renderOrder = 1;
-    this.id = 'road/' + props.id;
-    let gameController = Game.Instance().controller;
-    this.from = gameController.getCityById(props.from);
-    this.to = gameController.getCityById(props.to);
     
+    /** @const {number} */
+    this.renderOrder = 1;
+    
+    /** @const {string} */
+    this.id = props.id;
+    
+    /** @type {GameController} */
+    let gameController = Game.Instance().controller;
+    
+    /** @type {CityGO} */
+    this.from = gameController.getCityById(props.from);
+    
+    /** @type {CityGO} */
+    this.to = gameController.getCityById(props.to);
+
+    /** @const {number} */
+    this.travelTime = this.GetTravelTime(Game.Instance().vehicleVelocity);
+
+    /** @type {City} */
     this.IEObject = new Road(this);
+    
     this.from.addRoad(this.IEObject);
   }
 
@@ -61,6 +76,14 @@ class RoadGO extends GameObject {
     ctx.setLineDash([]);
 
     this.RenderArrowDirection(ctx, 2.5);
+    this.RenderTime(ctx, 10)
+  }
+
+  RenderTime(ctx, fontSize, x, y) {
+    let t = this.GetTravelTime(Game.Instance().vehicleVelocity);
+    ctx.font = `${fontSize}px Arial`;
+    ctx.fillStyle = '#555';
+    ctx.fillText(`${t}s`,x,y);
   }
 
   RenderArrowDirection (ctx, r){
@@ -75,10 +98,13 @@ class RoadGO extends GameObject {
     
     let segments = 4;
     for (let i = 1; i<segments; i++) {
+      
       let angle = Math.atan2(toy-fromy,tox-fromx);
-      let degree_from_line = angle + Math.PI/2;
-      var new_x = this.getArrowPoint(i, segments).x + distance_from_line * Math.cos(degree_from_line)
-      var new_y = this.getArrowPoint(i, segments).y + distance_from_line * Math.sin(degree_from_line)
+      
+      let degree_from_line = angle + Math.PI / 1.5;
+      
+      var new_x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * Math.cos(degree_from_line)
+      var new_y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * Math.sin(degree_from_line)
 
       var x_center = new_x;
       var y_center = new_y;
@@ -121,10 +147,26 @@ class RoadGO extends GameObject {
       y = r * 5 * Math.sin(angle) + y_center;
       ctx.lineTo(x, y);
       ctx.stroke();
+
+      if (i == segments/2) {
+        let x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * 4 * Math.cos(degree_from_line)
+        let y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * 4 * Math.sin(degree_from_line)
+        this.RenderTime(ctx, 10, x, y);
+      }
     }
   }
 
-  getArrowPoint(n, nMax) {
+  GetTravelTime(velocity) {
+    /** @type {Vector2} */
+    let a = this.from.pos;
+    
+    /** @type {Vector2} */
+    let b = this.to.pos;
+
+    return (Math.hypot(b.x-a.x, b.y-a.y) / velocity / 1000).toFixed(2);
+  }
+
+  GetMiddlePointInSegment(n, nMax) {
     let t = n/nMax;
     
     let x1 = this.from.pos.x;

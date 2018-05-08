@@ -2,9 +2,9 @@ class VehicleGO extends GameObject {
   constructor(props) {
     super(props);
     // tweak this while on city
-    this.renderOrder = 3;
+    this.renderOrder = 1.5;
     this.id = props.id;
-    this.type = props.type;
+    this.type = this.GetVehicleTypeById(props.type);
     this.startingCity =
       Game.Instance().controller.getCityById(props.city);
     this.pos = {
@@ -12,12 +12,14 @@ class VehicleGO extends GameObject {
       y: this.startingCity.pos.y,
     };
     this.realPos = this.pos;
-    this.speed = 0.1;
+    this.speed = Game.Instance().vehicleVelocity;
     this._travelTo = [];
     this.passengers = [];
     this.lastCity = this.startingCity;
+    this.passengerCapacity = this.type.capacity;
     
-    this.isIdle = false;
+    this.isIdle = true;
+    this.firstRun = true;
 
     this.IEObject = new Vehicle(this);
     Game.Instance().vehicles.push(this.IEObject);
@@ -35,12 +37,23 @@ class VehicleGO extends GameObject {
     }
   }
 
-  Render(ctx) {
-    let radius = 5;
+  Render(ctx, offset) {
+    // disable auto render to let city render by offset
+    if (this.isIdle && !offset) {
+      return;
+    }
+
+    let radius = 10;
+    let offsetY = offset ? offset * 15 + 15 : 0;
+    let offsetX = offset ? 5 : 0;
     ctx.fillStyle = 'red';
     ctx.beginPath();
-    ctx.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI, false);
-    ctx.fill();  
+    ctx.rect(this.pos.x + offsetX, this.pos.y - offsetY, radius * 1.5, radius);
+    ctx.fill();
+    this.RenderInfo(
+      ctx, 10,
+      this.pos.x + 20 + offsetX, this.pos.y - (offset ? -5 : 15) - offsetY
+    );
   }
 
   Update(dt) {
@@ -70,7 +83,7 @@ class VehicleGO extends GameObject {
         this.pos.y + dt * dir.y * this.speed
       );
 
-      this.pos = this.shiftToRightLane(city.pos);
+      this.pos = this.RenderInRightLane(city.pos);
       
       if (Math.abs(this.realPos.x-city.pos.x) <= 1 && Math.abs(this.realPos.y-city.pos.y) <= 1) {
         this.pos.x = city.pos.x;
@@ -81,7 +94,7 @@ class VehicleGO extends GameObject {
         this._travelTo.shift();
       }
     } else {
-      if (!this.isIdle) {
+      if (!this.isIdle || this.firstRun) {
         this.isIdle = true;
         setTimeout(() => {
           if (this._travelTo.length == 0) {  
@@ -91,18 +104,30 @@ class VehicleGO extends GameObject {
         }, 10);
       }
     }
+    this.firstRun = false;
   }
+
+  GetVehicleTypeById(id) {
+    console.log(id);
+    for (let type in VehicleType) {
+      console.log(type);
+      if (VehicleType[type].id == id)
+        return VehicleType[type];
+    }
+    return undefined;
+  }
+
   /**
    * @param {Vector2} position
    * @param {Vector2} dir
   */
-  shiftToRightLane(targetCityPos) {
+  RenderInRightLane(targetCityPos) {
     let angle = Math.atan2(
       targetCityPos.y - this.realPos.y,
       targetCityPos.x - this.realPos.x
     );
     let rotated_angle = angle + Math.PI/2;
-    let distance = 6;
+    let distance = 1;
     return new Vector2(
       this.realPos.x + Math.cos(rotated_angle) * distance,
       this.realPos.y + Math.sin(rotated_angle) * distance,
@@ -111,7 +136,7 @@ class VehicleGO extends GameObject {
 
   addPassenger(passenger) {
     if (passenger && passenger.constructor === Passenger) {
-      passenger.gameObject.load(this);
+      passenger.__gameObject__.load(this);
       this.passengers.push(passenger);
       this.trigger('newPassenger', [passenger]);
     } else {
@@ -121,14 +146,22 @@ class VehicleGO extends GameObject {
 
   removePassenger(passenger) {
     if (passenger) {
-      passenger.gameObject.unload(this.lastCity);  
+      passenger.__gameObject__.unload(this.lastCity);  
       this.passengers = this.passengers.filter(p => p !== passenger);
     } else {
       for (let p of this.passengers) {
-        p.gameObject.unload(this.lastCity);
+        p.__gameObject__.unload(this.lastCity);
       }
       this.passengers = [];
     }    
+  }
+
+  RenderInfo(ctx, fontSize, x, y) {
+    let p = this.passengers.length;
+    let pMax = this.passengerCapacity;
+    ctx.font = `${fontSize}px Arial`;
+    ctx.fillStyle = '#555';
+    ctx.fillText(`${p}/${pMax}`,x,y);
   }
 
   /** @param City */

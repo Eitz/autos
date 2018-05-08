@@ -21,6 +21,8 @@ class Game {
 		this.vehicles = [];
 		this.cities = [];
 		this.passengers = [];
+		/** @const {number} */
+		this.vehicleVelocity = 0.1;
 
 		this.gameStats = new GameStats(this.elements.progress_buttons);
 

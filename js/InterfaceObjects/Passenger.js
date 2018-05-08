@@ -21,11 +21,11 @@ class Passenger extends GameInterface {
     /**
      * @private {PassengerGO}
      */
-    this.gameObject = passengerGO;
+    this.__gameObject__ = passengerGO;
   }
 
   /** @type {Integer} Tempo que este passageiro já esteve esperando um veículo, em segundos. Só conta enquanto o passageiro estiver fora de um veículo. */
   get waitingTime() {
-    return parseInt(this.gameObject.getWaitingTimeInSeconds());
+    return parseInt(this.__gameObject__.getWaitingTimeInSeconds());
   }
 }

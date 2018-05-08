@@ -108,18 +108,32 @@ class GameController {
     }
   }
 
+  GetVehiclesInCity(cityGO) {
+    let vehicles = [];
+    for (let go of this.gameObjects) {
+      if (go.constructor.name == 'VehicleGO' && go.pos.x == cityGO.pos.x && go.pos.y == cityGO.pos.y) {
+        vehicles.push(go);
+      }
+    }
+    return vehicles;
+  }
+
+  /** @returns {CityGO} */
   getCityById(id) {
     return this.getGameObjectByTypeAndId('City', id);
 	}
 
+  /** @returns {VehicleGO} */
 	getVehicleById(id) {
 		return this.getGameObjectByTypeAndId('Vehicle', id);
 	}
 
+  /** @returns {RoadGO} */
 	getRoadById(id) {
 		return this.getGameObjectByTypeAndId('Road', id);
   }
 
+  /** @returns {PassengerGO} */
   getPassengerById(id) {
 		return this.getGameObjectByTypeAndId('Passenger', id);
   }

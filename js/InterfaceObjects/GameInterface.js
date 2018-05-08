@@ -1,7 +1,7 @@
 class GameInterface {
 
   on(eventName, fn) {
-    this.gameObject.on(eventName, fn);
+    this.__gameObject__.on(eventName, fn);
   }
 
   toString() {

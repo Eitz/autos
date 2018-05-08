@@ -16,6 +16,13 @@ class CityGO extends GameObject {
   Render(ctx) {
     ctx.fillStyle = '#000';
     ctx.fillRect(this.pos.x-this.size/2, this.pos.y-this.size/2, this.size, this.size);
+    let vehicles = this.VehiclesInCity();
+    if (vehicles.length) {
+      let i = 1;
+      for (let v of vehicles) {
+        v.Render(ctx, i++);
+      }
+    }
   }
 
   Update(dt) {
@@ -33,6 +40,10 @@ class CityGO extends GameObject {
 
   addRoad(road) {
     this.roads.push(road);
+  }
+
+  VehiclesInCity() {
+    return Game.Instance().controller.GetVehiclesInCity(this);
   }
 
   static fromObject(object) {

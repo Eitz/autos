@@ -1,3 +1,9 @@
+const VehicleType = {
+  CAR: { id: 1, capacity: 4, name: "Car" },
+  BUS: { id: 2, capacity: 10, name: "Bus" },
+  AMBULANCE: { id: 3, capacity: 1, name: "Ambulance" }
+};
+
 class Vehicle extends GameInterface {
 
   constructor(vehicleGO) {
@@ -10,7 +16,7 @@ class Vehicle extends GameInterface {
     this.passengers = vehicleGO.passengers;
 
     /** @type {Integer} Inteiro que informa a quantidade máxima de passageiros que este veículo suporta. */
-    this.vehicleCapacity = vehicleGO.vehicleCapacity;
+    this.passengersCapacity = vehicleGO.passengersCapacity;
 
     /** @type {City} Última cidade que o veículo passou */
     this.lastCity = vehicleGO.lastCity.IEObject;
@@ -18,10 +24,13 @@ class Vehicle extends GameInterface {
     /** @type {City[]} Array de cidades contendo a rota de destino deste veículo. */
     this.currentRoute = [];
 
+    /** @type {VehicleType} */
+    this.type = vehicleGO.type;
+
     /**
      * @private {VehicleGO}
      */
-    this.gameObject = vehicleGO;
+    this.__gameObject__ = vehicleGO;
   }
 
   /** @param {City|City[]|String|String[]} targetCity Mover o veículo para uma cidade ou para várias cidades, através de uma rota. */
@@ -29,21 +38,21 @@ class Vehicle extends GameInterface {
     let ok = false;
     if (targetCity) {
       if (typeof targetCity === "string") {
-        ok = this.gameObject.moveToCityById(targetCity);
+        ok = this.__gameObject__.moveToCityById(targetCity);
       } else if (targetCity && targetCity.constructor === Array) {
         if (typeof targetCity[0] === "string") {
-          ok = this.gameObject.moveToCityById(targetCity);
+          ok = this.__gameObject__.moveToCityById(targetCity);
         } else {
           let cityIds = targetCity.map((city) => {
             return city.id;
           });
           if (cityIds.length != 0)
-            this.gameObject.moveToCityById(cityIds);
+            this.__gameObject__.moveToCityById(cityIds);
           else
             ok = false;
         }
       } else if (targetCity && targetCity.constructor === City) {
-        ok = this.gameObject.moveToCityById(targetCity.id);
+        ok = this.__gameObject__.moveToCityById(targetCity.id);
       }
     }
 
@@ -53,11 +62,11 @@ class Vehicle extends GameInterface {
 
   /** @param {Passenger|Passenger[]} */
   load(passenger) {
-    this.gameObject.addPassenger(passenger);
+    this.__gameObject__.addPassenger(passenger);
   }
 
   /** @param {Passenger} */
   unload(passenger) {
-    this.gameObject.removePassenger(passenger);
+    this.__gameObject__.removePassenger(passenger);
   }
 }
