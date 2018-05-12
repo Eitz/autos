@@ -45,14 +45,14 @@ class VehicleGO extends GameObject {
 
     let radius = 10;
     let offsetY = offset ? offset * 15 + 15 : 0;
-    let offsetX = offset ? 5 : 0;
-    ctx.fillStyle = 'red';
+    let offsetX = offset ? -20 : 0;
+    ctx.fillStyle = '#342D7A';
     ctx.beginPath();
     ctx.rect(this.pos.x + offsetX, this.pos.y - offsetY, radius * 1.5, radius);
     ctx.fill();
     this.RenderInfo(
       ctx, 10,
-      this.pos.x + 20 + offsetX, this.pos.y - (offset ? -5 : 15) - offsetY
+      this.pos.x - 18 + offsetX, this.pos.y - offsetY + (offset ? 8 : 0)
     );
   }
 

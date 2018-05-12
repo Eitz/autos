@@ -1,4 +1,4 @@
-*:not(.ace_editor) {
+*:not(.ace_editor):not(button) {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -6,13 +6,24 @@
 
 html, body {
   min-height: 600px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  background: #C2B8B2;
+}
+
+#game > h1 {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  font-weight: 900;
+}
+#game > h5 { 
+  margin-left: 10px;
+  margin-bottom: 0px;
+  font-weight: 300;
 }
 
 #game {
-  min-width: 1024px;
-  width: 100%;
-  background: lightblue;
+  width: 1024px;
+  margin: 20px auto;
 }
 
 #game #top-bar div {
@@ -22,7 +33,7 @@ html, body {
 }
 
 #game #top-bar {
-  height: 100px;
+  height: 120px;
 }
 
 #game #top-bar #description,
@@ -38,51 +49,58 @@ html, body {
 }
 
 #game #top-bar #description {
-  background: #CCC;
+  background: #faf8f5;
 }
 
 #game #top-bar #description h1 { 
-  color: #333;
+  color: #2d2006;
   font-size: 20px;
-  font-weight: bold;
-  margin: 10px;
-  margin-bottom: 4px;
+  font-weight: 500;
+  margin: 12px;
+  margin-top: 18px;
+  margin-bottom: 0px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #8A716A;
+  display: inline-block;
+  padding-right: 30px;
 }
 
 #game #top-bar #description h3 { 
-  margin: 10px;
-  margin-top: 10px;  
-  color: #666;
-  font-size: 16px;
-  font-weight: normal;
+  margin: 12px;
+  color: #2d2006;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 #game #top-bar #progress-buttons {
-  background: darkcyan;
+  /*background: #8A716A;*/
+  height: 100%;
+  position: relative;
 }
 
 #game #top-bar #progress-buttons button {
-  float: left;
-  margin: 10px;
-  padding: 5px 15px;
+  margin-left: 0;
 }
 
 #game #top-bar #progress-buttons .buttons {
+  height: auto;
+  text-align: center;
   width: 70%;
-  float: left;
-  border-right: 1px solid #CCC;
+  position: absolute;
+  bottom: 0px;
 }
 
 
 #game #top-bar #progress-buttons .stats {
-  float: left;
+  float: right;
   width: 30%;
   padding: 20px;
+  border-left: 1px solid #CCC;
 }
 
 #game #left-block,
 #game #right-block {
-  height: 580px;
+  height: 480px;
   display: inline-block;
 }
 
@@ -93,35 +111,26 @@ html, body {
 #game #event-log,
 #game #code-area,
 #game #short-documentation {  
-  border: 1px solid white;
+  border: 4px solid #C2B8B2;
 }
 
 #game #left-block #game-area {
-  background: blue;
-  height: calc(100% - 100px);
+  height: 100%;
 }
 
 #game #right-block #code-area {
-  background: darkgreen;
-  height: calc(100% - 150px);
+  height: 100%;
+  margin-top: 8x;
+  margin-bottom: 8x;
 }
 
-#game #right-block #code-area #code-editor{
-  width: 100%;
-  height: 100%;
-  float: left;
-}
-.CodeMirror {
-  overflow: visible !important;
-  height: 100% !important;
-}
-.CodeMirror-scroll {
-  overflow: auto !important;
+.CodeMirror-line {
+  padding-left: 5px !important;
 }
 #game #right-block #short-documentation {
-  background: darkolivegreen;
-  height: 400px;
-  padding: 10px;
+  height: 240px;
+  padding: 8px;
+  padding-left: 0;
 }
 
 #game #game-area canvas {
@@ -129,14 +138,13 @@ html, body {
   height: 100%;
   margin: 0;
   float: left;
-  background: blueviolet;
 }
 #game #left-block #event-log {
-  background: #333;
-  height: 350px;
+  background: #231942;
+  height: 240px;
   padding: 5px;
   overflow: auto;
-  font-family: monospace;
+  font-family: "PT Mono", monospace;
 }
 #game #left-block #event-log .log {
   font-size: 9px;
@@ -148,10 +156,113 @@ html, body {
   color: #FF6;
 }
 
-#game #left-block #event-log .log-error {
+#game #left-block #event-log .log-error,
+.modal .modal-body .text-error {
   color: #F66;
 }
 
 #game #left-block #event-log .log-success {
   color: #6F6;
+}
+
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 130px;
+  left: 100px;
+  background: #FFF;
+  width: 500px;
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+body.modal-on #modals::before {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal .modal-header,
+.modal .modal-body,
+.modal .modal-footer {
+  padding: 20px;
+}
+
+.modal .modal-header {
+  text-align: center;
+  font-weight: bold;
+  background: #DDD;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  font-size: 18px;
+  color: black;
+}
+
+.modal .modal-body p {
+  margin-bottom: 1em;
+}
+
+.modal .modal-body p:last-of-type {
+  margin-bottom: 0;
+}
+
+.modal .modal-footer {
+  text-align: center;
+  font-weight: bold;
+  background: #DDD;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  font-size: 18px;
+}
+
+
+.modal.modal-error .text-error {
+  font-size: 14px;
+}
+
+.modal.modal-error {
+  /*display: block;*/
+}
+
+button {
+  background: #FFF;
+  border: #CCC;
+  padding: 5px 15px;
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.2), 2px 3px 0px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+button:focus {
+  border: 1px solid #6F6;
+}
+button:active {
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,1);
+}
+
+button.primary {
+  background: #3D348B;
+  color: white;
+}
+button.primary:hover {
+  background: #342D7A;
+}
+
+body.modal-on {
+  overflow: hidden;
 }

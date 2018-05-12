@@ -17,7 +17,7 @@ class PassengerGO extends GameObject {
 
     /** Rendering */
     this.renderOrder = 5;
-    this.size = 5;
+    this.size = 4;
     
     this.IEObject = new Passenger(this);
     this.fromCity.addPassenger(this.IEObject);
@@ -25,16 +25,16 @@ class PassengerGO extends GameObject {
 
   Render(ctx) {
     if (!this.onBoard) {
-      ctx.fillStyle = '#0F0';
-      var path = new Path2D();
-      let angle = Math.PI / 6;
-      let p1 = new Vector2(this.size * Math.cos(angle+0) + this.pos.x, this.size * Math.sin(angle+0) + this.pos.y);
+      ctx.beginPath();
+      ctx.fillStyle = '#9F86C0';
+      ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);      
+      /*let p1 = new Vector2(this.size * Math.cos(angle+0) + this.pos.x, this.size * Math.sin(angle+0) + this.pos.y);
       let p2 = new Vector2(this.size * Math.cos(angle+(1/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(1/3)*(2*Math.PI)) + this.pos.y);
       let p3 = new Vector2(this.size * Math.cos(angle+(2/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(2/3)*(2*Math.PI)) + this.pos.y);
       path.moveTo(p1.x, p1.y);
       path.lineTo(p2.x, p2.y);
-      path.lineTo(p3.x, p3.y);
-      ctx.fill(path);
+      path.lineTo(p3.x, p3.y);*/
+      ctx.fill();
     }
   }
 

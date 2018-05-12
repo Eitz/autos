@@ -15,16 +15,8 @@ class Game {
 			short_documentation: root.getElementById('short-documentation'),
 		};
 
-		this.log = new Logger(this.elements.event_log);
-		this.log.debug("The game has loaded!");
-
-		this.vehicles = [];
-		this.cities = [];
-		this.passengers = [];
 		/** @const {number} */
 		this.vehicleVelocity = 0.1;
-
-		this.gameStats = new GameStats(this.elements.progress_buttons);
 
 		game_instance = this;
 	}
@@ -33,15 +25,30 @@ class Game {
 		return game_instance;
 	}
 
-	Setup() {
+	Setup(cachedChallenge) {
+		
+		this.vehicles = [];
+		this.cities = [];
+		this.passengers = [];
+		
 		this.events = new GameEventManager();
+		this.gameStats = new GameStats(this.elements.progress_buttons);
+		this.log = new Logger(this.elements.event_log);
 		this.controller = new GameController(this.elements.gameArea);
-		this.LoadChallenge(this.GetLevelNumberFromHash());
-		this.events.on('load-level', (levelNumber, level) => {
-			this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
-			this.setProperties(levelNumber, level);
+		
+		this.LoadChallenge(this.GetLevelNumberFromHash(), cachedChallenge);
+		
+		if (!cachedChallenge) {
+			this.events.on('load-level', (levelNumber, level) => {
+				this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
+				this.setProperties(levelNumber, level);
+				this.editor.refresh();
+				this.controller.Prepare();
+			});
+		} else {
+			this.editor.refresh();
 			this.controller.Prepare();
-		});
+		}
 	}
 
 	GetLevelNumberFromHash() {
@@ -83,28 +90,28 @@ class Game {
 	}
 
 	Pause() {
-		this.controller.Pause();
+		if (this.controller.isGameRunning)
+			this.controller.Pause();
+		else
+			this.controller.Unpause();
 	}
 
-	// todo execute Setup() again with cached values
 	Reset() {
-		this.vehicles = [];
-		this.cities = [];
-		this.passengers = [];
-		this.controller.Reset();
-		this.gameStats = new GameStats(this.elements.progress_buttons);
-		let level = new Level(this.currentLevelNumber);
-		level.fromJSON(this.currentLevelCache);
-		this.controller.Prepare();
+		this.controller.Stop();
+		this.Setup(this.cachedChallenge);
 	}
 
-	LoadChallenge(levelNumber) {
+	LoadChallenge(levelNumber, cachedChallenge) {
 		let level = new Level(levelNumber);
-		Game.loadTextAsset(level.getURL(), (asset) => {
-			this.currentLevelCache = asset;
-			level.fromJSON(asset);
-			this.events.trigger('load-level', [levelNumber, level]);
-		});
+		if (cachedChallenge) {
+			level.fromJSON(cachedChallenge);
+		} else {
+			Game.loadTextAsset(level.getURL(), (asset) => {
+				this.cachedChallenge = asset;
+				level.fromJSON(asset);
+				this.events.trigger('load-level', [levelNumber, level]);
+			});	
+		}	
 	}
 
 	setProperties(levelNumber, level) {
@@ -137,13 +144,18 @@ class Game {
 		*/
 		this.editor = CodeMirror.fromTextArea(this.elements.code_editor, {
 			lineNumbers: true,
-			theme: "dracula",
+			theme: "duotone-light",
 			mode: "javascript",
+			indentWithTabs: true,
 			gutters: ["CodeMirror-lint-markers"],
 			lint: {
-				esversion: 6
-			}
+				esversion: 6,
+				undef: true
+			},
+			tabSize: 4,
+			indentUnit: 4
 		});
+		this.editor.setSize("100%", "100%");
 	}
 
 	GetCode() {

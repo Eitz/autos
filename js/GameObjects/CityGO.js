@@ -23,6 +23,17 @@ class CityGO extends GameObject {
         v.Render(ctx, i++);
       }
     }
+    this.RenderText(ctx);
+  }
+
+  RenderText(ctx) {
+    ctx.font = `bold 14px Arial`;
+    ctx.fillStyle = '#CCC';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.fillText(this.id,this.pos.x,this.pos.y);
+    ctx.textBaseline = 'alphabetic'; 
+    ctx.textAlign = 'left';
   }
 
   Update(dt) {

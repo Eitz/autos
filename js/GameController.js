@@ -6,9 +6,8 @@ class GameController {
     this.ctx2D = this.canvas.getContext('2d');
     this.width  = this.canvas.width  = this.canvas.offsetWidth;
     this.height = this.canvas.height = this.canvas.offsetHeight;
-    this.backgroundColor = '#EEE';
+    this.backgroundColor = '#C2B8B2';
     this.gameObjects = [];
-    this.a = 0;
   }
 
   AddGameObject(gameObject) {
@@ -28,7 +27,6 @@ class GameController {
       else
           return 0;
     });
-    this.a++;
   }
 
   Start() {
@@ -39,10 +37,14 @@ class GameController {
     this.isGameRunning = false;
   }
 
-  Reset() {
+  Unpause() {
+    this.isGameRunning = true;
+  }
+
+  Stop() {
     this.gameObjects = [];
     this.isGameRunning = false;
-    this.reset = true;
+    this.stop = true;
   }
 
   Prepare (levelData) {
@@ -93,10 +95,8 @@ class GameController {
     this.Render();
     this.last = now;
     
-    if (!this.reset)
+    if (!this.stop)
       requestAnimationFrame(this.Frame.bind(this));
-    else
-      this.reset = false;    
   }
 
   getGameObjectByTypeAndId(type, id) {

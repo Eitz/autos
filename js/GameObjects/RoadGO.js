@@ -53,17 +53,17 @@ class RoadGO extends GameObject {
 
     let rotated_angle = angle + Math.PI/2;
 
-    let rotate_from_city_x = 6*Math.cos(rotated_angle);
-    let rotate_from_city_y = 6*Math.sin(rotated_angle);
+    let rotate_from_city_x = 3*Math.cos(rotated_angle);
+    let rotate_from_city_y = 3*Math.sin(rotated_angle);
     
     let move_from_city_x = 20*Math.cos(angle);
     let move_from_city_y = 20*Math.sin(angle);
 
-    ctx.lineWidth = 12;
+    ctx.lineWidth = 14;
     ctx.moveTo(this.from.pos.x+rotate_from_city_x, this.from.pos.y+rotate_from_city_y);
     ctx.lineTo(this.to.pos.x+rotate_from_city_x, this.to.pos.y+rotate_from_city_y);
     ctx.setLineDash([]);
-    ctx.strokeStyle = '#CCC';
+    ctx.strokeStyle = '#faf8f5';
     ctx.stroke();
     
     ctx.beginPath();
@@ -71,12 +71,11 @@ class RoadGO extends GameObject {
     ctx.setLineDash([]);
     ctx.moveTo(this.from.pos.x+move_from_city_x, this.from.pos.y+move_from_city_y);
     ctx.lineTo(this.to.pos.x-move_from_city_x, this.to.pos.y-move_from_city_y);
-    ctx.strokeStyle = '#FFF';
+    ctx.strokeStyle = '#C2B8B2';
     ctx.stroke();
     ctx.setLineDash([]);
 
-    this.RenderArrowDirection(ctx, 2.5);
-    this.RenderTime(ctx, 10)
+    this.RenderArrowDirection(ctx, 3);
   }
 
   RenderTime(ctx, fontSize, x, y) {

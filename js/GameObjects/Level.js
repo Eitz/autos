@@ -10,6 +10,8 @@ class Level extends GameObject {
     this.cars = [];
     /** @type {RoadGO[]} */
     this.roads = [];
+    /** @type {PassengerGO[]} */
+    this.passengers = [];
   }
 
   Render(ctx) {

@@ -2,6 +2,10 @@ class Logger {
 
   constructor(logElement) {
     this.el = logElement;
+    if (this.el.innerHTML) {
+      this.el.innerHTML = "";
+      this.debug("The game has been reset");
+    }
   }
 
   /**

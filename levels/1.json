@@ -5,24 +5,37 @@
     {
       "id": "A",
       "name": "Itajaí",
-      "x": 150,
+      "x": 50,
       "y": 240
     },
     {
       "id": "B",
       "name": "Itapema",
       "x": 550,
-      "y": 240
+      "y": 440
+    },
+    {
+      "id": "C",
+      "name": "Itajaí",
+      "x": 450,
+      "y": 140
+    },
+    {
+      "id": "D",
+      "name": "Itapema",
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "E",
+      "name": "Itapema",
+      "x": 280,
+      "y": 200
     }
   ],
   "cars": [
     {
       "id": "1",
-      "type": "1",
-      "city": "A"
-    },
-    {
-      "id": "2",
       "type": "1",
       "city": "A"
     }
@@ -32,13 +45,45 @@
       "id": "1",
       "from": "A",
       "to": "B"
+    },
+    {
+      "id": "1",
+      "from": "B",
+      "to": "C"
+    },
+    {
+      "id": "1",
+      "from": "C",
+      "to": "D"
+    },
+    {
+      "id": "1",
+      "from": "B",
+      "to": "A"
+    },
+    {
+      "id": "1",
+      "from": "B",
+      "to": "E"
+    },
+    {
+      "id": "1",
+      "from": "C",
+      "to": "E"
+    },
+    {
+      "id": "1",
+      "from": "A",
+      "to": "E"
     }
   ],
-  "passengers": [{
-    "id": "1",
-    "fromCity": "A",
-    "toCity": "B"
-  }],
-  "codeSample": "function init (vehicles, cities) {\r\n        let v = vehicles[0];\r\n        \r\n        v.on('idle', function() {\r\n          v.moveTo('B');\r\n        })\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
+  "passengers": [
+    {
+      "id": "a",
+      "fromCity": "A",
+      "toCity": "B"
+    }
+  ],
+  "codeSample": "function init (vehicles, cities) {\r\n\tlet v = vehicles[0];\r\n\t\r\n\tv.on('idle', function() {\r\n\t  v.moveTo('B');\r\n\t})\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
   "shortDocumentation": "<strong>Hello</strong> World"
 }
