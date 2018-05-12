@@ -35,6 +35,7 @@ class Game {
 		this.gameStats = new GameStats(this.elements.progress_buttons);
 		this.log = new Logger(this.elements.event_log);
 		this.controller = new GameController(this.elements.gameArea);
+		this.gameFunctions = new GameFunctions(this);
 		
 		this.LoadChallenge(this.GetLevelNumberFromHash(), cachedChallenge);
 		
@@ -81,7 +82,7 @@ class Game {
 			return;
 		}
 		try {
-			this.gameCode.init(this.vehicles, this.cities);
+			this.gameCode.init(this.vehicles, this.cities, this.gameFunctions);
 		} catch (err) {
 			this.Pause();
 			let numbers = Util.GetErrorNumbers(err.stack);

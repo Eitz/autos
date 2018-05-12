@@ -24,7 +24,7 @@ html, body {
 }
 
 #game {
-  width: 1024px;
+  width: 1124px;
   margin: 20px auto;
 }
 
@@ -89,8 +89,7 @@ html, body {
   font-size: 14px;
   display: block;
   text-align: right;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #CCC;
+  padding-bottom: 8px;
   height: auto;
   font-weight: 300;
 }
@@ -100,7 +99,7 @@ html, body {
 }
 
 #game #top-bar #progress-buttons .buttons .speed-buttons {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 #game #top-bar #progress-buttons .buttons .speed-buttons button {
@@ -115,7 +114,7 @@ html, body {
   display: block;
   height: auto;
   position: absolute;
-  bottom: -4px;
+  bottom: -6px;
   margin-bottom: 0px;
 }
 
@@ -266,7 +265,7 @@ body.modal-on #modals::before {
 button {
   background: #FFF;
   border: #CCC;
-  padding: 5px 17px;
+  padding: 4px 17px;
   border: 1px solid rgba(0,0,0,0.4);
   border-radius: 2px;
   box-shadow: 0px 0px 5px rgba(0,0,0,0.2), 2px 3px 0px rgba(0,0,0,0.1);
@@ -297,4 +296,8 @@ body.modal-on {
 
 .CodeMirror-lint-tooltip img {
   display: none;
+}
+.CodeMirror {
+  font-family: "Source Code Pro", "PT Mono", monospace;
+  font-size: 12px;
 }

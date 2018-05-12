@@ -45,13 +45,24 @@ class VehicleGO extends GameObject {
       return;
     }
 
-    let radius = 10;
+    let size = 8;
     let offsetY = offset ? offset * 15 + 15 : 0;
     let offsetX = offset ? -20 : 0;
     ctx.fillStyle = '#2d2006';
-    ctx.beginPath();
-    ctx.rect(this.pos.x + offsetX, this.pos.y - offsetY, radius * 1.5, radius);
-    ctx.fill();
+    if (offset) {
+      ctx.fillRect(this.pos.x + offsetX, this.pos.y - offsetY, size * 1.5, size);
+    } else if (this._travelTo[0]) {
+      let toy = this._travelTo[0].pos.y;
+      let tox = this._travelTo[0].pos.x;
+      let fromy = this.lastCity.pos.y;
+      let fromx = this.lastCity.pos.x;
+      let deg = Math.atan2(toy-fromy,tox-fromx);
+      ctx.save();
+      ctx.translate(this.pos.x + size*1.5 / 2, this.pos.y + size / 2);
+      ctx.rotate(deg);
+      ctx.fillRect(-size*1.5/2, -size/2, size * 1.5, size);
+      ctx.restore();
+    }
     this.RenderInfo(
       ctx, 10,
       this.pos.x - 18 + offsetX, this.pos.y - offsetY + (offset ? 9 : 0)
@@ -132,7 +143,7 @@ class VehicleGO extends GameObject {
       targetCityPos.x - this.realPos.x
     );
     let rotated_angle = angle + Math.PI/2;
-    let distance = 1;
+    let distance = 3.5;
     return new Vector2(
       this.realPos.x + Math.cos(rotated_angle) * distance,
       this.realPos.y + Math.sin(rotated_angle) * distance,

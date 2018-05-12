@@ -73,7 +73,6 @@ class GameController {
 
   Render() {
     
-    this.ctx2D.save();
     this.ctx2D.fillStyle = this.backgroundColor;
     this.ctx2D.fillRect(0, 0, this.width, this.height);
     
@@ -83,17 +82,18 @@ class GameController {
     }
     // End Render
     
-    this.ctx2D.restore();
   }
 
   Frame(now) {  
     if (!this.last) {
       this.last = now;
+      this.Render();
     }
     if (this.isGameRunning) {
       this.Update(now-this.last);
-    }
-    this.Render();
+      this.Render();
+    }    
+    
     this.last = now;
     
     if (!this.stop)
