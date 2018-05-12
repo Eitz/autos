@@ -14,6 +14,7 @@ class GameEvent {
         let numbers = Util.GetErrorNumbers(err.stack);
 			  err = new ImplementationError(err, `for event: '${this.name}'`, numbers.line, numbers.column);
         game.log.error(err);
+        Modals.showError(err.toString());
       }
     }
   }

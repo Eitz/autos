@@ -62,6 +62,7 @@ class GameController {
       game.log.error(err);
       // FIXME change to Stop
       this.Pause();
+      Modals.showError(err.toString());
       return;
     }    
     for (let go of this.gameObjects) {

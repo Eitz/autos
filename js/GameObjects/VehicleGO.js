@@ -23,6 +23,8 @@ class VehicleGO extends GameObject {
 
     this.IEObject = new Vehicle(this);
     Game.Instance().vehicles.push(this.IEObject);
+
+    this.startingCity.AddVehicle(this);
   }
 
   static fromObject(object) {
@@ -46,13 +48,13 @@ class VehicleGO extends GameObject {
     let radius = 10;
     let offsetY = offset ? offset * 15 + 15 : 0;
     let offsetX = offset ? -20 : 0;
-    ctx.fillStyle = '#342D7A';
+    ctx.fillStyle = '#2d2006';
     ctx.beginPath();
     ctx.rect(this.pos.x + offsetX, this.pos.y - offsetY, radius * 1.5, radius);
     ctx.fill();
     this.RenderInfo(
       ctx, 10,
-      this.pos.x - 18 + offsetX, this.pos.y - offsetY + (offset ? 8 : 0)
+      this.pos.x - 18 + offsetX, this.pos.y - offsetY + (offset ? 9 : 0)
     );
   }
 
@@ -70,6 +72,7 @@ class VehicleGO extends GameObject {
         return;
       }
 
+      this.lastCity.RemoveVehicle(this);
       this.isIdle = false;
       this.pos = this.realPos;
       
@@ -90,7 +93,9 @@ class VehicleGO extends GameObject {
         this.pos.y = city.pos.y;
         // ARRIVED
         this.lastCity = city;
-        this.trigger('visitCity', [city.IEObject]);
+        console.log(city);
+        city.AddVehicle(this);
+        this.trigger('visitCity', [city]);
         this._travelTo.shift();
       }
     } else {
@@ -140,7 +145,9 @@ class VehicleGO extends GameObject {
       this.passengers.push(passenger);
       this.trigger('newPassenger', [passenger]);
     } else {
-      Game.Instance().log.error(`${this.IEObject} tried to load an invalid passenger: '${passenger && passenger.IEObject ? passenger.IEObject : passenger}'`);
+      let err = new CommandError(`${this.IEObject} tried to load an invalid passenger: '${passenger && passenger.IEObject ? passenger.IEObject : passenger}'`);
+      Game.Instance().log.error(err);
+      console.error(err);
     }
   }
 

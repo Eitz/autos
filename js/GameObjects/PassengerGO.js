@@ -23,19 +23,25 @@ class PassengerGO extends GameObject {
     this.fromCity.addPassenger(this.IEObject);
   }
 
-  Render(ctx) {
-    if (!this.onBoard) {
+  Render(ctx, offset) {
+    if (offset) {
+      let offsetY = offset ? offset * 15 + 10 : 0;
+      let offsetX = offset ? 10 : 0;
       ctx.beginPath();
-      ctx.fillStyle = '#9F86C0';
-      ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);      
-      /*let p1 = new Vector2(this.size * Math.cos(angle+0) + this.pos.x, this.size * Math.sin(angle+0) + this.pos.y);
-      let p2 = new Vector2(this.size * Math.cos(angle+(1/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(1/3)*(2*Math.PI)) + this.pos.y);
-      let p3 = new Vector2(this.size * Math.cos(angle+(2/3)*(2*Math.PI)) + this.pos.x, this.size * Math.sin(angle+(2/3)*(2*Math.PI)) + this.pos.y);
-      path.moveTo(p1.x, p1.y);
-      path.lineTo(p2.x, p2.y);
-      path.lineTo(p3.x, p3.y);*/
+      ctx.fillStyle = '#3D348B';
+      ctx.arc(this.pos.x + offsetX, this.pos.y - offsetY, this.size, 0, Math.PI * 2);
       ctx.fill();
+      this.RenderInfo(
+        ctx, 10,
+        this.pos.x + offsetX + 6, this.pos.y - offsetY + 2.5
+      );
     }
+  }
+
+  RenderInfo(ctx, fontSize, x, y) {
+    ctx.font = `${fontSize}px Raleway`;
+    ctx.fillStyle = '#555';
+    ctx.fillText(`-> ${this.toCity.id}`,x,y);
   }
 
   Update(dt) {

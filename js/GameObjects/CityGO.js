@@ -9,26 +9,32 @@ class CityGO extends GameObject {
     this.renderOrder = 2;
     this.roads = [];
     this.passengers = [];
+    this.vehicles = [];
     this.IEObject = new City(this);
     Game.Instance().cities.push(this.IEObject);
   }
 
   Render(ctx) {
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = '#8A716A';
     ctx.fillRect(this.pos.x-this.size/2, this.pos.y-this.size/2, this.size, this.size);
-    let vehicles = this.VehiclesInCity();
-    if (vehicles.length) {
+    if (this.vehicles.length) {
       let i = 1;
-      for (let v of vehicles) {
+      for (let v of this.vehicles) {
         v.Render(ctx, i++);
+      }
+    }
+    if (this.passengers.length) {
+      let i = 1;
+      for (let p of this.passengers) {
+        p.__gameObject__.Render(ctx, i++);
       }
     }
     this.RenderText(ctx);
   }
 
   RenderText(ctx) {
-    ctx.font = `bold 14px Arial`;
-    ctx.fillStyle = '#CCC';
+    ctx.font = `500 14px Raleway`;
+    ctx.fillStyle = '#FFF';
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
     ctx.fillText(this.id,this.pos.x,this.pos.y);
@@ -49,12 +55,16 @@ class CityGO extends GameObject {
     this.passengers = this.passengers.filter(p => p !== passenger);
   }
 
-  addRoad(road) {
-    this.roads.push(road);
+  AddVehicle(vehicle) {
+    this.vehicles.push(vehicle);
   }
 
-  VehiclesInCity() {
-    return Game.Instance().controller.GetVehiclesInCity(this);
+  RemoveVehicle(vehicle) {
+    this.vehicles = this.vehicles.filter(v => v !== vehicle);
+  }
+
+  addRoad(road) {
+    this.roads.push(road);
   }
 
   static fromObject(object) {

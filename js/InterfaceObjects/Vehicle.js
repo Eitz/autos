@@ -62,7 +62,13 @@ class Vehicle extends GameInterface {
 
   /** @param {Passenger|Passenger[]} */
   load(passenger) {
-    this.__gameObject__.addPassenger(passenger);
+    if (passenger && passenger instanceof Array) {
+      for (let p of passenger) {
+        this.__gameObject__.addPassenger(p);
+      }
+    } else {
+      this.__gameObject__.addPassenger(passenger);
+    }
   }
 
   /** @param {Passenger} */

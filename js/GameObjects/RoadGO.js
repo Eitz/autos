@@ -56,10 +56,10 @@ class RoadGO extends GameObject {
     let rotate_from_city_x = 3*Math.cos(rotated_angle);
     let rotate_from_city_y = 3*Math.sin(rotated_angle);
     
-    let move_from_city_x = 20*Math.cos(angle);
-    let move_from_city_y = 20*Math.sin(angle);
+    let move_from_city_x = 40*Math.cos(angle);
+    let move_from_city_y = 40*Math.sin(angle);
 
-    ctx.lineWidth = 14;
+    ctx.lineWidth = 12;
     ctx.moveTo(this.from.pos.x+rotate_from_city_x, this.from.pos.y+rotate_from_city_y);
     ctx.lineTo(this.to.pos.x+rotate_from_city_x, this.to.pos.y+rotate_from_city_y);
     ctx.setLineDash([]);
@@ -93,7 +93,7 @@ class RoadGO extends GameObject {
     var tox = this.to.pos.x;
     var toy = this.to.pos.y;
 
-    let distance_from_line = 6.7;
+    let distance_from_line = 5.5;
     
     let segments = 4;
     for (let i = 1; i<segments; i++) {
@@ -111,7 +111,7 @@ class RoadGO extends GameObject {
       var x;
       var y;
 
-      let arrowColor = '#000';//'#FFF';
+      let arrowColor = '#8A716A';//'#FFF';
 
       ctx.fillStyle = arrowColor;
       ctx.beginPath();

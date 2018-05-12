@@ -82,6 +82,16 @@
       "id": "a",
       "fromCity": "A",
       "toCity": "B"
+    },
+    {
+      "id": "b",
+      "fromCity": "A",
+      "toCity": "B"
+    },
+    {
+      "id": "c",
+      "fromCity": "A",
+      "toCity": "B"
     }
   ],
   "codeSample": "function init (vehicles, cities) {\r\n\tlet v = vehicles[0];\r\n\t\r\n\tv.on('idle', function() {\r\n\t  v.moveTo('B');\r\n\t})\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",

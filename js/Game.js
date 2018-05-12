@@ -77,6 +77,7 @@ class Game {
 			this.Pause();
 			err = new ImplementationError(err, undefined, err.lineNumber?err.lineNumber-2:undefined, err.columnNumber);
 			this.log.error(err);
+			Modals.showError(err.toString());
 			return;
 		}
 		try {
@@ -85,7 +86,8 @@ class Game {
 			this.Pause();
 			let numbers = Util.GetErrorNumbers(err.stack);
 			err = new ImplementationError(err, 'init', numbers.line, numbers.column);
-      this.log.error(err);
+			this.log.error(err);
+			Modals.showError(err.toString());
 		}
 	}
 
