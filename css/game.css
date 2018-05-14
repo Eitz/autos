@@ -4,9 +4,15 @@
   margin: 0;
 }
 
+.pull-right {
+  float: right;
+  text-align: right;
+}
+
 html, body {
   min-height: 600px;
   font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 400;
   background: #C2B8B2;
 }
 
@@ -271,6 +277,10 @@ button {
   box-shadow: 0px 0px 5px rgba(0,0,0,0.2), 2px 3px 0px rgba(0,0,0,0.1);
 }
 
+strong {
+  font-weight: 500;
+}
+
 button:hover {
   box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);
   cursor: pointer;
@@ -300,4 +310,10 @@ body.modal-on {
 .CodeMirror {
   font-family: "Source Code Pro", "PT Mono", monospace;
   font-size: 12px;
+}
+#short-documentation p {
+  margin-bottom: 14px;
+}
+#short-documentation strong {
+  font-weight: 700;
 }

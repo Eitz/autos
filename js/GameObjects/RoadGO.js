@@ -19,12 +19,28 @@ class RoadGO extends GameObject {
     this.to = gameController.getCityById(props.to);
 
     /** @const {number} */
+    this.dampering = props.dampering || 1;
+
+    /** @const {number} */
     this.travelTime = this.GetTravelTime(Game.Instance().vehicleVelocity);
 
     /** @type {City} */
     this.IEObject = new Road(this);
     
+    this.shouldRenderInfo = !props.hideInfo;
+    this.renderThisSide = true;
+
     this.from.addRoad(this.IEObject);
+  }
+
+  Prepare() {
+    if (this.renderThisSide) {
+      let game = Game.Instance();
+      let otherRoad = game.gameFunctions.GetRoadBetween(this.to.IEObject, this.from.IEObject);
+      if (otherRoad) {
+        otherRoad.__gameObject__.renderThisSide = false;
+      }
+    }
   }
 
   static fromObject(object) {
@@ -56,8 +72,8 @@ class RoadGO extends GameObject {
     let rotate_from_city_x = 3*Math.cos(rotated_angle);
     let rotate_from_city_y = 3*Math.sin(rotated_angle);
     
-    let move_from_city_x = 40*Math.cos(angle);
-    let move_from_city_y = 40*Math.sin(angle);
+    let move_from_city_x = 20*Math.cos(angle);
+    let move_from_city_y = 20*Math.sin(angle);
 
     ctx.lineWidth = 13;
     ctx.moveTo(this.from.pos.x+rotate_from_city_x, this.from.pos.y+rotate_from_city_y);
@@ -67,7 +83,7 @@ class RoadGO extends GameObject {
     ctx.stroke();
     
     ctx.beginPath();
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 0.5;
     ctx.setLineDash([]);
     ctx.moveTo(this.from.pos.x+move_from_city_x, this.from.pos.y+move_from_city_y);
     ctx.lineTo(this.to.pos.x-move_from_city_x, this.to.pos.y-move_from_city_y);
@@ -79,10 +95,28 @@ class RoadGO extends GameObject {
   }
 
   RenderTime(ctx, fontSize, x, y) {
-    let t = this.GetTravelTime(Game.Instance().vehicleVelocity);
-    ctx.font = `${fontSize}px Arial`;
-    ctx.fillStyle = '#555';
-    ctx.fillText(`${t}s`,x-5,y+5);
+    if (this.shouldRenderInfo && this.renderThisSide) {
+      let t = this.GetTravelTime(Game.Instance().vehicleVelocity);
+      let bold = '';
+      if (this.dampering != 1) {
+        bold = 'bold ';
+      }
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      t = t.replace('.00', '');
+      ctx.font = `${bold}${fontSize}px Arial`;
+      ctx.fillStyle = '#555';
+      ctx.fillText(`${t}s`,x,y);
+      if (this.dampering < 1) {
+        ctx.fillStyle = '#F66';
+        ctx.font = `bold ${fontSize*.8}px Arial`;
+        ctx.fillText(`- ${1/this.dampering}x`,x,y+8);
+      } else if (this.dampering > 1) {
+        ctx.fillStyle = '#6F6';
+        ctx.font = `bold ${fontSize*.8}px Arial`;
+        ctx.fillText(`+ ${this.dampering}x`,x,y+8);
+      }
+    }
   }
 
   RenderArrowDirection (ctx, r){
@@ -100,7 +134,7 @@ class RoadGO extends GameObject {
       
       let angle = Math.atan2(toy-fromy,tox-fromx);
       
-      let degree_from_line = angle + 45 / Math.PI;
+      let degree_from_line = angle + 44.4 / Math.PI;
       
       var new_x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * Math.cos(degree_from_line)
       var new_y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * Math.sin(degree_from_line)
@@ -148,9 +182,9 @@ class RoadGO extends GameObject {
       ctx.stroke();
 
       if (i == segments/2) {
-        let x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * 4.5 * Math.cos(degree_from_line)
-        let y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * 4.5 * Math.sin(degree_from_line)
-        this.RenderTime(ctx, 10, x, y);
+        let x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * 5 * Math.cos(degree_from_line)
+        let y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * 5 * Math.sin(degree_from_line)
+        this.RenderTime(ctx, 10, x-2, y);
       }
     }
   }
@@ -162,7 +196,7 @@ class RoadGO extends GameObject {
     /** @type {Vector2} */
     let b = this.to.pos;
 
-    return (Math.hypot(b.x-a.x, b.y-a.y) / velocity / 1000).toFixed(2);
+    return (Math.hypot(b.x-a.x, b.y-a.y) / velocity / 1000 / this.dampering ).toFixed(2);
   }
 
   GetMiddlePointInSegment(n, nMax) {

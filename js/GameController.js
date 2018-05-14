@@ -31,6 +31,9 @@ class GameController {
 
   Start() {
     this.isGameRunning = true;
+    for (let go of this.gameObjects) {
+      go.Start();
+    }
   }
 
   Pause() {
@@ -49,19 +52,31 @@ class GameController {
 
   Prepare (levelData) {
     this.ReorderGameObjects();
+    for (let go of this.gameObjects) {
+      go.Prepare();
+    }
     requestAnimationFrame(this.Frame.bind(this));
   }
 
   Update (dt) {
     let game = Game.Instance();
+    if(this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
+      console.log("it works!");
+      Modals.showDefeat(this.victoryCondition.text);
+    }
+
+    if (this.defeatCondition.function(game.vehicles, game.cities, game.gameStats)) {
+      console.log("it works too!");
+      Modals.showDefeat(this.defeatCondition.text);
+    }
+
     try {
       game.gameCode.update(dt, game.vehicles, game.cities);
     } catch(err) {
       err = new ImplementationError(err);
       console.error(err);
       game.log.error(err);
-      // FIXME change to Stop
-      this.Pause();
+      this.Stop();
       Modals.showError(err.toString());
       return;
     }    
@@ -117,6 +132,19 @@ class GameController {
       }
     }
     return vehicles;
+  }
+
+  SetConditions(victory, defeat) {
+    this.victoryCondition = {
+      text: victory.text,
+      function: victory.function
+    };
+    this.defeatCondition = {
+      text: defeat.text,
+      function: defeat.function
+    };
+    console.log(this.victoryCondition.function);
+    console.log(this.defeatCondition.function);
   }
 
   /** @returns {CityGO} */

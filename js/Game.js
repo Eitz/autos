@@ -12,11 +12,11 @@ class Game {
 			gameArea: root.getElementById('game-area').getElementsByTagName('canvas')[0],
 			event_log: root.getElementById('event-log'),
 			code_editor: root.getElementById('code-editor'),
-			short_documentation: root.getElementById('short-documentation'),
+			short_documentation: root.getElementById('short-documentation-content'),
 		};
 
 		/** @const {number} */
-		this.vehicleVelocity = 0.1;
+		this.vehicleVelocity = 0.15;
 
 		game_instance = this;
 	}
@@ -37,16 +37,18 @@ class Game {
 		this.controller = new GameController(this.elements.gameArea);
 		this.gameFunctions = new GameFunctions(this);
 		
-		this.LoadChallenge(this.GetLevelNumberFromHash(), cachedChallenge);
+		let level = this.LoadChallenge(this.GetLevelNumberFromHash(), cachedChallenge);
 		
-		if (!cachedChallenge) {
+		if (!level) {
 			this.events.on('load-level', (levelNumber, level) => {
 				this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
 				this.setProperties(levelNumber, level);
+				this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
 				this.editor.refresh();
 				this.controller.Prepare();
 			});
 		} else {
+			this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
 			this.editor.refresh();
 			this.controller.Prepare();
 		}
@@ -54,7 +56,6 @@ class Game {
 
 	GetLevelNumberFromHash() {
 		let level = location.hash.replace('#', '');
-		console.log(level);
 		if (!level || isNaN(level) || parseInt(level) > 5 || parseInt(level) < 1) {
 			location.hash = "1";
 			level = 1;
@@ -72,7 +73,7 @@ class Game {
 	ParseGameCode(code) {
 		this.gameCode = {};
 		try {
-			code = new Function ('{ try {' + code + '; return { init: init, update: update }} catch (err) { throw err; }}');
+			code = new Function ('{ try {' + code + '; return { init: init, update: (typeof update != \'undefined\') ? update : function(){} }} catch (err) { throw err; }}');
 			this.gameCode = code();
 		} catch(err) {
 			this.Pause();
@@ -108,6 +109,7 @@ class Game {
 		let level = new Level(levelNumber);
 		if (cachedChallenge) {
 			level.fromJSON(cachedChallenge);
+			return level;
 		} else {
 			Game.loadTextAsset(level.getURL(), (asset) => {
 				this.cachedChallenge = asset;

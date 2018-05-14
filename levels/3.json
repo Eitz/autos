@@ -1,24 +1,26 @@
 {
-  "name": "Desafio #2: A primeira viagem longa",
-  "description": "Uma introdução ao jogo: neste desafio você deve levar o veículo de “A” para “C” para concluir o objetivo e avançar para o próximo desafio.",
+  "name": "Desafio #2: Caminhos bloqueados",
+  "description": "Neste desafio você deve levar o veículo de “A” para “C” para concluir o objetivo e avançar para o próximo desafio. Algumas podem ser contra-mão e você não poderá utilizá-las.",
   "cities": [
     {
       "id": "A",
-      "name": "Itajaí",
-      "x": 100,
-      "y": 75
+      "x": 50,
+      "y": 225
     },
     {
       "id": "B",
-      "name": "Itapema",
-      "x": 300,
-      "y": 200
+      "x": 325,
+      "y": 300
     },
     {
       "id": "C",
-      "name": "Itajaí",
-      "x": 550,
-      "y": 140
+      "x": 325,
+      "y": 150
+    },
+    {
+      "id": "D",
+      "x": 575,
+      "y": 225
     }
   ],
   "cars": [
@@ -33,25 +35,31 @@
       "id": "1",
       "from": "A",
       "to": "B",
-      "hideInfo" : true
+      "hideInfo": true
     },
     {
       "id": "1",
-      "from": "B",
+      "from": "C",
       "to": "A",
-      "hideInfo" : true
+      "hideInfo": true
     },
     {
       "id": "1",
       "from": "B",
       "to": "C",
-      "hideInfo" : true
+      "hideInfo": true
     },
     {
       "id": "1",
       "from": "C",
+      "to": "D",
+      "hideInfo": true
+    },
+    {
+      "id": "1",
+      "from": "D",
       "to": "B",
-      "hideInfo" : true
+      "hideInfo": true
     }
   ],
   "passengers": [],
@@ -67,5 +75,4 @@
       "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeSeconds > 15; }"
     }
   }
-  
 }

@@ -9,6 +9,8 @@ class GameObject extends GameEventManager {
     Game.Instance().controller.AddGameObject(this);    
   }
 
+  Prepare() {}
+
   Start() {}
   
   Update(dt) {}

@@ -4,14 +4,23 @@ class GameFunctions {
     this.game = game;
   }
 
-  GetTimeBetween(cityA, cityB) {
+  GetRoadBetween(cityA, cityB) {
     let roads = cityA.roads;
     for (let r of roads) {
       if (r.to == cityB) {
-        return r.__gameObject__.GetTravelTime(this.game.vehicleVelocity);
+        return r;
       }
     }
-    return Infinity;
+    return undefined;
+  }
+
+  GetTimeBetween(cityA, cityB) {
+    let road = this.GetRoadBetween(cityA, cityB);
+    if (road) {
+      return r.travelTime;
+    } else {
+      return Infinity;
+    }
   }
 
   GetObjectById(typeOfObject, id) {

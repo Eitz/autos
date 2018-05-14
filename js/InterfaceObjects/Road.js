@@ -15,6 +15,9 @@ class Road extends GameInterface {
     /** @const {Integer} Tempo necessário para cruzar esta rua com um veículo padrão. */
     this.travelTime = roadGO.travelTime;
 
+    /** @const {Integer} */
+    this.dampering = roadGO.dampering;
+
     /**
      * @private {RoadGO}
      */

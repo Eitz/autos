@@ -32,8 +32,11 @@ class Level extends GameObject {
       cities: CityGO.fromObject(this.levelProps.cities),
       cars: VehicleGO.fromObject(this.levelProps.cars),
       roads: RoadGO.fromObject(this.levelProps.roads),
-      passengers: PassengerGO.fromObject(this.levelProps.passengers)
+      passengers: PassengerGO.fromObject(this.levelProps.passengers),
+      conditions: this.levelProps.conditions
     });
+    this.conditions.victory.function = Util.ParseFunction(this.levelProps.conditions.victory.function);
+    this.conditions.defeat.function = Util.ParseFunction(this.levelProps.conditions.defeat.function);
   }
 
   setProperties(props) {

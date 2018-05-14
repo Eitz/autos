@@ -1,57 +1,78 @@
 {
-  "name": "Desafio #2: A primeira viagem longa",
-  "description": "Uma introdução ao jogo: neste desafio você deve levar o veículo de “A” para “C” para concluir o objetivo e avançar para o próximo desafio.",
+  "name": "Desafio #4: Considerando Alternativas",
+  "description": "<b>Introdução:</b> você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Utilize as melhores ruas pois não temos tempo a perder.",
   "cities": [
     {
       "id": "A",
-      "name": "Itajaí",
       "x": 100,
-      "y": 75
+      "y": 315
     },
     {
       "id": "B",
-      "name": "Itapema",
-      "x": 300,
-      "y": 200
+      "x": 325,
+      "y": 300
     },
     {
       "id": "C",
-      "name": "Itajaí",
-      "x": 550,
-      "y": 140
+      "x": 325,
+      "y": 100
+    },
+    {
+      "id": "D",
+      "x": 575,
+      "y": 125
     }
   ],
   "cars": [
     {
-      "id": "1",
       "type": "1",
       "city": "A"
     }
   ],
   "roads": [
     {
-      "id": "1",
       "from": "A",
-      "to": "B",
-      "hideInfo" : true
+      "to": "B"
     },
     {
-      "id": "1",
-      "from": "B",
-      "to": "A",
-      "hideInfo" : true
-    },
-    {
-      "id": "1",
-      "from": "B",
-      "to": "C",
-      "hideInfo" : true
-    },
-    {
-      "id": "1",
       "from": "C",
+      "to": "A",
+      "dampering": 0.5
+    },
+    {
+      "from": "B",
+      "to": "C"
+    },
+    {
+      "from": "C",
+      "to": "D"
+    },
+    {
+      "from": "D",
       "to": "B",
-      "hideInfo" : true
+      "dampering": 0.5
+    },
+    {
+      "from": "B",
+      "to": "A"
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "dampering": 0.5
+    },
+    {
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "from": "D",
+      "to": "C"
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "dampering": 0.5
     }
   ],
   "passengers": [],
@@ -59,13 +80,12 @@
   "shortDocumentation": "<p>In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single car to city \"C\"",
-      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'C'; }"
+      "text" : "Deliver the single car to city \"D\"",
+      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'D'; }"
     },
     "defeat" : {
-      "text" : "Timer goes over 15 seconds",
-      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeSeconds > 15; }"
+      "text" : "Timer goes over 5 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeMS > 5000; }"
     }
   }
-  
 }

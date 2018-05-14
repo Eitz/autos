@@ -1,36 +1,18 @@
 {
   "name": "Desafio #1: Aprendendo a dirigir",
-  "description": "Uma introdução ao jogo: leve o veículo de “A” para “B” para concluir o objetivo e avançar para o próximo desafio.",
+  "description": "Como uma introdução ao jogo, seu único objetivo é levar o veículo de “A” para “B” para avançar para o próximo desafio.",
   "cities": [
     {
       "id": "A",
       "name": "Itajaí",
-      "x": 50,
-      "y": 240
+      "x": 130,
+      "y": 150
     },
     {
       "id": "B",
       "name": "Itapema",
-      "x": 550,
-      "y": 440
-    },
-    {
-      "id": "C",
-      "name": "Itajaí",
-      "x": 450,
-      "y": 140
-    },
-    {
-      "id": "D",
-      "name": "Itapema",
-      "x": 250,
-      "y": 40
-    },
-    {
-      "id": "E",
-      "name": "Itapema",
-      "x": 280,
-      "y": 200
+      "x": 455,
+      "y": 280
     }
   ],
   "cars": [
@@ -44,56 +26,28 @@
     {
       "id": "1",
       "from": "A",
-      "to": "B"
+      "to": "B",
+      "hideInfo": true
     },
     {
-      "id": "1",
+      "id": "2",
       "from": "B",
-      "to": "C"
-    },
-    {
-      "id": "1",
-      "from": "C",
-      "to": "D"
-    },
-    {
-      "id": "1",
-      "from": "B",
-      "to": "A"
-    },
-    {
-      "id": "1",
-      "from": "B",
-      "to": "E"
-    },
-    {
-      "id": "1",
-      "from": "C",
-      "to": "E"
-    },
-    {
-      "id": "1",
-      "from": "A",
-      "to": "E"
+      "to": "A",
+      "hideInfo": true
     }
   ],
-  "passengers": [
-    {
-      "id": "a",
-      "fromCity": "A",
-      "toCity": "B"
+  "passengers": [],
+  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Game functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, game) {\r\n\tlet v = vehicles[0];\r\n\t\r\n}",
+  "shortDocumentation": 
+    "<p>In this first challenge your task is to move the only vehicle from city A to city B.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "conditions" : {
+    "victory": {
+      "text" : "Deliver the single car to city \"B\"",
+      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'B'; }"
     },
-    {
-      "id": "b",
-      "fromCity": "A",
-      "toCity": "B"
-    },
-    {
-      "id": "c",
-      "fromCity": "A",
-      "toCity": "B"
+    "defeat" : {
+      "text" : "Timer goes over 10 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeSeconds > 10; }"
     }
-  ],
-  "codeSample": "function init (vehicles, cities) {\r\n\tlet v = vehicles[0];\r\n\t\r\n\tv.on('idle', function() {\r\n\t  v.moveTo('B');\r\n\t})\r\n}\r\n\r\nfunction update () {\r\n  \r\n}",
-  "shortDocumentation": "<strong>Hello</strong> World"
+  }
 }

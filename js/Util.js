@@ -4,6 +4,18 @@ class Util {
     return JSON.parse(jsonText);
   }
 
+  static ParseFunction(json) {
+    let code;
+		try {
+      code = new Function('{ try { return ' + json + ' } catch (err) { throw err; }}');
+      code = code();
+		} catch(err) {
+			console.error(err);
+			return;
+		}
+		return code;
+  }
+
   static GetErrorNumbers(stackTrace) {
     let regex = /<anonymous>:(\d+):(\d+)/;
     let matches = regex.exec(stackTrace);
