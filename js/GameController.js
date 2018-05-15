@@ -61,20 +61,19 @@ class GameController {
   Update (dt) {
     let game = Game.Instance();
     if(this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
-      console.log("it works!");
-      Modals.showDefeat(this.victoryCondition.text);
+      Modals.showVictory(this.victoryCondition.text);
+      this.Pause();
     }
 
     if (this.defeatCondition.function(game.vehicles, game.cities, game.gameStats)) {
-      console.log("it works too!");
       Modals.showDefeat(this.defeatCondition.text);
+      this.Pause();
     }
 
     try {
       game.gameCode.update(dt, game.vehicles, game.cities);
     } catch(err) {
       err = new ImplementationError(err);
-      console.error(err);
       game.log.error(err);
       this.Stop();
       Modals.showError(err.toString());
@@ -143,8 +142,6 @@ class GameController {
       text: defeat.text,
       function: defeat.function
     };
-    console.log(this.victoryCondition.function);
-    console.log(this.defeatCondition.function);
   }
 
   /** @returns {CityGO} */

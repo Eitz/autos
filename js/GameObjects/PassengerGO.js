@@ -52,18 +52,21 @@ class PassengerGO extends GameObject {
   }
 
   load(vehicleGO) {
-    this.onBoard = vehicleGO;
+    this.onBoard = vehicleGO.IEObject;
     this.fromCity.removePassenger(this.IEObject);
   }
 
   unload(city) {
-    this.onBoard = false;
+    this.onBoard = undefined;
     if (city == this.toCity) {
       let game = Game.Instance();
       game.gameStats.addPassenger();
       game.controller.RemoveGameObject(this);
-    }
-    this.pos = city.pos;
+    } else {
+      this.lastCity = city;
+      city.addPassenger(this.IEObject);
+      this.pos = city.pos;
+    }    
   }
 
   getWaitingTimeInSeconds() {

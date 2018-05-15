@@ -5,15 +5,15 @@ class Modals {
   }
 
   static showDefeat(description) {
-    // document.getElementById('modal-defeat').style.display = 'block';
-    // document.getElementById('description').innerHTML = description;
-    // Modals.show();
+    document.getElementById('modal-defeat').style.display = 'block';
+    document.getElementById('modal-description-defeat').innerHTML = description;
+    Modals.show();
   }
 
   static showVictory(description) {
-    // document.getElementById('modal-victory').style.display = 'block';
-    // document.getElementById('description').innerHTML = description;
-    // Modals.show();
+    document.getElementById('modal-victory').style.display = 'block';
+    document.getElementById('modal-description-victory').innerHTML = description;
+    Modals.show();
   }
 
   static showError(errStr) {

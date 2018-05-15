@@ -18,6 +18,9 @@ class Passenger extends GameInterface {
     /** @type {City} Cidade que este passageiro tem como destino. */
     this.toCity = passengerGO.toCity.IEObject;
 
+    /** @type {Vehicle} Veículo que este passageiro esta abordo. */
+    this.onBoard = passengerGO.onBoard;
+
     /**
      * @private {PassengerGO}
      */

@@ -16,6 +16,7 @@ class VehicleGO extends GameObject {
     this._travelTo = [];
     this.passengers = [];
     this.lastCity = this.startingCity;
+    this.currentCity = this.startingCity.IEObject;
     this.passengerCapacity = this.type.capacity;
     
     this.isIdle = true;
@@ -61,10 +62,16 @@ class VehicleGO extends GameObject {
       let fromy = this.lastCity.pos.y;
       let fromx = this.lastCity.pos.x;
       let deg = Math.atan2(toy-fromy,tox-fromx);
+
+      let sizeX = size * 1.5;
+      let sizeY = size;
+
+      this.pos = this.RenderInRightLane(new Vector2(tox, toy));
+
       ctx.save();
-      ctx.translate(this.pos.x + size*1.5 / 2, this.pos.y + size / 2);
+      ctx.translate(this.pos.x, this.pos.y);
       ctx.rotate(deg);
-      ctx.fillRect(-size*1.5/2, -size/2, size * 1.5, size);
+      ctx.fillRect(-sizeX/2, -sizeY/2, sizeX, sizeY);
       ctx.restore();
       this.RenderInfo(
         ctx, 10,
@@ -75,6 +82,8 @@ class VehicleGO extends GameObject {
 
   Update(dt) {
     if (this._travelTo.length) {
+      this.currentCity = undefined;
+      this.IEObject.currentCity = undefined;
       let city = this._travelTo[0];
       let road = Game.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
       if (!road) {
@@ -101,14 +110,14 @@ class VehicleGO extends GameObject {
         this.pos.y + dt * dir.y * this.speed * road.dampering
       );
 
-      this.pos = this.RenderInRightLane(city.pos);
-      
       if (Math.abs(this.realPos.x-city.pos.x) <= 1.5 && Math.abs(this.realPos.y-city.pos.y) <= 1.5) {
         this.pos.x = city.pos.x;
         this.pos.y = city.pos.y;
         // ARRIVED
         this.lastCity = city;
         this.IEObject.lastCity = city.IEObject;
+        this.currentCity = city.IEObject;
+        this.IEObject.currentCity = city.IEObject;
         city.AddVehicle(this);
         this._travelTo.shift();
         this.trigger('visitCity', [city]);
@@ -118,7 +127,7 @@ class VehicleGO extends GameObject {
         this.isIdle = true;
         setTimeout(() => {
           if (this._travelTo.length == 0) {  
-            this.trigger('idle');
+            this.trigger('idle', [this.lastCity.IEObject]);
           }
         }, 10);
       }
@@ -139,12 +148,15 @@ class VehicleGO extends GameObject {
    * @param {Vector2} dir
   */
   RenderInRightLane(targetCityPos) {
+    
     let angle = Math.atan2(
       targetCityPos.y - this.realPos.y,
       targetCityPos.x - this.realPos.x
     );
-    let rotated_angle = angle + Math.PI/2;
-    let distance = 3.5;
+    
+    let rotated_angle = angle + (2 * Math.PI / 8);
+    let distance = 7.5;
+
     return new Vector2(
       this.realPos.x + Math.cos(rotated_angle) * distance,
       this.realPos.y + Math.sin(rotated_angle) * distance,
@@ -152,15 +164,34 @@ class VehicleGO extends GameObject {
   }
 
   addPassenger(passenger) {
-    if (passenger && passenger.constructor === Passenger) {
-      passenger.__gameObject__.load(this);
-      this.passengers.push(passenger);
-      this.trigger('newPassenger', [passenger]);
-    } else {
+    if (!passenger || passenger.constructor !== Passenger) {
       let err = new CommandError(`${this.IEObject} tried to load an invalid passenger: '${passenger && passenger.IEObject ? passenger.IEObject : passenger}'`);
       Game.Instance().log.error(err);
-      console.error(err);
+      return;
     }
+
+    if (passenger.onBoard) {
+      let err = new CommandError(`${this.IEObject} tried to load a passenger that is already on board a vehicle: '${passenger}' that is on ${passenger.onBoard}`);
+      Game.Instance().log.error(err);
+      return;
+    }
+
+    if (this.passengers.length == this.passengerCapacity) {
+      let err = new CommandError(`${this.IEObject} is full and can't load any more passengers! '${passenger}' from ${passenger.lastCity} is not going to board.`);
+      Game.Instance().log.error(err);
+      return;
+    }
+
+    if (passenger.lastCity != this.lastCity.IEObject) {
+      let err = new CommandError(`${this.IEObject} tried to load a passenger that is not in this city: '${passenger}' from ${passenger.lastCity}`);
+      Game.Instance().log.error(err);
+      return;
+    }
+
+    // everything ok!
+    passenger.__gameObject__.load(this);
+    this.passengers.push(passenger);
+    this.trigger('newPassenger', [passenger]);
   }
 
   removePassenger(passenger) {

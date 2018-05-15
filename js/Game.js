@@ -19,6 +19,11 @@ class Game {
 		this.vehicleVelocity = 0.15;
 
 		game_instance = this;
+
+		window.onhashchange = () => { 
+			this.controller.Stop();
+			this.Setup();
+ 		}
 	}
 
 	static Instance() {
@@ -93,6 +98,14 @@ class Game {
 		}
 	}
 
+	Next() {
+		location.hash = this.currentLevelNumber+1;
+	}
+
+	Back() {
+		location.hash = this.currentLevelNumber-1;
+	}
+
 	Pause() {
 		if (this.controller.isGameRunning)
 			this.controller.Pause();
@@ -107,7 +120,7 @@ class Game {
 
 	LoadChallenge(levelNumber, cachedChallenge) {
 		let level = new Level(levelNumber);
-		if (cachedChallenge) {
+		if (cachedChallenge && this.currentLevelNumber == levelNumber) {
 			level.fromJSON(cachedChallenge);
 			return level;
 		} else {
@@ -135,32 +148,25 @@ class Game {
 	}
 
 	setCode(codeSample) {
-		this.elements.code_editor.innerHTML = codeSample;
-		/*
-		ace.require("ace/ext/language_tools");
-		this.editor = ace.edit("code-editor");
-    this.editor.setTheme("ace/theme/monokai");
-		this.editor.session.setMode("ace/mode/javascript");
-		this.editor.renderer.setScrollMargin(10, 10);
-		this.editor.setFontSize(16);
-		this.editor.setOptions({
-			enableBasicAutocompletion: true
-		});
-		*/
-		this.editor = CodeMirror.fromTextArea(this.elements.code_editor, {
-			lineNumbers: true,
-			theme: "duotone-light",
-			mode: "javascript",
-			indentWithTabs: true,
-			gutters: ["CodeMirror-lint-markers"],
-			lint: {
-				esversion: 6,
-				undef: true
-			},
-			tabSize: 4,
-			indentUnit: 4
-		});
-		this.editor.setSize("100%", "100%");
+		if (!this.editor) {
+			this.elements.code_editor.innerHTML = codeSample;
+			this.editor = CodeMirror.fromTextArea(this.elements.code_editor, {
+				lineNumbers: true,
+				theme: "duotone-light",
+				mode: "javascript",
+				indentWithTabs: true,
+				gutters: ["CodeMirror-lint-markers"],
+				lint: {
+					esversion: 6,
+					undef: true
+				},
+				tabSize: 4,
+				indentUnit: 4
+			});
+			this.editor.setSize("100%", "100%");
+		} else {
+			this.editor.setValue(codeSample);
+		}
 	}
 
 	GetCode() {

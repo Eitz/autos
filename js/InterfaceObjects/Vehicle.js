@@ -21,6 +21,9 @@ class Vehicle extends GameInterface {
     /** @type {City} Última cidade que o veículo passou */
     this.lastCity = vehicleGO.lastCity.IEObject;
 
+    /** @type {City} Cidade atual do veículo */
+    this.currentCity = vehicleGO.currentCity;
+
     /** @type {City[]} Array de cidades contendo a rota de destino deste veículo. */
     this.currentRoute = [];
 
@@ -73,6 +76,11 @@ class Vehicle extends GameInterface {
 
   /** @param {Passenger} */
   unload(passenger) {
-    this.__gameObject__.removePassenger(passenger);
+    if (this.currentCity)
+      this.__gameObject__.removePassenger(passenger);
+    else {
+      Game.Instance().log.error(new CommandError(`${this} can't unload a passenger on the road!: '${passenger}'`));
+    }
+
   }
 }

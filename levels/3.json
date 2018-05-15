@@ -1,6 +1,6 @@
 {
   "name": "Desafio #2: Caminhos bloqueados",
-  "description": "Neste desafio você deve levar o veículo de “A” para “C” para concluir o objetivo e avançar para o próximo desafio. Algumas podem ser contra-mão e você não poderá utilizá-las.",
+  "description": "Neste desafio você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Algumas podem ser contra-mão e você não poderá utilizá-las.",
   "cities": [
     {
       "id": "A",
@@ -67,8 +67,8 @@
   "shortDocumentation": "<p>In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single car to city \"C\"",
-      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'C'; }"
+      "text" : "Deliver the single car to city \"D\"",
+      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'D'; }"
     },
     "defeat" : {
       "text" : "Timer goes over 15 seconds",
