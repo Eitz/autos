@@ -13,10 +13,16 @@ class Game {
 			event_log: root.getElementById('event-log'),
 			code_editor: root.getElementById('code-editor'),
 			short_documentation: root.getElementById('short-documentation-content'),
+			buttons: {
+				start: root.getElementById('btn-start'),
+				reset: root.getElementById('btn-reset'),
+				speed: root.getElementById('btns-speed').getElementsByTagName('button'),
+			}
 		};
 
 		/** @const {number} */
-		this.vehicleVelocity = 0.15;
+		this.vehicleVelocity = 0.1;
+		this.gameSpeed = 1;
 
 		this.lastLevel = 10;
 
@@ -57,11 +63,13 @@ class Game {
 					this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
 					this.setProperties(levelNumber, level);
 					this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
+					this.controller.SetLevel(level);
 					this.editor.refresh();
 					this.controller.Prepare();
 				});
 			} else {
 				this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
+				this.controller.SetLevel(level);
 				this.editor.refresh();
 				this.controller.Prepare();
 			}
@@ -80,10 +88,16 @@ class Game {
 		} else {
 			location.hash = '1';
 			return undefined;
-		}		
+		}
 	}
 
 	Start() {
+		this.elements.buttons.start.disabled = true;
+		this.elements.buttons.reset.disabled = false;
+		this.elements.buttons.start.classList.remove('primary');
+		for (let btn of this.elements.buttons.speed) {
+			btn.disabled = btn.classList.contains('primary');
+		}		
 		this.log.debug(`The game has started!`);
 		this.controller.Start();
 		let gameCode = this.GetCode();
@@ -121,14 +135,48 @@ class Game {
 		location.hash = this.currentLevelNumber-1;
 	}
 
-	Pause() {
-		if (this.controller.isGameRunning)
+	Pause(btn) {
+
+		if (this.controller.isGameRunning) {
+			// btn locking
+			for (let b of this.elements.buttons.speed) {
+				b.disabled = true;
+				b.classList.remove('primary');
+			}
+			
+			this.elements.buttons.reset.disabled = true;
+			this.elements.buttons.start.classList.remove('primary');
+			
+			btn.classList.add('primary');
+			btn.disabled = false;
+			btn.innerHTML = "Unpause";
 			this.controller.Pause();
-		else
+		}
+		else {
+			btn.innerHTML = "Pause";
+			this.elements.buttons.reset.disabled = false;
+			this.SetSpeed(1, this.elements.buttons.speed[0]);
 			this.controller.Unpause();
+		}
+	}
+
+	SetSpeed(speed, btn) {
+		for (let b of this.elements.buttons.speed) {
+			b.disabled = false;
+			b.classList.remove('primary');
+		}
+		btn.classList.add('primary');
+		btn.disabled = true;
+		this.gameSpeed = speed;
 	}
 
 	Reset() {
+		this.elements.buttons.start.disabled = false;
+		this.elements.buttons.reset.disabled = true;
+		this.elements.buttons.start.classList.add('primary');
+		for (let btn of this.elements.buttons.speed) {
+			btn.disabled = true;
+		}		
 		this.controller.Stop();
 		this.Setup(this.cachedChallenge);
 	}

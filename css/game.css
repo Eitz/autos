@@ -115,8 +115,8 @@ html, body {
 
 #game #top-bar #progress-buttons .buttons {
   height: auto;
-  text-align: center;
-  margin: 4px;
+  text-align: right;
+  margin: 0px;
   display: block;
   height: auto;
   position: absolute;
@@ -281,7 +281,7 @@ strong {
   font-weight: 500;
 }
 
-button:hover {
+button:not([disabled]):hover {
   box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);
   cursor: pointer;
 }
@@ -296,7 +296,10 @@ button.primary {
   background: #3D348B;
   color: white;
 }
-button.primary:hover {
+button.primary[disabled] {
+  background: #6D64AB;
+}
+button.primary:not([disabled]):hover {
   background: #342D7A;
 }
 

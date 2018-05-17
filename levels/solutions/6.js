@@ -30,7 +30,6 @@ function init (vehicles, cities, game) {
 	v.moveTo(path);
 	
 	v.on('visitCity', function(city) {
-		console.log(city, p.toCity);
 		if (city == p.toCity) {
 			v.unload(p);
 		}

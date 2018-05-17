@@ -8,6 +8,7 @@ class GameController {
     this.height = this.canvas.height = this.canvas.offsetHeight;
     this.backgroundColor = '#C2B8B2';
     this.gameObjects = [];
+    this.currentLevel = undefined;
   }
 
   AddGameObject(gameObject) {
@@ -60,7 +61,8 @@ class GameController {
 
   Update (dt) {
     let game = Game.Instance();
-    if(this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
+    dt *= game.gameSpeed;
+    if (this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
       
       if (game.lastLevel == game.currentLevelNumber)
         Modals.showEndModal();  
@@ -136,6 +138,10 @@ class GameController {
       }
     }
     return vehicles;
+  }
+
+  SetLevel(level) {
+    this.currentLevel = level;
   }
 
   SetConditions(victory, defeat) {

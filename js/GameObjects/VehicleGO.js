@@ -122,12 +122,18 @@ class VehicleGO extends GameObject {
       if (isNaN(dir.x) || isNaN(dir.y))
         return;
       
+      let distance = Math.hypot(this.realPos.x-city.pos.x, this.realPos.y-city.pos.y);
+      let speed = this.speed;
+      if (distance < 4) {
+        speed /= 2;
+      }
+
       this.realPos = new Vector2(
-        this.pos.x + dt * dir.x * this.speed * road.dampering,
-        this.pos.y + dt * dir.y * this.speed * road.dampering
+        this.pos.x + dt * dir.x * speed * road.dampering,
+        this.pos.y + dt * dir.y * speed * road.dampering
       );
 
-      if (Math.abs(this.realPos.x-city.pos.x) <= 1.5 && Math.abs(this.realPos.y-city.pos.y) <= 1.5) {
+      if (distance < 2) {
         // ARRIVED
         this.ArriveCity(city);
       }
@@ -138,7 +144,7 @@ class VehicleGO extends GameObject {
           if (this._travelTo.length == 0) {  
             this.trigger('idle', [this.lastCity.IEObject]);
           }
-        }, 10);
+        }, 1000);
       }
     }
     this.firstRun = false;
@@ -170,7 +176,6 @@ class VehicleGO extends GameObject {
    * @param {Vector2} dir
   */
   RenderInRightLane(targetCityPos, singleRoad) {
-    console.log(singleRoad);
     
     let angle = Math.atan2(
       targetCityPos.y - this.realPos.y,

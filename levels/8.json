@@ -1,0 +1,91 @@
+{
+  "name": "Challenge #8: Passengers... passengers everywhere!",
+  "description": "And they keep coming! Deliver them all before the timer runs out!",
+  "randomPassengers": {
+    "delayMS": 2000,
+    "cities": [],
+    "randomFactorMS": 500
+  },
+  "cities": [
+    {
+      "id": "A",
+      "x": 160,
+      "y": 80
+    },
+    {
+      "id": "B",
+      "x": 260,
+      "y": 160
+    },
+    {
+      "id": "C",
+      "x": 90,
+      "y": 300,
+      "renderBottom": true
+    },
+    {
+      "id": "D",
+      "x": 415,
+      "y": 210,
+      "renderBottom": true
+    },
+    {
+      "id": "E",
+      "x": 440,
+      "y": 80
+    },
+    {
+      "id": "F",
+      "x": 420,
+      "y": 340,
+      "renderBottom": true
+    },
+    {
+      "id": "G",
+      "x": 540,
+      "y": 220,
+      "renderBottom": true
+    },
+    {
+      "id": "H",
+      "x": 560,
+      "y": 90,
+      "renderBottom": true
+    }    
+  ],
+  "vehicles": [
+    { "type": 1, "city": "A" },
+    { "type": 1, "city": "D" }
+  ],
+  "roads": [
+    { "from" : "A", "to" : "B" },
+    { "from" : "B", "to" : "A" },
+    { "from" : "C", "to" : "B" },
+    { "from" : "B", "to" : "C" },
+    { "from" : "B", "to" : "D" },
+    { "from" : "D", "to" : "B" },
+    { "from" : "F", "to" : "G" },
+    { "from" : "G", "to" : "F" },
+    { "from" : "G", "to" : "D" },
+    { "from" : "D", "to" : "G" },
+    { "from" : "G", "to" : "H" },
+    { "from" : "H", "to" : "E" },
+    { "from" : "E", "to" : "D" }
+  ],
+  "passengers": [
+    { "from" : "E", "to" : "C" },
+    { "from" : "C", "to" : "D" }
+  ],
+  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Game functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
+  "shortDocumentation": "<p>In this challenge your task is to move the single passenger to his desired destination.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "conditions" : {
+    "victory": {
+      "text" : "Deliver the single passenger to his desired destination.",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.passengersDelivered >= 20 }"
+    },
+    "defeat" : {
+      "text" : "Timer goes over 30 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeSeconds > 60; }"
+    }
+  }
+}

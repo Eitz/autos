@@ -1,5 +1,5 @@
 {
-  "name": "Challenge #5: Mistery cities & Passenger",
+  "name": "Challenge #6: Mistery Cities + Passenger",
   "description": "It's the same task as the last challenge, except in this one you can't see the city ids and who tells you the way is the passenger! Tip: City ids randomly change each run, so, pay attention.",
   "randomCityIds": true,
   "cities": [
@@ -36,26 +36,12 @@
       "to": "B"
     },
     {
-      "from": "C",
-      "to": "A",
-      "dampering": 0.5
-    },
-    {
       "from": "B",
       "to": "C"
     },
     {
       "from": "C",
       "to": "D"
-    },
-    {
-      "from": "D",
-      "to": "B",
-      "dampering": 0.5
-    },
-    {
-      "from": "B",
-      "to": "A"
     },
     {
       "from": "A",
@@ -65,10 +51,6 @@
     {
       "from": "C",
       "to": "B"
-    },
-    {
-      "from": "D",
-      "to": "C"
     },
     {
       "from": "B",

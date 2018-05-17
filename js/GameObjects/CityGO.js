@@ -17,8 +17,12 @@ class CityGO extends GameObject {
   }
 
   Render(ctx) {
+    let size = this.size;
     ctx.fillStyle = '#8A716A';
-    ctx.fillRect(this.pos.x-this.size/2, this.pos.y-this.size/2, this.size, this.size);
+    ctx.fillRect(this.pos.x-size/2, this.pos.y-size/2, size, size);
+    size -= 4;
+    ctx.fillStyle = '#9A817A';
+    ctx.fillRect(this.pos.x-size/2, this.pos.y-size/2, size, size);
     if (this.vehicles.length) {
       let i = 1;
       for (let v of this.vehicles) {

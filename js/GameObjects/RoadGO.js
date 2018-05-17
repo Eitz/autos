@@ -82,8 +82,12 @@ class RoadGO extends GameObject {
     ctx.moveTo(this.from.pos.x+rotate_from_city_x, this.from.pos.y+rotate_from_city_y);
     ctx.lineTo(this.to.pos.x+rotate_from_city_x, this.to.pos.y+rotate_from_city_y);
     ctx.setLineDash([]);
-    ctx.strokeStyle = '#faf8f5';
+
+    let roadColor = '#faf8f5'
+
+    ctx.strokeStyle = roadColor;
     ctx.stroke();    
+
     if (!this.singleRoad) {
       ctx.beginPath();
       ctx.lineWidth = 0.5;
@@ -155,7 +159,13 @@ class RoadGO extends GameObject {
       var x;
       var y;
 
-      let arrowColor = '#8A716A';//'#FFF';
+      let arrowColor = '#C2B8B2';//'#FFF';
+
+      if (this.dampering < 1) {
+        arrowColor = '#F99';
+      } else if (this.dampering > 1) {
+        arrowColor = '#6D6';
+      }
 
       ctx.fillStyle = arrowColor;
       ctx.beginPath();

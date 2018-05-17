@@ -12,10 +12,52 @@ class Level extends GameObject {
     this.roads = [];
     /** @type {PassengerGO[]} */
     this.passengers = [];
+
+
   }
 
   Render(ctx) {
     
+  }
+
+  Update(dt) {
+    if (this.randomPassengers) {
+      if (this.randomPassengers.nextSpawn === undefined) {
+        this.randomPassengers.nextSpawn = 
+          this.randomPassengers.delayMS +
+          this.RandomIntFromInterval(
+            -1 * this.randomPassengers.randomFactorMS,
+            this.randomPassengers.randomFactorMS
+          );
+      }
+      
+      if (this.randomPassengers.nextSpawn < 0) {
+        this.SpawnPassenger(this.randomPassengers.cities);
+        this.randomPassengers.nextSpawn = undefined;
+        return;
+      }
+      this.randomPassengers.nextSpawn -= dt;
+    }
+  }
+
+  SpawnPassenger(fromCities) {
+    if (!fromCities.length)
+      fromCities = this.cities.filter(c => c.passengers.length < 4);
+    let targetCities = this.cities;
+
+    let from = Util.ShuffleArray(fromCities)[0];
+    
+    if (from) {  
+      let to = Util.ShuffleArray(targetCities).filter(c => c != from)[0];
+      PassengerGO.fromObject({
+        from: from.id,
+        to: to.id
+      });
+    }
+  }
+
+  RandomIntFromInterval(min, max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
   }
 
   getURL() {
@@ -33,7 +75,8 @@ class Level extends GameObject {
       vehicles: VehicleGO.fromObject(this.levelProps.vehicles),
       roads: RoadGO.fromObject(this.levelProps.roads),
       passengers: PassengerGO.fromObject(this.levelProps.passengers),
-      conditions: this.levelProps.conditions
+      conditions: this.levelProps.conditions,
+      randomPassengers: this.levelProps.randomPassengers
     });
     this.conditions.victory.function = Util.ParseFunction(this.levelProps.conditions.victory.function);
     this.conditions.defeat.function = Util.ParseFunction(this.levelProps.conditions.defeat.function);

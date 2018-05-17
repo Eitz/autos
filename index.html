@@ -73,14 +73,14 @@
 				</div>
 				<div class="buttons">
 						<div>
-							<button class="primary" onclick="Game.Instance().Start();">Start</button>
-							<button onclick="Game.Instance().Reset();">Reset</button>
+							<button id="btn-start" class="primary" onclick="Game.Instance().Start();">Start</button>
+							<button id="btn-reset" disabled onclick="Game.Instance().Reset();">Reset</button>
 						</div>
-						<div class="speed-buttons">
-								<button class="primary" onclick="Game.Instance().Start();">1x</button>
-								<button onclick="Game.Instance().Pause();">4x</button>
-								<button onclick="Game.Instance().Reset();">8x</button>
-								<button onclick="Game.Instance().Pause();">Pause</button>
+						<div class="speed-buttons" id="btns-speed">
+								<button disabled class="primary" onclick="Game.Instance().SetSpeed(1, this);">1x</button>
+								<button disabled onclick="Game.Instance().SetSpeed(2, this);">2x</button>
+								<button disabled onclick="Game.Instance().SetSpeed(4, this);">4x</button>
+								<button disabled onclick="Game.Instance().Pause(this)">Pause</button>
 						</div>
 				</div>				
 			</div>

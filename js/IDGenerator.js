@@ -17,7 +17,6 @@ class IDGenerator {
     let characters = this.generators[name].split('');
     let code = characters[characters.length-1].charCodeAt(0);
     characters[characters.length-1] = String.fromCharCode(code+1);
-    console.log(String.fromCharCode(code+1));
     this.generators[name] = characters.join('');
     
     return this.generators[name];

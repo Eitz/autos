@@ -1,17 +1,17 @@
 {
-  "name": "Challenge #6: Deliver madness",
+  "name": "Challenge #7: Delivery madness",
   "description": "Description Description Description",
   "cities": [
     {
       "id": "A",
-      "x": 340,
+      "x": 335,
       "y": 320,
       "renderBottom": true
     },
     {
       "id": "B",
-      "x": 225,
-      "y": 200
+      "x": 230,
+      "y": 215
     },
     {
       "id": "C",
@@ -26,12 +26,12 @@
     },
     {
       "id": "E",
-      "x": 75,
-      "y": 75
+      "x": 120,
+      "y": 110
     },
     {
       "id": "F",
-      "x": 375,
+      "x": 380,
       "y": 200
     }
   ],
@@ -125,11 +125,11 @@
   "conditions" : {
     "victory": {
       "text" : "Deliver the single passenger to his desired destination.",
-      "function" : "function (vehicles, cities, gameStats) { return !!gameStats.passengersDelivered }"
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.passengersDelivered == 4 }"
     },
     "defeat" : {
-      "text" : "Timer goes over 5 seconds",
-      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeMS > 5000; }"
+      "text" : "Timer goes over 8 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeMS > 8; }"
     }
   }
 }
