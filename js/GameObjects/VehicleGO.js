@@ -1,18 +1,24 @@
 class VehicleGO extends GameObject {
   constructor(props) {
     super(props);
-    // tweak this while on city
+
+    let game = Game.Instance();
+
     this.renderOrder = 1.5;
-    this.id = props.id;
+
+    this.id = game.idGenerator.GetNext('vehicle');
+    
     this.type = this.GetVehicleTypeById(props.type);
-    this.startingCity =
-      Game.Instance().controller.getCityById(props.city);
-    this.pos = {
-      x: this.startingCity.pos.x,
-      y: this.startingCity.pos.y,
-    };
+    
+    this.startingCity = game.controller.getCityById(props.city);
+    
+    this.pos = new Vector2(
+      this.startingCity.pos.x,
+      this.startingCity.pos.y,
+    );
+
     this.realPos = this.pos;
-    this.speed = Game.Instance().vehicleVelocity;
+    this.speed = game.vehicleVelocity;
     this._travelTo = [];
     this.passengers = [];
     this.lastCity = this.startingCity;
@@ -23,7 +29,7 @@ class VehicleGO extends GameObject {
     this.firstRun = true;
 
     this.IEObject = new Vehicle(this);
-    Game.Instance().vehicles.push(this.IEObject);
+    game.vehicles.push(this.IEObject);
 
     this.startingCity.AddVehicle(this);
   }
@@ -46,37 +52,46 @@ class VehicleGO extends GameObject {
       return;
     }
 
-    let size = 8;
+    let size = this.type.size;
+    let sizeX = size.x * 1.5;
+    let sizeY = size.y;
+
     let offsetY = offset ? offset * 15 + 15 : 0;
-    let offsetX = offset ? -20 : 0;
-    ctx.fillStyle = '#2d2006';
+    let offsetX = offset ? -28 : 0;
+    ctx.fillStyle = this.type.color;
+    
     if (offset && this._travelTo.length == 0) {
-      ctx.fillRect(this.pos.x + offsetX, this.pos.y - offsetY, size * 1.5, size);
+      ctx.fillRect(this.pos.x + offsetX, this.pos.y - offsetY, sizeX, sizeY);
       this.RenderInfo(
         ctx, 10,
-        this.pos.x - 18 + offsetX, this.pos.y - offsetY + (offset ? 9 : 0)
+        this.pos.x - (sizeX / 2) - 8 + offsetX, this.pos.y - offsetY + (offset ? 9 : 0)
       );
     } else if (this._travelTo[0]) {
-      let toy = this._travelTo[0].pos.y;
-      let tox = this._travelTo[0].pos.x;
-      let fromy = this.lastCity.pos.y;
-      let fromx = this.lastCity.pos.x;
-      let deg = Math.atan2(toy-fromy,tox-fromx);
 
-      let sizeX = size * 1.5;
-      let sizeY = size;
+      let city = this._travelTo[0];
+      let road = Game.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
+      
+      if (road) {
+        road = road.__gameObject__;
+        let toy = city.pos.y;
+        let tox = city.pos.x;
+        let fromy = this.lastCity.pos.y;
+        let fromx = this.lastCity.pos.x;
+        let deg = Math.atan2(toy-fromy,tox-fromx);
 
-      this.pos = this.RenderInRightLane(new Vector2(tox, toy));
+        this.pos = this.RenderInRightLane(new Vector2(tox, toy), road.singleRoad);
 
-      ctx.save();
-      ctx.translate(this.pos.x, this.pos.y);
-      ctx.rotate(deg);
-      ctx.fillRect(-sizeX/2, -sizeY/2, sizeX, sizeY);
-      ctx.restore();
-      this.RenderInfo(
-        ctx, 10,
-        this.pos.x - 18, this.pos.y
-      );
+        ctx.save();
+        ctx.translate(this.pos.x, this.pos.y);
+        ctx.rotate(deg);
+        ctx.fillRect(-sizeX/2, -sizeY/2, sizeX, sizeY);
+        ctx.restore();
+        
+        this.RenderInfo(
+          ctx, 10,
+          this.pos.x - sizeX - 10, this.pos.y
+        );
+      }
     }
   }
 
@@ -111,16 +126,8 @@ class VehicleGO extends GameObject {
       );
 
       if (Math.abs(this.realPos.x-city.pos.x) <= 1.5 && Math.abs(this.realPos.y-city.pos.y) <= 1.5) {
-        this.pos.x = city.pos.x;
-        this.pos.y = city.pos.y;
         // ARRIVED
-        this.lastCity = city;
-        this.IEObject.lastCity = city.IEObject;
-        this.currentCity = city.IEObject;
-        this.IEObject.currentCity = city.IEObject;
-        city.AddVehicle(this);
-        this._travelTo.shift();
-        this.trigger('visitCity', [city]);
+        this.ArriveCity(city);
       }
     } else {
       if (!this.isIdle || this.firstRun) {
@@ -135,6 +142,19 @@ class VehicleGO extends GameObject {
     this.firstRun = false;
   }
 
+  ArriveCity(city) {
+    this.pos.x = city.pos.x;
+    this.pos.y = city.pos.y;
+    this.lastCity = city;
+    this.IEObject.lastCity = city.IEObject;
+    this.currentCity = city.IEObject;
+    this.IEObject.currentCity = city.IEObject;
+    city.AddVehicle(this);
+    this._travelTo.shift();
+    this.trigger('visitCity', [city.IEObject]);
+    this.IEObject.currentRoute.shift();
+  }
+
   GetVehicleTypeById(id) {
     for (let type in VehicleType) {
       if (VehicleType[type].id == id)
@@ -147,7 +167,8 @@ class VehicleGO extends GameObject {
    * @param {Vector2} position
    * @param {Vector2} dir
   */
-  RenderInRightLane(targetCityPos) {
+  RenderInRightLane(targetCityPos, singleRoad) {
+    console.log(singleRoad);
     
     let angle = Math.atan2(
       targetCityPos.y - this.realPos.y,
@@ -155,7 +176,7 @@ class VehicleGO extends GameObject {
     );
     
     let rotated_angle = angle + (2 * Math.PI / 8);
-    let distance = 7.5;
+    let distance = singleRoad ? 5 : 7.5;
 
     return new Vector2(
       this.realPos.x + Math.cos(rotated_angle) * distance,
@@ -217,6 +238,7 @@ class VehicleGO extends GameObject {
   /** @param City */
   goToCity(city) {
     this._travelTo.push(city);
+    this.IEObject.currentRoute.push(city.id);
   }
 
   /** Game Functions */

@@ -1,0 +1,133 @@
+{
+  "name": "Challenge #6: Deliver madness",
+  "description": "Description Description Description",
+  "cities": [
+    {
+      "id": "A",
+      "x": 240,
+      "y": 350
+    },
+    {
+      "id": "B",
+      "x": 225,
+      "y": 200
+    },
+    {
+      "id": "C",
+      "x": 525,
+      "y": 300
+    },
+    {
+      "id": "D",
+      "x": 475,
+      "y": 50
+    },
+    {
+      "id": "E",
+      "x": 75,
+      "y": 75
+    },
+    {
+      "id": "F",
+      "x": 375,
+      "y": 200
+    }
+  ],
+  "vehicles": [
+    {
+      "type": 1,
+      "city": "A"
+    }],
+  "roads": [
+    {
+      "from" : "A",
+      "to" : "B"
+    },
+    {
+      "from" : "B",
+      "to" : "A"
+    },
+    {
+      "from" : "A",
+      "to" : "C",
+      "dampering": 1.25
+    },
+    {
+      "from" : "C",
+      "to" : "A",
+      "dampering": 1.25
+    },
+    {
+      "from" : "D",
+      "to" : "C"
+    },
+    {
+      "from" : "C",
+      "to" : "D"
+    },
+    {
+      "from" : "B",
+      "to" : "F"
+    },
+    {
+      "from" : "F",
+      "to" : "B"
+    },
+    {
+      "from" : "C",
+      "to" : "F",
+      "dampering": 0.75
+    },
+    {
+      "from" : "F",
+      "to" : "C",
+      "dampering": 0.75
+    },
+    {
+      "from" : "D",
+      "to" : "F"
+    },
+    {
+      "from" : "F",
+      "to" : "D"
+    },
+    {
+      "from" : "E",
+      "to" : "B"
+    },
+    {
+      "from" : "B",
+      "to" : "E"
+    }
+  ],
+  "passengers": [
+    {
+      "from": "A",
+      "to": "D"
+    },
+    {
+      "from": "E",
+      "to": "D"
+    },
+    {
+      "from": "B",
+      "to": "D"
+    },
+    {
+      "from": "C",
+      "to": "D"
+    }
+  ],
+  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Game functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
+  "shortDocumentation": "<p>In this challenge your task is to move the single passenger to his desired destination.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "conditions" : {
+    "victory": {
+      "text" : "Deliver the single passenger to his desired destination.",
+      "function" : "function (vehicles, cities, gameStats) { return !!gameStats.passengersDelivered }"
+    },
+    "defeat" : {
+      "text" : "Timer goes over 5 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeMS > 5000; }"
+    }
+  }
+}

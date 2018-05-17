@@ -1,7 +1,6 @@
 const VehicleType = {
-  CAR: { id: 1, capacity: 4, name: "Car" },
-  BUS: { id: 2, capacity: 10, name: "Bus" },
-  AMBULANCE: { id: 3, capacity: 1, name: "Ambulance" }
+  CAR: { id: 1, capacity: 4, name: "Car", size: { x: 12, y: 10 }, color: "#2d2006" },
+  BUS: { id: 2, capacity: 10, name: "Bus", size: { x: 18, y: 12 }, color: "green" },
 };
 
 class Vehicle extends GameInterface {
@@ -16,7 +15,7 @@ class Vehicle extends GameInterface {
     this.passengers = vehicleGO.passengers;
 
     /** @type {Integer} Inteiro que informa a quantidade máxima de passageiros que este veículo suporta. */
-    this.passengersCapacity = vehicleGO.passengersCapacity;
+    this.passengersCapacity = vehicleGO.passengerCapacity;
 
     /** @type {City} Última cidade que o veículo passou */
     this.lastCity = vehicleGO.lastCity.IEObject;
@@ -38,7 +37,7 @@ class Vehicle extends GameInterface {
 
   /** @param {City|City[]|String|String[]} targetCity Mover o veículo para uma cidade ou para várias cidades, através de uma rota. */
   moveTo(targetCity) {
-    let ok = false;
+    let ok = true;
     if (targetCity) {
       if (typeof targetCity === "string") {
         ok = this.__gameObject__.moveToCityById(targetCity);

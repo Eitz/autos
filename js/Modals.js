@@ -1,7 +1,8 @@
 class Modals {
 
-  static showDescription() {
-
+  static showEndModal() {
+    document.getElementById('modal-end').style.display = 'block';
+    Modals.show();
   }
 
   static showDefeat(description) {

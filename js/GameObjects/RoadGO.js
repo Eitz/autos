@@ -29,6 +29,7 @@ class RoadGO extends GameObject {
     
     this.shouldRenderInfo = !props.hideInfo;
     this.renderThisSide = true;
+    this.singleRoad = true;
 
     this.from.addRoad(this.IEObject);
   }
@@ -39,6 +40,8 @@ class RoadGO extends GameObject {
       let otherRoad = game.gameFunctions.GetRoadBetween(this.to.IEObject, this.from.IEObject);
       if (otherRoad) {
         otherRoad.__gameObject__.renderThisSide = false;
+        otherRoad.__gameObject__.singleRoad = false;
+        this.singleRoad = false;
       }
     }
   }
@@ -80,16 +83,17 @@ class RoadGO extends GameObject {
     ctx.lineTo(this.to.pos.x+rotate_from_city_x, this.to.pos.y+rotate_from_city_y);
     ctx.setLineDash([]);
     ctx.strokeStyle = '#faf8f5';
-    ctx.stroke();
-    
-    ctx.beginPath();
-    ctx.lineWidth = 0.5;
-    ctx.setLineDash([]);
-    ctx.moveTo(this.from.pos.x+move_from_city_x, this.from.pos.y+move_from_city_y);
-    ctx.lineTo(this.to.pos.x-move_from_city_x, this.to.pos.y-move_from_city_y);
-    ctx.strokeStyle = '#C2B8B2';
-    ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.stroke();    
+    if (!this.singleRoad) {
+      ctx.beginPath();
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([]);
+      ctx.moveTo(this.from.pos.x+move_from_city_x, this.from.pos.y+move_from_city_y);
+      ctx.lineTo(this.to.pos.x-move_from_city_x, this.to.pos.y-move_from_city_y);
+      ctx.strokeStyle = '#C2B8B2';
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
 
     this.RenderArrowDirection(ctx, 3);
   }
@@ -97,25 +101,31 @@ class RoadGO extends GameObject {
   RenderTime(ctx, fontSize, x, y) {
     if (this.shouldRenderInfo && this.renderThisSide) {
       let t = this.GetTravelTime(Game.Instance().vehicleVelocity);
+      t = t.replace('.00', '');
+      
       let bold = '';
       if (this.dampering != 1) {
         bold = 'bold ';
       }
+      
+      ctx.font = `${bold}${fontSize}px Arial`;
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'center';
-      t = t.replace('.00', '');
-      ctx.font = `${bold}${fontSize}px Arial`;
       ctx.fillStyle = '#555';
       ctx.fillText(`${t}s`,x,y);
+      
+      ctx.font = `bold ${fontSize*.8}px Arial`;
       if (this.dampering < 1) {
         ctx.fillStyle = '#F66';
-        ctx.font = `bold ${fontSize*.8}px Arial`;
-        ctx.fillText(`- ${1/this.dampering}x`,x,y+8);
+        ctx.fillText(`(${this.dampering}x)`,x,y+8);
       } else if (this.dampering > 1) {
-        ctx.fillStyle = '#6F6';
-        ctx.font = `bold ${fontSize*.8}px Arial`;
-        ctx.fillText(`+ ${this.dampering}x`,x,y+8);
+        ctx.fillStyle = '#9F9';
+        ctx.fillText(`(${this.dampering}x)`,x,y+8);
       }
+      
+      
+      ctx.textBaseline = 'alphabetic'; 
+      ctx.textAlign = 'left';
     }
   }
 
@@ -127,7 +137,7 @@ class RoadGO extends GameObject {
     var tox = this.to.pos.x;
     var toy = this.to.pos.y;
 
-    let distance_from_line = 5.5;
+    let distance_from_line = this.singleRoad ? 3 : 5.5;
     
     let segments = 4;
     for (let i = 1; i<segments; i++) {
@@ -182,8 +192,11 @@ class RoadGO extends GameObject {
       ctx.stroke();
 
       if (i == segments/2) {
-        let x = this.GetMiddlePointInSegment(i, segments).x + distance_from_line * 5 * Math.cos(degree_from_line)
-        let y = this.GetMiddlePointInSegment(i, segments).y + distance_from_line * 5 * Math.sin(degree_from_line)
+        
+        let bonusWidth = this.singleRoad ? 3 : 0;
+
+        let x = this.GetMiddlePointInSegment(i, segments).x + (distance_from_line+bonusWidth) * 4.5 * Math.cos(degree_from_line)
+        let y = this.GetMiddlePointInSegment(i, segments).y + (distance_from_line+bonusWidth) * 4 * Math.sin(degree_from_line)
         this.RenderTime(ctx, 10, x-2, y);
       }
     }

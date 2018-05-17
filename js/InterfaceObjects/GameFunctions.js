@@ -17,10 +17,14 @@ class GameFunctions {
   GetTimeBetween(cityA, cityB) {
     let road = this.GetRoadBetween(cityA, cityB);
     if (road) {
-      return r.travelTime;
+      return road.travelTime;
     } else {
       return Infinity;
     }
+  }
+
+  GetCity(id) {
+    return this.GetObjectById("City", id);
   }
 
   GetObjectById(typeOfObject, id) {

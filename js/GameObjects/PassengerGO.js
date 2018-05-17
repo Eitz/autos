@@ -3,12 +3,14 @@ class PassengerGO extends GameObject {
   constructor(props) {
     super(props);
 
-    this.id = 'passenger-' + props.id;
-    
-    let gameController = Game.Instance().controller;
+    let game = Game.Instance();
 
-    this.fromCity = gameController.getCityById(props.fromCity);
-    this.toCity = gameController.getCityById(props.toCity);
+    this.id = game.idGenerator.GetNext('passenger');
+    
+    let gameController = game.controller;
+
+    this.fromCity = gameController.getCityById(props.from);
+    this.toCity = gameController.getCityById(props.to);
     this.lastCity = this.fromCity;
     
     this.waitingTime = 0;
@@ -31,16 +33,16 @@ class PassengerGO extends GameObject {
       ctx.fillStyle = '#3D348B';
       ctx.arc(this.pos.x + offsetX, this.pos.y - offsetY, this.size, 0, Math.PI * 2);
       ctx.fill();
+
       this.RenderInfo(
         ctx, 10,
-        this.pos.x + offsetX + 6, this.pos.y - offsetY + 2.5
+        this.pos.x + offsetX + 7, this.pos.y - offsetY + 2.5
       );
     }
   }
 
   RenderInfo(ctx, fontSize, x, y) {
     ctx.font = `${fontSize}px Raleway`;
-    ctx.fillStyle = '#555';
     ctx.fillText(`-> ${this.toCity.id}`,x,y);
   }
 
@@ -48,7 +50,7 @@ class PassengerGO extends GameObject {
     if (!this.onBoard)
       this.waitingTime += dt;
     else
-      this.pos = this.onBoard.pos;
+      this.pos = new Vector2(this.onBoard.__gameObject__.pos.x, this.onBoard.__gameObject__.pos.y);
   }
 
   load(vehicleGO) {
@@ -65,7 +67,7 @@ class PassengerGO extends GameObject {
     } else {
       this.lastCity = city;
       city.addPassenger(this.IEObject);
-      this.pos = city.pos;
+      this.pos = new Vector2(city.pos.x, city.pos.y);
     }    
   }
 

@@ -18,12 +18,15 @@ class Game {
 		/** @const {number} */
 		this.vehicleVelocity = 0.15;
 
-		game_instance = this;
+		this.lastLevel = 10;
 
-		window.onhashchange = () => { 
-			this.controller.Stop();
+		game_instance = this;
+		
+		window.onhashchange = (e) => { 
+			if (this.controller)
+				this.controller.Stop();
 			this.Setup();
- 		}
+ 		};
 	}
 
 	static Instance() {
@@ -35,37 +38,49 @@ class Game {
 		this.vehicles = [];
 		this.cities = [];
 		this.passengers = [];
-		
-		this.events = new GameEventManager();
-		this.gameStats = new GameStats(this.elements.progress_buttons);
-		this.log = new Logger(this.elements.event_log);
-		this.controller = new GameController(this.elements.gameArea);
-		this.gameFunctions = new GameFunctions(this);
-		
-		let level = this.LoadChallenge(this.GetLevelNumberFromHash(), cachedChallenge);
-		
-		if (!level) {
-			this.events.on('load-level', (levelNumber, level) => {
-				this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
-				this.setProperties(levelNumber, level);
+
+		let levelNumber = this.GetLevelNumberFromHash();
+
+		if (levelNumber) {
+			
+			this.events = new GameEventManager();
+			this.gameStats = new GameStats(this.elements.progress_buttons);
+			this.log = new Logger(this.elements.event_log);
+			this.controller = new GameController(this.elements.gameArea);
+			this.gameFunctions = new GameFunctions(this);
+			this.idGenerator = new IDGenerator();
+			
+			let level = this.LoadChallenge(levelNumber, cachedChallenge);
+			
+			if (!level) {
+				this.events.on('load-level', (levelNumber, level) => {
+					this.log.debug(`The level (${levelNumber} - ${level.name}) has loaded!`);
+					this.setProperties(levelNumber, level);
+					this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
+					this.editor.refresh();
+					this.controller.Prepare();
+				});
+			} else {
 				this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
 				this.editor.refresh();
 				this.controller.Prepare();
-			});
-		} else {
-			this.controller.SetConditions(level.conditions.victory, level.conditions.defeat);
-			this.editor.refresh();
-			this.controller.Prepare();
+			}
 		}
 	}
 
-	GetLevelNumberFromHash() {
+	IsHashOk() {
 		let level = location.hash.replace('#', '');
-		if (!level || isNaN(level) || parseInt(level) > 5 || parseInt(level) < 1) {
-			location.hash = "1";
-			level = 1;
-		}
-		return parseInt(level);
+		return !(!level || isNaN(level) || parseInt(level) > this.lastLevel || parseInt(level) < 1);
+	}
+
+	GetLevelNumberFromHash() {
+		if (this.IsHashOk()) {
+			let level = location.hash.replace('#', '');
+			return parseInt(level);
+		} else {
+			location.hash = '1';
+			return undefined;
+		}		
 	}
 
 	Start() {

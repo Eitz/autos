@@ -1,5 +1,5 @@
 {
-  "name": "Desafio #2: Caminhos bloqueados",
+  "name": "Desafio #3: Caminhos bloqueados",
   "description": "Neste desafio você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Algumas podem ser contra-mão e você não poderá utilizá-las.",
   "cities": [
     {
@@ -23,7 +23,7 @@
       "y": 225
     }
   ],
-  "cars": [
+  "vehicles": [
     {
       "id": "1",
       "type": "1",

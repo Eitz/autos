@@ -2,7 +2,7 @@ class CityGO extends GameObject {
 
   constructor(props) {
     super(props);
-    this.id = props.id;
+    this.id = props.id;    
     this.name = props.name;
     this.pos = new Vector2(props.x, props.y);
     this.size = 25;
@@ -10,6 +10,7 @@ class CityGO extends GameObject {
     this.roads = [];
     this.passengers = [];
     this.vehicles = [];
+    this.connectedCities = [];
     this.IEObject = new City(this);
     Game.Instance().cities.push(this.IEObject);
   }
@@ -29,6 +30,7 @@ class CityGO extends GameObject {
         p.__gameObject__.Render(ctx, i++);
       }
     }
+    
     this.RenderText(ctx);
   }
 
@@ -37,7 +39,11 @@ class CityGO extends GameObject {
     ctx.fillStyle = '#FFF';
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.fillText(this.id,this.pos.x,this.pos.y);
+    if (Game.Instance().controller.showCityIds) {
+      ctx.fillText(this.id,this.pos.x,this.pos.y);
+    } else {
+      ctx.fillText('?',this.pos.x,this.pos.y);
+    }
     ctx.textBaseline = 'alphabetic'; 
     ctx.textAlign = 'left';
   }
@@ -65,6 +71,7 @@ class CityGO extends GameObject {
 
   addRoad(road) {
     this.roads.push(road);
+    this.connectedCities.push(road.to);
   }
 
   static fromObject(object) {

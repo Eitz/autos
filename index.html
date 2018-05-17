@@ -23,6 +23,7 @@
 		<script src="vendor/code-mirror/addon/lint/javascript-lint.js"></script>
 	
 		<script type="text/javascript" src="js/Modals.js"></script>	
+		<script type="text/javascript" src="js/IDGenerator.js"></script>	
 		<script type="text/javascript" src="js/Util.js"></script>
 		<script type="text/javascript" src="js/Vector2.js"></script>
 		<script type="text/javascript" src="js/Errors/CommandError.js"></script>
@@ -148,6 +149,30 @@
 					<div class="modal-footer">
 						<button onclick="Modals.hide(); Game.Instance().Reset();">Replay this challenge</button>
 						<button onclick="Modals.hide(); Game.Instance().Next();" class="primary">Go to next challenge!</button>
+					</div>
+				</div>
+
+				<!-- End modal -->
+				<div class="modal modal-end" id="modal-end">
+					<div class="modal-header">Congratulations. <br />You've conquered all challenges in Autos!</div>
+					<div class="modal-body">
+						<p id="modal-description-victory">
+							You should feel proud! Now go to the world and tell your friends about the game!
+							
+							<br /><br />
+
+							Or, what about telling me how was your experience with it? Did you find any bugs? Did you like it? Would you change something?
+							
+							<br /><br />
+
+							You can report bugs <a target="_blank" href="https://github.com/Eitz/autos/issues">here</a>!</small> 
+							Or get in contact on my twitter <a target="_blank" href="https://twitter.com/RichardEitz">@RichardEitz</a></small> 
+						</p>
+						<p  class="text-success">Whatever you do, thanks for playing!</p>
+					</div>
+					
+					<div class="modal-footer">
+						<button onclick="Modals.hide(); Game.Instance().Reset();">Replay the last challenge</button>
 					</div>
 				</div>
 			</section>

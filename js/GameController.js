@@ -61,8 +61,13 @@ class GameController {
   Update (dt) {
     let game = Game.Instance();
     if(this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
-      Modals.showVictory(this.victoryCondition.text);
-      this.Pause();
+      
+      if (game.lastLevel == game.currentLevelNumber)
+        Modals.showEndModal();  
+      else
+        Modals.showVictory(this.victoryCondition.text);
+      
+        this.Pause();
     }
 
     if (this.defeatCondition.function(game.vehicles, game.cities, game.gameStats)) {

@@ -1,0 +1,75 @@
+{
+  "name": "Desafio #5: Considerando Alternativas",
+  "description": "<b>Introdução:</b> você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Utilize as melhores ruas pois não temos tempo a perder.",
+  "cities": [
+    {
+      "id": "A",
+      "x": 100,
+      "y": 315
+    },
+    {
+      "id": "B",
+      "x": 325,
+      "y": 300
+    },
+    {
+      "id": "C",
+      "x": 325,
+      "y": 100
+    },
+    {
+      "id": "D",
+      "x": 575,
+      "y": 125
+    }
+  ],
+  "vehicles": [
+    {
+      "type": 1,
+      "city": "A"
+    }],
+  "roads": [
+    {
+      "from": "A",
+      "to": "B"
+    },
+    {
+      "from": "B",
+      "to": "C"
+    },
+    {
+      "from": "C",
+      "to": "D"
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "dampering": 0.5
+    },
+    {
+      "from": "C",
+      "to": "B"
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "dampering": 0.5
+    }
+  ],
+  "passengers": [{
+    "from": "A",
+    "to": "D"
+  }],
+  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Game functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
+  "shortDocumentation": "<p>In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "conditions" : {
+    "victory": {
+      "text" : "Deliver the single car to city \"D\"",
+      "function" : "function (vehicles, cities, gameStats) { return vehicles[0].lastCity.id == 'D'; }"
+    },
+    "defeat" : {
+      "text" : "Timer goes over 5 seconds",
+      "function" : "function (vehicles, cities, gameStats) { return gameStats.elapsedTimeMS > 5000; }"
+    }
+  }
+}
