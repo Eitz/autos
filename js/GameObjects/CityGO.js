@@ -7,11 +7,12 @@ class CityGO extends GameObject {
     this.pos = new Vector2(props.x, props.y);
     this.size = 25;
     this.renderOrder = 2;
+    this.renderBottom = !!props.renderBottom;
     this.roads = [];
     this.passengers = [];
     this.vehicles = [];
     this.connectedCities = [];
-    this.IEObject = new City(this);
+    this.IEObject = new City(this);    
     Game.Instance().cities.push(this.IEObject);
   }
 
@@ -21,13 +22,13 @@ class CityGO extends GameObject {
     if (this.vehicles.length) {
       let i = 1;
       for (let v of this.vehicles) {
-        v.Render(ctx, i++);
+        v.Render(ctx, (this.renderBottom ? -1 : 1) * i++);
       }
     }
     if (this.passengers.length) {
       let i = 1;
       for (let p of this.passengers) {
-        p.__gameObject__.Render(ctx, i++);
+        p.__gameObject__.Render(ctx, (this.renderBottom ? -1 : 1) * i++);
       }
     }
     

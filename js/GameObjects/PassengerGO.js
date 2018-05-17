@@ -27,7 +27,8 @@ class PassengerGO extends GameObject {
 
   Render(ctx, offset) {
     if (offset) {
-      let offsetY = offset ? offset * 15 + 10 : 0;
+      let modifierY = offset > 0 ? 10 : -10;
+      let offsetY = offset ? offset * 15 + modifierY : 0;
       let offsetX = offset ? 10 : 0;
       ctx.beginPath();
       ctx.fillStyle = '#3D348B';

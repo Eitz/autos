@@ -4,8 +4,9 @@
   "cities": [
     {
       "id": "A",
-      "x": 240,
-      "y": 350
+      "x": 340,
+      "y": 320,
+      "renderBottom": true
     },
     {
       "id": "B",
@@ -15,7 +16,8 @@
     {
       "id": "C",
       "x": 525,
-      "y": 300
+      "y": 300,
+      "renderBottom": true
     },
     {
       "id": "D",

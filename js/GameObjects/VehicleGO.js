@@ -56,7 +56,9 @@ class VehicleGO extends GameObject {
     let sizeX = size.x * 1.5;
     let sizeY = size.y;
 
-    let offsetY = offset ? offset * 15 + 15 : 0;
+    let modifierY = offset > 0 ? 15 : -5;
+
+    let offsetY = offset ? offset * 15 + modifierY : 0;
     let offsetX = offset ? -28 : 0;
     ctx.fillStyle = this.type.color;
     
