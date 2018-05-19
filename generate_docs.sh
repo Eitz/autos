@@ -1,0 +1,1 @@
+jsdoc -c docs_source/jsdoc.config.json -d docs/ js/InterfaceObjects/*

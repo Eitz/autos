@@ -1,33 +1,59 @@
+/**
+ * This is Passenger!
+ */
 class Passenger extends GameInterface {
 
   constructor(passengerGO) {
     super();
 
-    /** @type {string} Id do passageiro. */
+    /**
+     * Id do passageiro.
+     * @type {string}
+     */
     this.id = passengerGO.id;
 
-    /** @type {string} Nome fantasia do passageiro. */     
+    /**
+     * Nome fantasia do passageiro.
+     * @type {string}
+     */
     this.name = passengerGO.name;
     
-    /** @type {City} Última cidade que este passageiro esteve. */
+    /**
+     * Última cidade que este passageiro esteve.
+     * @type {City}
+     */
     this.lastCity = passengerGO.lastCity.IEObject;
 
-    /** @type {City} Cidade que este passageiro se originou. */
+    /**
+     * Cidade que este passageiro se originou.
+     * @type {City}
+     */
     this.fromCity = passengerGO.fromCity.IEObject;
 
-    /** @type {City} Cidade que este passageiro tem como destino. */
+    /**
+     * Cidade que este passageiro tem como destino.
+     * @type {City}
+     */
     this.toCity = passengerGO.toCity.IEObject;
 
-    /** @type {Vehicle} Veículo que este passageiro esta abordo. */
+    /**
+     * Veículo que este passageiro esta abordo.
+     * @type {Vehicle}
+     */
     this.onBoard = passengerGO.onBoard;
 
     /**
-     * @private {PassengerGO}
-     */
+    * GameObject reference.
+    * @type {PassengerGO}
+    * @private
+    */
     this.__gameObject__ = passengerGO;
   }
 
-  /** @type {Integer} Tempo que este passageiro já esteve esperando um veículo, em segundos. Só conta enquanto o passageiro estiver fora de um veículo. */
+  /**
+   * Tempo que este passageiro já esteve esperando um veículo, em segundos. Só conta enquanto o passageiro estiver fora de um veículo.
+   * @type {Integer}
+   */
   get waitingTime() {
     return parseInt(this.__gameObject__.getWaitingTimeInSeconds());
   }

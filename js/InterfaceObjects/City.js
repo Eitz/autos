@@ -1,22 +1,39 @@
+/**
+ * This is City!
+ */
 class City extends GameInterface {
 
   constructor(cityGO) {
     super();
 
-    /** @type {string} Id da cidade. */
+    /** 
+     * Id da cidade.
+     * @type {string}
+     */
     this.id = cityGO.id;
     
-    /** @type {Passenger[]} Lista contendo os passageiros (Passenger) atuais esperando para serem transportados. */     
+    /**
+     * Lista contendo os passageiros (Passenger) atuais esperando para serem transportados.
+     * @type {Passenger[]}
+     */     
     this.passengers = cityGO.passengers;
 
-    /** @type {Road[]} Lista de ruas (Road) que fazem as ligações entre esta e as outras cidades. */
+    /** 
+     * Lista de ruas (Road) que fazem as ligações entre esta e as outras cidades.
+     * @type {Road[]}
+     */
     this.roads = cityGO.roads;
 
-    /** @type {City[]} Lista de cidades que estão ligadas com esta cidade. */
+    /**
+     * Lista de cidades que estão ligadas com esta cidade.
+     * @type {City[]}
+     */
     this.connectedCities = cityGO.connectedCities;
 
     /**
-     * @private {CityGO}
+     * GameObject reference.
+     * @type {CityGO}
+     * @private
      */
     this.__gameObject__ = cityGO;
   }

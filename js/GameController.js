@@ -62,23 +62,23 @@ class GameController {
   Update (dt) {
     let game = Game.Instance();
     dt *= game.gameSpeed;
-    if (this.victoryCondition.function(game.vehicles, game.cities, game.gameStats)){
+    if (this.victoryCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats)){
       
       if (game.lastLevel == game.currentLevelNumber)
         Modals.showEndModal();  
       else
         Modals.showVictory(this.victoryCondition.text);
       
-        this.Pause();
+      game.Stop();
     }
 
-    if (this.defeatCondition.function(game.vehicles, game.cities, game.gameStats)) {
+    if (this.defeatCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats)) {
       Modals.showDefeat(this.defeatCondition.text);
-      this.Pause();
+      game.Stop();
     }
 
     try {
-      game.gameCode.update(dt, game.vehicles, game.cities);
+      game.gameCode.update(dt, game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats);
     } catch(err) {
       err = new ImplementationError(err);
       game.log.error(err);

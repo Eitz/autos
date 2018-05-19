@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Autos - Class: Vehicle</title>
+
+    <!-- link rel="icon" type="image/png" href="favicon.ico" /-->
+    <link rel="stylesheet" href="styles/jsdoc-prism.css">
+    <link rel="stylesheet" href="styles/jsdoc-utils.css">
+    <link rel="stylesheet" href="styles/jsdoc-style.css">
+    <link rel="stylesheet" href="styles/inner-scroll.css">
+    <link rel="stylesheet" href="docs.style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="_ptb-double _plr-triple ">
+                
+                <div class="grid grid--space-triple">
+                    <div class="gcell gcell--7">
+                        <div class="_pl-double">
+                            <h1 class="title title--sub _mt-one">Class: Vehicle</h1>
+                            <hr class="divine">
+                            <main class="main">
+                                
+
+
+
+
+<section>
+
+<header class="wysiwyg">
+    
+        
+            
+            <h2 class="anchor-header" id="Vehicle"><a href="#Vehicle" class="anchor-header__link">#</a>
+        
+        Vehicle</h2>
+        
+            <div class="class-description"><p>The Vehicle class represents a vehicle within the game. Every vehicle in the game is an instance of this class. The Vehicle's task is to transport passengers to their desided destinations.<br>   Vehicles can travel between <a href="City.html">Cities</a> when these cities are connected by <a href="Road.html">Roads</a>.<br>   Vehicles are able to carry <a href="Passenger.html">Passengers</a> up to a max capacity, which depends on their <a href="global.html#VehicleType">type</a>.</p></div>
+        
+    
+</header>
+
+<article class="wysiwyg">
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name anchor-header" id="Vehicle" data-text="Vehicle">
+        <a href="#Vehicle" class="anchor-header__link">#</a>
+        <span class="_color-black">new Vehicle</span> ()
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example of vehicle going back and forth between cities A, B and C</p>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
+
+   let vehicle = vehicles[0];
+   vehicle.moveTo(['B', 'C']);
+
+   vehicle.on('visitCity', function(city) {
+     if (city.id == 'C')
+       vehicle.moveTo(['B', 'A']);
+     else if (city.id == 'C')
+       vehicle.moveTo(['B', 'A']);
+   });
+} </code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title anchor-header" id="Members">
+            <a href="#Members" class="anchor-header__link">#</a>
+            Members</h3>
+
+        
+            
+
+<h4 class="name anchor-header" id="id" data-text="id">
+    <a href="#id" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>id</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{String}</small>
+</h4>
+<p class="un-mar is-empty"><code>constant</code></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">String</code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>The vehicle's id. It is a letter between &quot;A&quot; and &quot;Z&quot;.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="type" data-text="type">
+    <a href="#type" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>type</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{VehicleType}</small>
+</h4>
+<p class="un-mar is-empty"><code>constant</code></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript"><a href="global.html#VehicleType">VehicleType</a></code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Contains the information about this type of vehicle: capacity and type name.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="passengersCapacity" data-text="passengersCapacity">
+    <a href="#passengersCapacity" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>passengersCapacity</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
+</h4>
+<p class="un-mar is-empty"><code>constant</code></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">Integer</code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Integer that informs how many <a href="Passenger.html">Passengers</a> can fit inside this vehicle based on this <a href="global.html#VehicleType">VehicleType</a>. Basically a shortcut to <code class="language-js">Vehicle.type.capacity</code>.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="passengers" data-text="passengers">
+    <a href="#passengers" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>passengers</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Array.&lt;Passenger>}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">Array.&lt;<a href="Passenger.html">Passenger</a>></code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>List of <a href="Passenger.html">Passenger</a>s that are currently inside this vehicle.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="lastCity" data-text="lastCity">
+    <a href="#lastCity" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>lastCity</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{City}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>The last <a href="City.html">City</a> that this vehicle has been through.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="currentCity" data-text="currentCity">
+    <a href="#currentCity" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>currentCity</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{City}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Current <a href="City.html">City</a> that this vehicle is in. This property is <code class="language-js">undefined</code> if the vehicle is travelling over <a href="Road.html">Road</a>s.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="currentRoute" data-text="currentRoute">
+    <a href="#currentRoute" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Vehicle.</span>currentRoute</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Array.&lt;City>}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">Array.&lt;<a href="City.html">City</a>></code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Destination route of this vehicle, a list of <a href="City.html">cities</a>. Each call of <a href="Vehicle.html#moveTo">moveTo(city)</a> adds a city to the end of this list. The city is only removed when the vehicle reaches it.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
+
+    
+        <h3 id="Methods" class="subsection-title anchor-header">
+            <a href="#Methods" class="anchor-header__link">#</a>
+            Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="moveTo" data-text="moveTo">
+        <a href="#moveTo" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>moveTo</span> (targetCity)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>targetCity</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="City.html">City</a></code>
+|
+
+<code class="language-javascript">Array.&lt;<a href="City.html">City</a>></code>
+|
+
+<code class="language-javascript">String</code>
+|
+
+<code class="language-javascript">Array.&lt;String></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Instance(s) of <a href="City.html">City</a> or only their ID(s).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Method responsable for setting the destination of this vehicle. If the vehicle already has planned moves, the argument City is appended to this vehicle's <a href="Vehicle.html#currentRoute">current route</a>. This method can receive both instances of <a href="City.html">City</a> or only their IDs.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="load" data-text="load">
+        <a href="#load" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>load</span> (passengers)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>passengers</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="Passenger.html">Passenger</a></code>
+|
+
+<code class="language-javascript">Array.&lt;<a href="Passenger.html">Passenger</a>></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Passenger(s) to load</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Load a <a href="Passenger.html">Passenger</a> or a list of them to the vehicle. They must be in the same <a href="City.html">City</a> as the vehicle.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="unload" data-text="unload">
+        <a href="#unload" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>unload</span> (passengers)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>passengers</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="Passenger.html">Passenger</a></code>
+|
+
+<code class="language-javascript">Array.&lt;<a href="Passenger.html">Passenger</a>></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Passenger(s) to unload</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Unloads a <a href="Passenger.html">Passenger</a> or a list of them to the vehicle's <a href="Vehicle.html#currentCity">current city</a>. They vehicle must be visiting the city to be able to drop passengers.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title anchor-header" id="Events">
+            <a href="#Events" class="anchor-header__link">#</a>
+            Events</h3>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id=".event:on:idle" data-text="on:idle">
+        <a href="#.event:on:idle" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>on:idle</span>
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>name</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">'idle'</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name of this event</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>onIdle</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">function</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function that is called when this vehicle is idle for more then 1 second, receives the current <a href="City.html">City</a> by param.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Event that is triggered whenever this vehicle visits a city and stops moving for more than a second.</p>
+</div>
+
+
+
+    <h5>Example</h5>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
+   let vehicle = vehicles[0];
+   vehicle.on('idle', function(city) {
+     // do something
+   });
+}</code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id=".event:on:visitCity" data-text="on:visitCity">
+        <a href="#.event:on:visitCity" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>on:visitCity</span>
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>name</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">'visitCity'</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name of this event</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>onVisitCity</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">function</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function that is called when this vehicle visits a city, receives the visited <a href="City.html">City</a> by param.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Event that is triggered whenever this vehicle visits a city</p>
+</div>
+
+
+
+    <h5>Example</h5>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
+   let vehicle = vehicles[0];
+   vehicle.on('visitCity', function(city) {
+     // do something
+   });
+}</code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id=".event:on:loadPassenger" data-text="on:loadPassenger">
+        <a href="#.event:on:loadPassenger" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Vehicle.</span>on:loadPassenger</span>
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>name</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">'loadPassenger'</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name of this event</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>onLoadPassenger</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">function</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function that is called when this vehicle loads a <a href="Passenger.html">Passenger</a>, receives the loaded <a href="Passenger.html">Passenger</a> and his <a href="City.html">City</a> by param.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Event that is triggered whenever this vehicle loads a <a href="Passenger.html">Passenger</a></p>
+</div>
+
+
+
+    <h5>Example</h5>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
+   let vehicle = vehicles[0];
+   vehicle.on('loadPassenger', function(passenger, city) {
+     // do something
+   });
+}</code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+                            </main>
+                        </div>
+                    </div>
+                    <div class="gcell gcell--5">
+                        <div class="grid grid--2 grid--space-triple gbox">
+                            <div class="gcell js-insert-nav" style="border-left:1px solid #ddd;">
+                                <aside class="js-sidebar">
+                                    <nav class="nav wysiwyg _ptb-one _pb-triple"></nav>
+                                </aside>
+                            </div>
+                            <div class="gcell" style="border-left:1px solid #ddd;">
+                                <aside class="js-sidebar">
+                                    <nav class="nav wysiwyg _ptb-one _pb-triple">
+                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Util.html">Util</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3><a href="global.html">Global</a></h3>
+                                    </nav>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer _plr-triple">
+            <div class="_pl-double">
+                <small>
+                    Documentation generated by
+                    <a href="https://github.com/jsdoc3/jsdoc" target="_blank">JSDoc 3.5.5</a>.
+                    Based on
+                    <a href="https://www.npmjs.com/package/jsdoc-simple-theme" target="_blank">jsdoc-simple-theme</a>.
+                </small>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>
+    <script src="https://unpkg.com/custom-jquery-methods@latest/dist/index.min.js"></script>
+    <script src="scripts/inner-scroll.js"></script>
+    <script>
+	    jQuery(document).ready(function ($) {
+
+		    $('.prettyprint').removeClass('prettyprint');
+
+		    $('a').each(function(index, el) {
+			    var $a = $(el);
+
+                if ($a.closest('pre').length) {
+                    return true;
+                }
+
+			    var href = $a.attr('href');
+			    if (/^http/.test(href)) {
+				    $a.attr('target', '_blank');
+				    
+				    if (!$a.attr('title')) {
+					    $a.attr('title', href.toLowerCase());
+					    $a.attr('href', href.toLowerCase());
+					    $a.append(' &rArr;');
+				    }
+			    }
+		    });
+
+		    var transliterate = (function() {
+				    var rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы  э  а б в г д е з и й к л м н о п р с т у ф х ь".split(/ +/g);
+				    var eng = "shh sh ch cz yu ya yo zh _  y  e  a b v g d e z i j k l m n o p r s t u f x _".split(/ +/g);
+
+				    return function(text) {
+					    for(var x = 0; x < rus.length; x++) {
+						    text = text.split(rus[x]).join(eng[x]);
+						    text = text.split(rus[x].toUpperCase()).join(eng[x].toUpperCase());
+					    }
+
+					    return text.replace(/\W+/g, '_');
+				    }
+			    }
+		    )();
+
+		    var headers = [];
+		    $('.anchor-header').each( function() {
+			    var $h = $(this);
+			    var text = $(this).data('text') || $(this).text();
+			    text = text.replace(/::/g, '.');
+			    var id = $h.prop('id') || transliterate(text);
+
+			    headers.push('<li class="lvl-'+this.tagName.toLowerCase()+'"><a href="#'+id+'">'+text+'</a></li>');
+		    });
+
+		    if (headers.length > 1) {
+			    $('.js-insert-nav')
+                    .find('.wysiwyg')
+				    .html('<h2>Tables of contents</h2><ul>'+headers.join('')+'</ul>');
+		    } else {
+			    $('.js-insert-nav')
+				    .addClass('_hide!')
+            }
+
+		    
+		    $(".js-sidebar").each(function() {
+			    $(this).stick_in_parent();
+		    });
+
+            $.innerScroll('.wysiwyg table');
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="scripts/jsdoc-prism.js"></script>
+    <script src="https://unpkg.com/prism-ejs-language@latest/prism-ejs-language.js"></script>
+</body>
+</html>

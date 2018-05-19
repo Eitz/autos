@@ -1,0 +1,39 @@
+{
+    "title" : "Autos - Documentation",
+	"source": {
+		"includePattern": ".+\\.js(doc|x)?$",
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	"tags": {
+		"allowUnknownTags": true,
+		"dictionaries": [
+			"jsdoc",
+			"closure"
+		]
+	},
+	"opts": {
+		"template": "/usr/lib/node_modules/jsdoc-simple-theme/",
+		"sort": false
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	},
+	"templates": {
+		"sort": false,
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"default": {
+			"outputSourceFiles": false,
+            "layoutFile": "./docs_source/layout.tmpl",
+            "staticFiles": {
+                "include": [
+                    "./docs_source/docs.style.css"
+                ]
+              }
+		}
+	}
+}

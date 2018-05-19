@@ -219,7 +219,7 @@ class VehicleGO extends GameObject {
     // everything ok!
     passenger.__gameObject__.load(this);
     this.passengers.push(passenger);
-    this.trigger('newPassenger', [passenger]);
+    this.trigger('loadPassenger', [passenger, this.currentCity]);
   }
 
   removePassenger(passenger) {
@@ -245,7 +245,7 @@ class VehicleGO extends GameObject {
   /** @param City */
   goToCity(city) {
     this._travelTo.push(city);
-    this.IEObject.currentRoute.push(city.id);
+    this.IEObject.currentRoute.push(city);
   }
 
   /** Game Functions */

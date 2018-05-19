@@ -1,4 +1,7 @@
-class GameFunctions {
+/**
+ * @class Util
+ */
+class UtilFunctions {
 
   constructor(game) {
     this.game = game;
@@ -31,5 +34,9 @@ class GameFunctions {
     let go = this.game.controller.getGameObjectByTypeAndId(typeOfObject, id);
     if (go)
       return go.IEObject;
+  }
+
+  log () {
+    return this.game.log;
   }
 }

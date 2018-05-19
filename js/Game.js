@@ -53,7 +53,7 @@ class Game {
 			this.gameStats = new GameStats(this.elements.progress_buttons);
 			this.log = new Logger(this.elements.event_log);
 			this.controller = new GameController(this.elements.gameArea);
-			this.gameFunctions = new GameFunctions(this);
+			this.gameFunctions = new UtilFunctions(this);
 			this.idGenerator = new IDGenerator();
 			
 			let level = this.LoadChallenge(levelNumber, cachedChallenge);
@@ -92,6 +92,7 @@ class Game {
 	}
 
 	Start() {
+		this.elements.buttons.reset.classList.remove('primary');
 		this.elements.buttons.start.disabled = true;
 		this.elements.buttons.reset.disabled = false;
 		this.elements.buttons.start.classList.remove('primary');
@@ -110,16 +111,16 @@ class Game {
 			code = new Function ('{ try {' + code + '; return { init: init, update: (typeof update != \'undefined\') ? update : function(){} }} catch (err) { throw err; }}');
 			this.gameCode = code();
 		} catch(err) {
-			this.Pause();
+			this.Stop();
 			err = new ImplementationError(err, undefined, err.lineNumber?err.lineNumber-2:undefined, err.columnNumber);
 			this.log.error(err);
 			Modals.showError(err.toString());
 			return;
 		}
 		try {
-			this.gameCode.init(this.vehicles, this.cities, this.gameFunctions);
+			this.gameCode.init(this.vehicles, this.cities, this.passengers, this.gameFunctions, this.gameStats);
 		} catch (err) {
-			this.Pause();
+			this.Stop();
 			let numbers = Util.GetErrorNumbers(err.stack);
 			err = new ImplementationError(err, 'init', numbers.line, numbers.column);
 			this.log.error(err);
@@ -146,18 +147,36 @@ class Game {
 			
 			this.elements.buttons.reset.disabled = true;
 			this.elements.buttons.start.classList.remove('primary');
-			
-			btn.classList.add('primary');
-			btn.disabled = false;
-			btn.innerHTML = "Unpause";
+			if (btn) {
+				btn.classList.add('primary');
+				btn.disabled = false;
+				btn.innerHTML = "Unpause";
+			}
 			this.controller.Pause();
 		}
 		else {
-			btn.innerHTML = "Pause";
+			if (btn)
+				btn.innerHTML = "Pause";
 			this.elements.buttons.reset.disabled = false;
 			this.SetSpeed(1, this.elements.buttons.speed[0]);
 			this.controller.Unpause();
 		}
+	}
+
+
+	Stop() {
+		this.SetSpeed(1, this.elements.buttons.speed[0]);
+		
+		this.controller.Pause();
+		this.elements.buttons.start.disabled = true;	
+		
+		this.elements.buttons.start.classList.remove('primary');
+		for (let btn of this.elements.buttons.speed) {
+			btn.disabled = true;
+		}
+		
+		this.elements.buttons.reset.disabled = false;
+		this.elements.buttons.reset.classList.add('primary');
 	}
 
 	SetSpeed(speed, btn) {
@@ -171,6 +190,7 @@ class Game {
 	}
 
 	Reset() {
+		this.elements.buttons.reset.classList.remove('primary');
 		this.elements.buttons.start.disabled = false;
 		this.elements.buttons.reset.disabled = true;
 		this.elements.buttons.start.classList.add('primary');

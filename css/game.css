@@ -30,7 +30,7 @@ html, body {
 }
 
 #game {
-  width: 1124px;
+  width: 1220px;
   margin: 20px auto;
 }
 
@@ -46,13 +46,13 @@ html, body {
 
 #game #top-bar #description,
 #game #left-block {
-  width: 60%;
+  width: 55%;
   float: left;
 }
 
 #game #top-bar #progress-buttons,
 #game #right-block {
-  width: 39.9%;
+  width: 44.9%;
   float: left;
 }
 
@@ -262,10 +262,6 @@ body.modal-on #modals::before {
 
 .modal.modal-error .text-error {
   font-size: 14px;
-}
-
-.modal.modal-error {
-  /*display: block;*/
 }
 
 button {
