@@ -38,7 +38,8 @@
         
         Road</h2>
         
-            <div class="class-description"><p>This is Road!</p></div>
+            <div class="class-description"><p>Every road on the map is an instance of the Road class.</p>
+<p>Roads should be used to take your <a href="Vehicle.html">Vehicle</a>s between cities. Roads may have weights, use them to your favor when delivering <a href="Passenger.html">Passenger</a>s.</p></div>
         
     
 </header>
@@ -150,7 +151,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>ID da via (A-Z).</p>
+    <p>Road's id (may be between &quot;A&quot; and &quot;Z&quot;).</p>
 </div>
 
 
@@ -199,7 +200,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Cidade de onde esta rua parte.</p>
+    <p>The <a href="City.html">City</a> this Road starts from.</p>
 </div>
 
 
@@ -248,7 +249,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Cidade para onde esta rua segue.</p>
+    <p>The <a href="City.html">City</a> this Road leads to.</p>
 </div>
 
 
@@ -272,7 +273,7 @@
 
 <h4 class="name anchor-header" id="travelTime" data-text="travelTime">
     <a href="#travelTime" class="anchor-header__link">#</a>
-	<span class="_color-black"><span class="_color-gray50">Road.</span>travelTime</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
+	<span class="_color-black"><span class="_color-gray50">Road.</span>travelTime</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{number}</small>
 </h4>
 <p class="un-mar is-empty"><code>constant</code></p>
 
@@ -286,7 +287,7 @@
     <tr class="table-list__type">
         <td>Type:</td>
         <td>
-<code class="language-javascript">Integer</code>
+<code class="language-javascript">number</code>
 
 </td>
     </tr>
@@ -297,7 +298,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Tempo necessário para cruzar esta rua com um veículo padrão.</p>
+    <p>Necessary time to travel in this road. It's the same for all <a href="Vehicle.html">Vehicle</a>s.</p>
 </div>
 
 
@@ -321,7 +322,7 @@
 
 <h4 class="name anchor-header" id="dampering" data-text="dampering">
     <a href="#dampering" class="anchor-header__link">#</a>
-	<span class="_color-black"><span class="_color-gray50">Road.</span>dampering</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
+	<span class="_color-black"><span class="_color-gray50">Road.</span>dampering</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{number}</small>
 </h4>
 <p class="un-mar is-empty"><code>constant</code></p>
 
@@ -335,7 +336,7 @@
     <tr class="table-list__type">
         <td>Type:</td>
         <td>
-<code class="language-javascript">Integer</code>
+<code class="language-javascript">number</code>
 
 </td>
     </tr>
@@ -343,6 +344,11 @@
 
 <table class="table-list"></table>
 
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>How better or worse is this Road compared to other roads, some levels may use this to tweak the Road speed.</p>
+</div>
 
 
 
@@ -388,7 +394,7 @@
                             <div class="gcell" style="border-left:1px solid #ddd;">
                                 <aside class="js-sidebar">
                                     <nav class="nav wysiwyg _ptb-one _pb-triple">
-                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Util.html">Util</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3><a href="global.html">Global</a></h3>
+                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Game.html">Game</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="City.html#.event:on:newPassenger">on:newPassenger</a></li><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3>Global</h3><ul><li><a href="global.html#init">init</a></li><li><a href="global.html#update">update</a></li></ul>
                                     </nav>
                                 </aside>
                             </div>

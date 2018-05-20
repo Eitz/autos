@@ -6,7 +6,7 @@ class GameObject extends GameEventManager {
     /** @type {Object.<string, GameEvent>} */
     this.events = {};
 
-    Game.Instance().controller.AddGameObject(this);    
+    Autos.Instance().controller.AddGameObject(this);    
   }
 
   Prepare() {}

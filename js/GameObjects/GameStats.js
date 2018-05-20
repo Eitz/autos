@@ -12,7 +12,7 @@ class GameStats {
     this.updateInterface();
   }
 
-  getElapsedTime() {
+  getElapsedTimeInSeconds() {
     return parseInt(this.elapsedTimeMS / 1000);
   }
 
@@ -23,7 +23,7 @@ class GameStats {
 
   addTime(ms) {
     this.elapsedTimeMS += ms;
-    let seconds = this.getElapsedTime();
+    let seconds = this.getElapsedTimeInSeconds();
     if (seconds != this.elapsedTimeSeconds) {
       this.elapsedTimeSeconds = seconds;
       this.updateInterface();      

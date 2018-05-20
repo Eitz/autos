@@ -9,6 +9,7 @@ class GameController {
     this.backgroundColor = '#C2B8B2';
     this.gameObjects = [];
     this.currentLevel = undefined;
+    this.showCityIds = true;
   }
 
   AddGameObject(gameObject) {
@@ -32,6 +33,7 @@ class GameController {
 
   Start() {
     this.isGameRunning = true;
+    this.showCityIds = true;
     for (let go of this.gameObjects) {
       go.Start();
     }
@@ -60,9 +62,9 @@ class GameController {
   }
 
   Update (dt) {
-    let game = Game.Instance();
+    let game = Autos.Instance();
     dt *= game.gameSpeed;
-    if (this.victoryCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats)){
+    if (this.victoryCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions)){
       
       if (game.lastLevel == game.currentLevelNumber)
         Modals.showEndModal();  
@@ -72,13 +74,13 @@ class GameController {
       game.Stop();
     }
 
-    if (this.defeatCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats)) {
+    if (this.defeatCondition.function(game.vehicles, game.cities, game.passengers, game.gameFunctions)) {
       Modals.showDefeat(this.defeatCondition.text);
       game.Stop();
     }
 
     try {
-      game.gameCode.update(dt, game.vehicles, game.cities, game.passengers, game.gameFunctions, game.gameStats);
+      game.gameCode.update(dt, game.vehicles, game.cities, game.passengers, game.gameFunctions);
     } catch(err) {
       err = new ImplementationError(err);
       game.log.error(err);

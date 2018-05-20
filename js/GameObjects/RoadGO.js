@@ -10,7 +10,7 @@ class RoadGO extends GameObject {
     this.id = props.id;
     
     /** @type {GameController} */
-    let gameController = Game.Instance().controller;
+    let gameController = Autos.Instance().controller;
     
     /** @type {CityGO} */
     this.from = gameController.getCityById(props.from);
@@ -22,7 +22,7 @@ class RoadGO extends GameObject {
     this.dampering = props.dampering || 1;
 
     /** @const {number} */
-    this.travelTime = this.GetTravelTime(Game.Instance().vehicleVelocity);
+    this.travelTime = this.GetTravelTime(Autos.Instance().vehicleVelocity);
 
     /** @type {City} */
     this.IEObject = new Road(this);
@@ -36,7 +36,7 @@ class RoadGO extends GameObject {
 
   Prepare() {
     if (this.renderThisSide) {
-      let game = Game.Instance();
+      let game = Autos.Instance();
       let otherRoad = game.gameFunctions.GetRoadBetween(this.to.IEObject, this.from.IEObject);
       if (otherRoad) {
         otherRoad.__gameObject__.renderThisSide = false;
@@ -104,7 +104,7 @@ class RoadGO extends GameObject {
 
   RenderTime(ctx, fontSize, x, y) {
     if (this.shouldRenderInfo && this.renderThisSide) {
-      let t = this.GetTravelTime(Game.Instance().vehicleVelocity);
+      let t = this.GetTravelTime(Autos.Instance().vehicleVelocity);
       t = t.replace('.00', '');
       
       let bold = '';

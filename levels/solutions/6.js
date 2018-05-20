@@ -1,4 +1,4 @@
-function init (vehicles, cities, passengers, util, stats) {
+function init (vehicles, cities, passengers, game) {
 	let v = vehicles[0];
 	let p = v.currentCity.passengers[0];
 	v.load(p);

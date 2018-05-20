@@ -1,24 +1,49 @@
 /**
- * This is Road!
+ * Every road on the map is an instance of the Road class.
+ * 
+ * Roads should be used to take your {@link Vehicle}s between cities. Roads may have weights, use them to your favor when delivering {@link Passenger}s.
+ * 
+ * @hideconstructor
+ *
  */
 class Road extends GameInterface {
 
   constructor(roadGO) {
     super();
 
-    /** @const {string} - ID da via (A-Z). */
+     /** 
+     * Road's id (may be between "A" and "Z").
+     * @const
+     * @type {string}
+     */
     this.id = roadGO.id;
 
-    /** @const {City} - Cidade de onde esta rua parte. */     
+     /**
+     * The {@link City} this Road starts from.
+     * @const
+     * @type {City}
+     */
     this.from = roadGO.from.IEObject;
 
-    /** @const {City} - Cidade para onde esta rua segue. */
+    /**
+     * The {@link City} this Road leads to.
+     * @const
+     * @type {City}
+     */
     this.to = roadGO.to.IEObject;
 
-    /** @const {Integer} - Tempo necessário para cruzar esta rua com um veículo padrão. */
+    /**
+     * Necessary time to travel in this road. It's the same for all {@link Vehicle}s.
+     * @const
+     * @type {number}
+     */
     this.travelTime = roadGO.travelTime;
 
-    /** @const {Integer} - */
+    /**
+     * How better or worse is this Road compared to other roads, some levels may use this to tweak the Road speed.
+     * @const
+     * @type {number}
+     */
     this.dampering = roadGO.dampering;
 
     /**

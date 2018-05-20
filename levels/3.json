@@ -63,16 +63,16 @@
     }
   ],
   "passengers": [],
-  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Game functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, passengers, util, stats) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\tv.on('visitCity', function(city) {\r\n\t\t\r\n\t});\r\n}",
+  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Autos functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\tv.on('visitCity', function(city) {\r\n\t\t\r\n\t});\r\n}",
   "shortDocumentation": "<p>In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
   "conditions" : {
     "victory": {
       "text" : "Deliver the single car to city \"D\"",
-      "function" : "function (vehicles, cities, passengers, util, stats) { return vehicles[0].lastCity.id == 'D'; }"
+      "function" : "function (vehicles, cities, passengers, game) { return vehicles[0].lastCity.id == 'D'; }"
     },
     "defeat" : {
       "text" : "Timer goes over 15 seconds",
-      "function" : "function (vehicles, cities, passengers, util, stats) { return stats.elapsedTimeSeconds > 15; }"
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 15; }"
     }
   }
 }

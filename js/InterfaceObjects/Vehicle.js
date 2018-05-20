@@ -1,11 +1,18 @@
 /**
- * @typedef {VehicleType} - Enum that represents the Vehicle's type.
+ * @typedef {VehicleType} - Global ENUM that is used to represent each {@link Vehicle}'s type.
  * @property {object} CAR - Default vehicle type
- * @property {Integer} CAR.capacity - Type capacity for passengers (4)
- * @property {string} CAR.name - Type name ("Car")
+ * @property {Integer} CAR.id - Type's id (1)
+ * @property {Integer} CAR.capacity - Type's capacity for passengers (4)
+ * @property {string} CAR.name - Type's name ("Car")
  * @property {object} BUS - Advanced vehicle type
- * @property {Integer} BUS.capacity - Type capacity for passengers (10)
- * @property {string} BUS.name - Type name ("Bus")
+ * @property {Integer} BUS.id - Type's id (2)
+ * @property {Integer} BUS.capacity - Type's capacity for passengers (10)
+ * @property {string} BUS.name - Type's name ("Bus")
+ * @example
+ * const VehicleType = {
+ *  CAR: { id: 1, capacity: 4, name: "Car" },
+ *  BUS: { id: 2, capacity: 10, name: "Bus" },
+*  };
  */
 const VehicleType = {
   CAR: { id: 1, capacity: 4, name: "Car", size: { x: 12, y: 10 }, color: "#2d2006" },
@@ -14,11 +21,14 @@ const VehicleType = {
 
 /**
  * The Vehicle class represents a vehicle within the game. Every vehicle in the game is an instance of this class. The Vehicle's task is to transport passengers to their desided destinations.
- *    Vehicles can travel between {@link City|Cities} when these cities are connected by {@link Road|Roads}.
- *    Vehicles are able to carry {@link Passenger|Passengers} up to a max capacity, which depends on their {@link VehicleType|type}.
+ *  
+ * Vehicles can travel between {@link City|Cities} when these cities are connected by {@link Road|Roads}.
+ * 
+ * Vehicles are able to carry {@link Passenger|Passengers} up to a max capacity, which depends on their {@link VehicleType|type}.
+ * 
  * @hideconstructor
  *
- * @example <caption>Example of vehicle going back and forth between cities A, B and C</caption>
+ * @example <caption>Example of a vehicle going back and forth between cities A, B and C</caption>
  * function init (vehicles, cities, passengers, game) {
  *
  *    let vehicle = vehicles[0];
@@ -116,7 +126,7 @@ class Vehicle extends GameInterface {
     }
 
     if (!targetCity || !ok)
-      Game.Instance().log.error(new CommandError(`${this} recieved an invalid city on <b>moveTo</b>: '${targetCity}'`));
+      Autos.Instance().log.error(new CommandError(`${this} recieved an invalid city on <b>moveTo</b>: '${targetCity}'`));
   }
 
   /**
@@ -147,7 +157,7 @@ class Vehicle extends GameInterface {
         this.__gameObject__.removePassenger(passengers);
       }
     else {
-      Game.Instance().log.error(new CommandError(`${this} can't unload a passengers on the road!: '${passengers}'`));
+      Autos.Instance().log.error(new CommandError(`${this} can't unload a passengers on the road!: '${passengers}'`));
     }
 
   }
@@ -163,7 +173,7 @@ class Vehicle extends GameInterface {
  * function init (vehicles, cities, passengers, game) {
  *    let vehicle = vehicles[0];
  *    vehicle.on('idle', function(city) {
- *      // do something
+ *      vehicle.moveTo('A');
  *    });
  * }
  */
@@ -178,7 +188,9 @@ class Vehicle extends GameInterface {
  * function init (vehicles, cities, passengers, game) {
  *    let vehicle = vehicles[0];
  *    vehicle.on('visitCity', function(city) {
- *      // do something
+ *      if (city.id === 'A') {
+ *        vehicle.moveTo('B');
+ *      }
  *    });
  * }
  */

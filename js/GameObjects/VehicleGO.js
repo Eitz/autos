@@ -2,7 +2,7 @@ class VehicleGO extends GameObject {
   constructor(props) {
     super(props);
 
-    let game = Game.Instance();
+    let game = Autos.Instance();
 
     this.renderOrder = 1.5;
 
@@ -71,7 +71,7 @@ class VehicleGO extends GameObject {
     } else if (this._travelTo[0]) {
 
       let city = this._travelTo[0];
-      let road = Game.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
+      let road = Autos.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
       
       if (road) {
         road = road.__gameObject__;
@@ -102,12 +102,12 @@ class VehicleGO extends GameObject {
       this.currentCity = undefined;
       this.IEObject.currentCity = undefined;
       let city = this._travelTo[0];
-      let road = Game.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
+      let road = Autos.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
       if (!road) {
         if (city == this.lastCity) {
-          Game.Instance().log.warning((`${this.IEObject} tried to <b>moveTo</b> a <c>City it already is in: '${this.lastCity.IEObject}'`)); 
+          Autos.Instance().log.warning((`${this.IEObject} tried to <b>moveTo</b> a <c>City it already is in: '${this.lastCity.IEObject}'`)); 
         } else {
-          Game.Instance().log.error(new CommandError(`${this.IEObject} recieved an unreachable <c>City</c> on <b>moveTo</b>: '${this.lastCity.IEObject}' -> '${city.IEObject}'`));
+          Autos.Instance().log.error(new CommandError(`${this.IEObject} recieved an unreachable <c>City</c> on <b>moveTo</b>: '${this.lastCity.IEObject}' -> '${city.IEObject}'`));
         }
         this._travelTo.shift();
         return;
@@ -194,25 +194,25 @@ class VehicleGO extends GameObject {
   addPassenger(passenger) {
     if (!passenger || passenger.constructor !== Passenger) {
       let err = new CommandError(`${this.IEObject} tried to load an invalid passenger: '${passenger && passenger.IEObject ? passenger.IEObject : passenger}'`);
-      Game.Instance().log.error(err);
+      Autos.Instance().log.error(err);
       return;
     }
 
     if (passenger.onBoard) {
       let err = new CommandError(`${this.IEObject} tried to load a passenger that is already on board a vehicle: '${passenger}' that is on ${passenger.onBoard}`);
-      Game.Instance().log.error(err);
+      Autos.Instance().log.error(err);
       return;
     }
 
     if (this.passengers.length == this.passengerCapacity) {
       let err = new CommandError(`${this.IEObject} is full and can't load any more passengers! '${passenger}' from ${passenger.lastCity} is not going to board.`);
-      Game.Instance().log.error(err);
+      Autos.Instance().log.error(err);
       return;
     }
 
     if (passenger.lastCity != this.lastCity.IEObject) {
       let err = new CommandError(`${this.IEObject} tried to load a passenger that is not in this city: '${passenger}' from ${passenger.lastCity}`);
-      Game.Instance().log.error(err);
+      Autos.Instance().log.error(err);
       return;
     }
 
@@ -248,13 +248,13 @@ class VehicleGO extends GameObject {
     this.IEObject.currentRoute.push(city);
   }
 
-  /** Game Functions */
+  /** Autos Functions */
   moveToCityById(cities) {
     if (!cities.constructor === Array) {
       cities = [cities];
     }
     /** @type <GameController> */
-    let gameController = Game.Instance().controller;
+    let gameController = Autos.Instance().controller;
     for (let cityId of cities) {
       let city = gameController.getCityById(cityId);
       if (city)
@@ -262,7 +262,7 @@ class VehicleGO extends GameObject {
       else
         return false;
     }
-    Game.Instance().log.debug(`${this.IEObject} updated target <c>City</c> to <b>moveTo</b>: '${this._travelTo.map((el => el.IEObject.toString())).join(',')}'`);
+    Autos.Instance().log.debug(`${this.IEObject} updated target <c>City</c> to <b>moveTo</b>: '${this._travelTo.map((el => el.IEObject.toString())).join(',')}'`);
     return true;
   }
 }

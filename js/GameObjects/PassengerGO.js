@@ -3,7 +3,7 @@ class PassengerGO extends GameObject {
   constructor(props) {
     super(props);
 
-    let game = Game.Instance();
+    let game = Autos.Instance();
 
     this.id = game.idGenerator.GetNext('passenger');
     
@@ -62,7 +62,7 @@ class PassengerGO extends GameObject {
   unload(city) {
     this.onBoard = undefined;
     if (city == this.toCity) {
-      let game = Game.Instance();
+      let game = Autos.Instance();
       game.gameStats.addPassenger();
       game.controller.RemoveGameObject(this);
     } else {

@@ -38,7 +38,8 @@
         
         Passenger</h2>
         
-            <div class="class-description"><p>This is Passenger!</p></div>
+            <div class="class-description"><p>Every passenger on the map is an instance of the Passenger class.</p>
+<p>Passengers want to get from their initi <a href="City.html">City</a> to their destination city, your task is to help them using your <a href="Vehicle.html">Vehicle</a>s.</p></div>
         
     
 </header>
@@ -83,6 +84,26 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example of <a href="Vehicle.html">Vehicle</a> taking a passenger and delivering him to his desired <a href="City.html">City</a></p>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game, stats) {
+   
+   // assuming they are in the same city
+   let vehicle = vehicle[0];
+   let passenger = passengers[0];
+   
+   // assuming the cities are adjacent
+   vehicle.moveTo(passenger.toCity);
+ 
+   vehicle.on('visitCity', function(city) {
+     if (city === passenger.toCity)
+       vehicle.unload(passenger);
+   });
+} </code></pre>
 
 
 
@@ -150,56 +171,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Id do passageiro.</p>
-</div>
-
-
-
-
- 
-
-
-
-<table class="table-list"> </table>
-
-
-
-
-<br>
-<hr>
-<br>
-
-        
-            
-
-<h4 class="name anchor-header" id="name" data-text="name">
-    <a href="#name" class="anchor-header__link">#</a>
-	<span class="_color-black"><span class="_color-gray50">Passenger.</span>name</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{string}</small>
-</h4>
-<p class="un-mar is-empty"></p>
-
-
-
-
-
-
-
-<table class="table-list">
-    <tr class="table-list__type">
-        <td>Type:</td>
-        <td>
-<code class="language-javascript">string</code>
-
-</td>
-    </tr>
-    </table>
-
-<table class="table-list"></table>
-
-
-<h5><em>Description</em></h5>
-<div class="description">
-    <p>Nome fantasia do passageiro.</p>
+    <p>Passenger's id (may be between &quot;A&quot; and &quot;Z&quot;).</p>
 </div>
 
 
@@ -248,7 +220,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Última cidade que este passageiro esteve.</p>
+    <p>The last <a href="City.html">City</a> this passenger has been in.</p>
 </div>
 
 
@@ -297,7 +269,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Cidade que este passageiro se originou.</p>
+    <p>The <a href="City.html">City</a> this passenger is from.</p>
 </div>
 
 
@@ -346,7 +318,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Cidade que este passageiro tem como destino.</p>
+    <p>The <a href="City.html">City</a> this passenger desires to go to.</p>
 </div>
 
 
@@ -395,7 +367,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Veículo que este passageiro esta abordo.</p>
+    <p>Current <a href="Vehicle.html">Vehicle</a> that this passenger is in. It is <code class="language-js">undefined</code> if the passenger is not in a vehicle.</p>
 </div>
 
 
@@ -444,7 +416,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Tempo que este passageiro já esteve esperando um veículo, em segundos. Só conta enquanto o passageiro estiver fora de um veículo.</p>
+    <p>The time that this passengers has been waiting to be delivered.</p>
 </div>
 
 
@@ -491,7 +463,7 @@
                             <div class="gcell" style="border-left:1px solid #ddd;">
                                 <aside class="js-sidebar">
                                     <nav class="nav wysiwyg _ptb-one _pb-triple">
-                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Util.html">Util</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3><a href="global.html">Global</a></h3>
+                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Game.html">Game</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="City.html#.event:on:newPassenger">on:newPassenger</a></li><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3>Global</h3><ul><li><a href="global.html#init">init</a></li><li><a href="global.html#update">update</a></li></ul>
                                     </nav>
                                 </aside>
                             </div>

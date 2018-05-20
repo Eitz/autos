@@ -1,1 +1,1 @@
-jsdoc -c docs_source/jsdoc.config.json -d docs/ js/InterfaceObjects/*
+jsdoc -R docs_source/README.md -c docs_source/jsdoc.config.json -d docs/ js/InterfaceObjects/*

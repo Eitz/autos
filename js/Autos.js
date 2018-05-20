@@ -1,6 +1,6 @@
 let game_instance;
 
-class Game {
+class Autos {
 
 	constructor(root) {
 		if (!root) {
@@ -40,6 +40,14 @@ class Game {
 	}
 
 	Setup(cachedChallenge) {
+
+		this.elements.buttons.reset.classList.remove('primary');
+		this.elements.buttons.start.disabled = false;
+		this.elements.buttons.reset.disabled = true;
+		this.elements.buttons.start.classList.add('primary');
+		for (let btn of this.elements.buttons.speed) {
+			btn.disabled = btn.classList.contains('primary');
+		}
 		
 		this.vehicles = [];
 		this.cities = [];
@@ -53,7 +61,7 @@ class Game {
 			this.gameStats = new GameStats(this.elements.progress_buttons);
 			this.log = new Logger(this.elements.event_log);
 			this.controller = new GameController(this.elements.gameArea);
-			this.gameFunctions = new UtilFunctions(this);
+			this.gameFunctions = new Game(this);
 			this.idGenerator = new IDGenerator();
 			
 			let level = this.LoadChallenge(levelNumber, cachedChallenge);
@@ -118,7 +126,7 @@ class Game {
 			return;
 		}
 		try {
-			this.gameCode.init(this.vehicles, this.cities, this.passengers, this.gameFunctions, this.gameStats);
+			this.gameCode.init(this.vehicles, this.cities, this.passengers, this.gameFunctions);
 		} catch (err) {
 			this.Stop();
 			let numbers = Util.GetErrorNumbers(err.stack);
@@ -207,7 +215,7 @@ class Game {
 			level.fromJSON(cachedChallenge);
 			return level;
 		} else {
-			Game.loadTextAsset(level.getURL(), (asset) => {
+			Autos.loadTextAsset(level.getURL(), (asset) => {
 				this.cachedChallenge = asset;
 				level.fromJSON(asset);
 				this.events.trigger('load-level', [levelNumber, level]);

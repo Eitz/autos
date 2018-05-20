@@ -82,15 +82,15 @@ class Level extends GameObject {
     this.conditions.defeat.function = Util.ParseFunction(this.levelProps.conditions.defeat.function);
 
     if (this.levelProps.randomCityIds) {
-      Game.Instance().controller.showCityIds = false
+      Autos.Instance().controller.showCityIds = false
       this.RandomCityIds();
     } else {
-      Game.Instance().controller.showCityIds = true
+      Autos.Instance().controller.showCityIds = true
     }
   }
 
   RandomCityIds() {
-    let generator = Game.Instance().idGenerator;
+    let generator = Autos.Instance().idGenerator;
     for (let city of Util.ShuffleArray(this.cities)) {
       let originalId = city.id;
       let newId = generator.GetNext('city');

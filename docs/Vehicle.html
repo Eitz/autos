@@ -38,7 +38,9 @@
         
         Vehicle</h2>
         
-            <div class="class-description"><p>The Vehicle class represents a vehicle within the game. Every vehicle in the game is an instance of this class. The Vehicle's task is to transport passengers to their desided destinations.<br>   Vehicles can travel between <a href="City.html">Cities</a> when these cities are connected by <a href="Road.html">Roads</a>.<br>   Vehicles are able to carry <a href="Passenger.html">Passengers</a> up to a max capacity, which depends on their <a href="global.html#VehicleType">type</a>.</p></div>
+            <div class="class-description"><p>The Vehicle class represents a vehicle within the game. Every vehicle in the game is an instance of this class. The Vehicle's task is to transport passengers to their desided destinations.</p>
+<p>Vehicles can travel between <a href="City.html">Cities</a> when these cities are connected by <a href="Road.html">Roads</a>.</p>
+<p>Vehicles are able to carry <a href="Passenger.html">Passengers</a> up to a max capacity, which depends on their <a href="global.html#VehicleType">type</a>.</p></div>
         
     
 </header>
@@ -87,7 +89,7 @@
 
     <h5>Example</h5>
     
-        <p class="code-caption">Example of vehicle going back and forth between cities A, B and C</p>
+        <p class="code-caption">Example of a vehicle going back and forth between cities A, B and C</p>
     
     <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
 
@@ -975,7 +977,7 @@
     <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
    let vehicle = vehicles[0];
    vehicle.on('idle', function(city) {
-     // do something
+     vehicle.moveTo('A');
    });
 }</code></pre>
 
@@ -1123,7 +1125,9 @@
     <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
    let vehicle = vehicles[0];
    vehicle.on('visitCity', function(city) {
-     // do something
+     if (city.id === 'A') {
+       vehicle.moveTo('B');
+     }
    });
 }</code></pre>
 
@@ -1313,7 +1317,7 @@
                             <div class="gcell" style="border-left:1px solid #ddd;">
                                 <aside class="js-sidebar">
                                     <nav class="nav wysiwyg _ptb-one _pb-triple">
-                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Util.html">Util</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3><a href="global.html">Global</a></h3>
+                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Game.html">Game</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="City.html#.event:on:newPassenger">on:newPassenger</a></li><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3>Global</h3><ul><li><a href="global.html#init">init</a></li><li><a href="global.html#update">update</a></li></ul>
                                     </nav>
                                 </aside>
                             </div>

@@ -38,7 +38,7 @@
         
         City</h2>
         
-            <div class="class-description"><p>This is City!</p></div>
+            <div class="class-description"><p>Every city on the map is an instance of the City class. Cities may contain <a href="Passenger.html">Passenger</a>s and <a href="Vehicle.html">Vehicle</a>s.</p></div>
         
     
 </header>
@@ -85,6 +85,20 @@
 
 
 
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example of setting up an event handler that is triggered whenever a city gets a new <a href="Passenger.html">Passenger</a>.</p>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
+
+   let city = city[0];
+
+   city.on('newPassenger', function(passenger) {
+     // perhaps move a vehicle here??
+   });
+} </code></pre>
+
+
 
 
  
@@ -127,7 +141,7 @@
     <a href="#id" class="anchor-header__link">#</a>
 	<span class="_color-black"><span class="_color-gray50">City.</span>id</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{string}</small>
 </h4>
-<p class="un-mar is-empty"></p>
+<p class="un-mar is-empty"><code>constant</code></p>
 
 
 
@@ -150,7 +164,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Id da cidade.</p>
+    <p>City's id (may be between &quot;A&quot; and &quot;Z&quot;).</p>
 </div>
 
 
@@ -199,7 +213,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Lista contendo os passageiros (Passenger) atuais esperando para serem transportados.</p>
+    <p>List of <a href="Passenger.html">Passenger</a>s currently waiting to be delivered.</p>
 </div>
 
 
@@ -225,7 +239,7 @@
     <a href="#roads" class="anchor-header__link">#</a>
 	<span class="_color-black"><span class="_color-gray50">City.</span>roads</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Array.&lt;Road>}</small>
 </h4>
-<p class="un-mar is-empty"></p>
+<p class="un-mar is-empty"><code>constant</code></p>
 
 
 
@@ -248,7 +262,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Lista de ruas (Road) que fazem as ligações entre esta e as outras cidades.</p>
+    <p>List of <a href="Road.html">Road</a>s that run from this city to other cities.</p>
 </div>
 
 
@@ -274,7 +288,7 @@
     <a href="#connectedCities" class="anchor-header__link">#</a>
 	<span class="_color-black"><span class="_color-gray50">City.</span>connectedCities</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Array.&lt;City>}</small>
 </h4>
-<p class="un-mar is-empty"></p>
+<p class="un-mar is-empty"><code>constant</code></p>
 
 
 
@@ -297,7 +311,7 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Lista de cidades que estão ligadas com esta cidade.</p>
+    <p>List of cities that this city connects to by its <a href="Road.html">Road</a>s</p>
 </div>
 
 
@@ -324,6 +338,160 @@
     
 
     
+        <h3 class="subsection-title anchor-header" id="Events">
+            <a href="#Events" class="anchor-header__link">#</a>
+            Events</h3>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id=".event:on:newPassenger" data-text="on:newPassenger">
+        <a href="#.event:on:newPassenger" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">City.</span>on:newPassenger</span>
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>name</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">'newPassenger'</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name of this event</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>onNewPassenger</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">function</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function that is called when this this city gets a new <a href="Passenger.html">Passenger</a>, receives as argument the <a href="Passenger.html">Passenger</a>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Event that is triggered whenever this city gets a new <a href="Passenger.html">Passenger</a>. It's <strong>not</strong> triggered when a car delivers a passenger.</p>
+</div>
+
+
+
+    <h5>Example</h5>
+    
+    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game, stats) {
+   let city = cities[0];
+   city.on('newPassenger', function(passenger) {
+     // do something?
+   });
+}</code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
 </article>
 
 </section>
@@ -344,7 +512,7 @@
                             <div class="gcell" style="border-left:1px solid #ddd;">
                                 <aside class="js-sidebar">
                                     <nav class="nav wysiwyg _ptb-one _pb-triple">
-                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Util.html">Util</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3><a href="global.html">Global</a></h3>
+                                        <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="Game.html">Game</a></li><li><a href="Passenger.html">Passenger</a></li><li><a href="Road.html">Road</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul><h3>Events</h3><ul><li><a href="City.html#.event:on:newPassenger">on:newPassenger</a></li><li><a href="Vehicle.html#.event:on:idle">on:idle</a></li><li><a href="Vehicle.html#.event:on:visitCity">on:visitCity</a></li><li><a href="Vehicle.html#.event:on:loadPassenger">on:loadPassenger</a></li></ul><h3>Global</h3><ul><li><a href="global.html#init">init</a></li><li><a href="global.html#update">update</a></li></ul>
                                     </nav>
                                 </aside>
                             </div>

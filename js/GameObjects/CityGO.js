@@ -13,7 +13,7 @@ class CityGO extends GameObject {
     this.vehicles = [];
     this.connectedCities = [];
     this.IEObject = new City(this);    
-    Game.Instance().cities.push(this.IEObject);
+    Autos.Instance().cities.push(this.IEObject);
   }
 
   Render(ctx) {
@@ -44,7 +44,7 @@ class CityGO extends GameObject {
     ctx.fillStyle = '#FFF';
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    if (Game.Instance().controller.showCityIds) {
+    if (Autos.Instance().controller.showCityIds) {
       ctx.fillText(this.id,this.pos.x,this.pos.y);
     } else {
       ctx.fillText('?',this.pos.x,this.pos.y);

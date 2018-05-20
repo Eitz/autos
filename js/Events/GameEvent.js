@@ -9,7 +9,7 @@ class GameEvent {
       try {
         cb.apply(this, params);
       } catch (err) {
-        let game = Game.Instance();
+        let game = Autos.Instance();
         game.Stop();
         let numbers = Util.GetErrorNumbers(err.stack);
 			  err = new ImplementationError(err, `for event: '${this.name}'`, numbers.line, numbers.column);

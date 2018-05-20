@@ -73,3 +73,8 @@ article .description + h5 {
   max-width: 1366px;
   margin: 0 auto; 
 }
+
+._color-gray50 {
+  color: #807f7f;
+  text-transform: lowercase;
+}

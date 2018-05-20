@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Autos - Global</title>
+    <title>Autos - Class: Game</title>
 
     <!-- link rel="icon" type="image/png" href="favicon.ico" /-->
     <link rel="stylesheet" href="styles/jsdoc-prism.css">
@@ -20,7 +20,7 @@
                 <div class="grid grid--space-triple">
                     <div class="gcell gcell--7">
                         <div class="_pl-double">
-                            <h1 class="title title--sub _mt-one">Global</h1>
+                            <h1 class="title title--sub _mt-one">Class: Game</h1>
                             <hr class="divine">
                             <main class="main">
                                 
@@ -33,9 +33,14 @@
 <header class="wysiwyg">
     
         
-            <h2>
+            
+            <h2 class="anchor-header" id="Game"><a href="#Game" class="anchor-header__link">#</a>
         
-        </h2>
+        Game</h2>
+        
+            <div class="class-description"><p>The Game class provides some helper functions that the player can use to his/her advantage while playing the game and building paths.</p>
+<p>This class also provides a reference to the log class.</p>
+<p>This class also contains the stats of the game (how much time has passed, how many passengers have been delivered).</p></div>
         
     
 </header>
@@ -45,7 +50,46 @@
     
         
 
-         
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name anchor-header" id="Game" data-text="Game">
+        <a href="#Game" class="anchor-header__link">#</a>
+        <span class="_color-black">new Game</span> ()
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
@@ -54,7 +98,10 @@
 
 
 
-        
+<br>
+<hr>
+<br>
+
     
     </div>
 
@@ -71,426 +118,16 @@
     
 
     
-
-    
-        <h3 id="Methods" class="subsection-title anchor-header">
-            <a href="#Methods" class="anchor-header__link">#</a>
-            Methods</h3>
+        <h3 class="subsection-title anchor-header" id="Members">
+            <a href="#Members" class="anchor-header__link">#</a>
+            Members</h3>
 
         
             
 
-    
-
-    <h4 class="name anchor-header" id="init" data-text="init">
-        <a href="#init" class="anchor-header__link">#</a>
-        <span class="_color-black">init</span> (vehicles, cities, passengers, game)
-    </h4>
-    <p class="un-mar is-empty"></p>
-
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>vehicles</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="Vehicle.html">Vehicle</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="Vehicle.html">Vehicle</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>cities</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="City.html">City</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="City.html">City</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>passengers</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="Passenger.html">Passenger</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="Passenger.html">Passenger</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>game</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript"><a href="Game.html">Game</a></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Helper class that provides helpful methods and properties.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5><em>Description</em></h5>
-<div class="description">
-    <p>This functions get's executed automaticaly when the player presses the &quot;Start&quot; button.</p>
-</div>
-
-
-
-    <h5>Example</h5>
-    
-    <pre><code class="language-javascript">function init (vehicles, cities, passengers, game) {
-	let v = vehicles[0];
-
-}</code></pre>
-
-
-
-
- 
-
-
-
-<table class="table-list"> </table>
-
-
-
-
-<br>
-<hr>
-<br>
-
-        
-            
-
-    
-
-    <h4 class="name anchor-header" id="update" data-text="update">
-        <a href="#update" class="anchor-header__link">#</a>
-        <span class="_color-black">update</span> (vehicles, cities, passengers, game)
-    </h4>
-    <p class="un-mar is-empty"></p>
-
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>vehicles</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="Vehicle.html">Vehicle</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="Vehicle.html">Vehicle</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>cities</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="City.html">City</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="City.html">City</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>passengers</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Array.&lt;<a href="Passenger.html">Passenger</a>></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>List of <a href="Passenger.html">Passenger</a>s that are in this level.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name">
-                    
-                        <code><em>game</em></code>
-                    
-                </td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript"><a href="Game.html">Game</a></code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Helper class that provides helpful methods and properties.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5><em>Description</em></h5>
-<div class="description">
-    <p>This function get's executed every frame. Not generally used, but it exists.</p>
-</div>
-
-
-
-    <h5>Example</h5>
-    
-    <pre><code class="language-javascript">function update (vehicles, cities, passengers, game) {
-	let v = vehicles[0];
-
-}</code></pre>
-
-
-
-
- 
-
-
-
-<table class="table-list"> </table>
-
-
-
-
-<br>
-<hr>
-<br>
-
-        
-    
-
-    
-        <h3 class="subsection-title anchor-header" id="Type_Definitions">
-            <a href="#Type_Definitions" class="anchor-header__link">#</a>
-            Type Definitions</h3>
-
-        
-                
-
-<h4 class="name anchor-header" id="VehicleType" data-text="VehicleType">
-    <a href="#VehicleType" class="anchor-header__link">#</a>
-	<span class="_color-black">VehicleType</span>
+<h4 class="name anchor-header" id="elapsedTimeSeconds" data-text="elapsedTimeSeconds">
+    <a href="#elapsedTimeSeconds" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Game.</span>elapsedTimeSeconds</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
 </h4>
 <p class="un-mar is-empty"></p>
 
@@ -504,7 +141,7 @@
     <tr class="table-list__type">
         <td>Type:</td>
         <td>
-<code class="language-javascript"><a href="global.html#VehicleType">VehicleType</a></code>
+<code class="language-javascript">Integer</code>
 
 </td>
     </tr>
@@ -515,283 +152,13 @@
 
 <h5><em>Description</em></h5>
 <div class="description">
-    <p>Global ENUM that is used to represent each <a href="Vehicle.html">Vehicle</a>'s type.</p>
+    <p>Time the level has been running, in seconds.</p>
 </div>
 
 
 
-    <h5>Example</h5>
-    
-    <pre><code class="language-javascript">const VehicleType = {
- CAR: { id: 1, capacity: 4, name: "Car" },
- BUS: { id: 2, capacity: 10, name: "Bus" },
- };</code></pre>
-
-
 
  
-
-
-    <h5 class="subsection-title">Properties</h5>
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>CAR</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">object</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Default vehicle type</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Integer</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's id (1)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>capacity</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Integer</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's capacity for passengers (4)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">string</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's name (&quot;Car&quot;)</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>BUS</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">object</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Advanced vehicle type</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Integer</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's id (2)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>capacity</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">Integer</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's capacity for passengers (10)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<code class="language-javascript">string</code>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Type's name (&quot;Bus&quot;)</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
@@ -804,7 +171,573 @@
 <hr>
 <br>
 
+        
             
+
+<h4 class="name anchor-header" id="elapsedTimeMS" data-text="elapsedTimeMS">
+    <a href="#elapsedTimeMS" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Game.</span>elapsedTimeMS</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">Integer</code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Time the level has been running, in ms.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+<h4 class="name anchor-header" id="passengersDeliverd" data-text="passengersDeliverd">
+    <a href="#passengersDeliverd" class="anchor-header__link">#</a>
+	<span class="_color-black"><span class="_color-gray50">Game.</span>passengersDeliverd</span><small class="_color-gray50" style="display: inline-block;vertical-align: initial;">&nbsp;{Integer}</small>
+</h4>
+<p class="un-mar is-empty"></p>
+
+
+
+
+
+
+
+<table class="table-list">
+    <tr class="table-list__type">
+        <td>Type:</td>
+        <td>
+<code class="language-javascript">Integer</code>
+
+</td>
+    </tr>
+    </table>
+
+<table class="table-list"></table>
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Quantity of passengers already delivered.</p>
+</div>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
+
+    
+        <h3 id="Methods" class="subsection-title anchor-header">
+            <a href="#Methods" class="anchor-header__link">#</a>
+            Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="GetRoadBetween" data-text="GetRoadBetween">
+        <a href="#GetRoadBetween" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Game.</span>GetRoadBetween</span> (cityA, cityB)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>cityA</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The &quot;from&quot; city</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>cityB</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The &quot;to&quot; city</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Use this method to get the <a href="Road.html">Road</a> that runs from <a href="City.html">cityA</a> to <a href="City.html">cityB</a>.</p>
+<p>Returns <code class="language-js">undefined</code> if there's no <a href="Road.html">Road</a> between them.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="GetTimeBetween" data-text="GetTimeBetween">
+        <a href="#GetTimeBetween" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Game.</span>GetTimeBetween</span> (cityA, cityB)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>cityA</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The &quot;from&quot; city</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>cityB</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript"><a href="City.html">City</a></code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The &quot;to&quot; city</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>This is a shortcut to get the time to travel between two <a href="City.html">cities</a>.</p>
+<p>Use this method to get the travel time from the <a href="Road.html">Road</a> that runs from <a href="City.html">cityA</a> to <a href="City.html">cityB</a>.</p>
+<p>This method returns <code class="language-js">Infinity</code> if there's no <a href="Road.html">Road</a> from <a href="City.html">cityA</a> to <a href="City.html">cityB</a>.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="GetCity" data-text="GetCity">
+        <a href="#GetCity" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Game.</span>GetCity</span> (id)
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name">
+                    
+                        <code><em>id</em></code>
+                    
+                </td>
+            
+
+            <td class="type">
+            
+                
+<code class="language-javascript">string</code>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>City's id.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Use this method to get a <a href="City.html">City</a> instance by its ID (&quot;A&quot; to &quot;Z&quot;).</p>
+<p>This method returns <code class="language-js">undefined</code> if there's no <a href="City.html">City</a> with the specified ID.</p>
+</div>
+
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+            
+
+    
+
+    <h4 class="name anchor-header" id="log" data-text="log">
+        <a href="#log" class="anchor-header__link">#</a>
+        <span class="_color-black"><span class="_color-gray50">Game.</span>log</span> ()
+    </h4>
+    <p class="un-mar is-empty"></p>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5><em>Description</em></h5>
+<div class="description">
+    <p>Use this method write to the console at the bottom of the screen.</p>
+</div>
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">You have to specify a logging level to write, as exemplified below </p>
+    
+    <pre><code class="language-javascript">game.log.error("This is a error message");
+game.log.debug("This is a debug message");
+game.log.success("This is a success message");</code></pre>
+
+
+
+
+ 
+
+
+
+<table class="table-list"> </table>
+
+
+
+
+<br>
+<hr>
+<br>
+
+        
+    
+
     
 
     
