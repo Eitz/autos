@@ -74,7 +74,7 @@ class Game {
    * game.log.debug("This is a debug message");
    * game.log.success("This is a success message");
    */
-  log () {
+  get log () {
     return this.autos.log;
   }
   

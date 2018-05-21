@@ -12,7 +12,7 @@ class Autos {
 			gameArea: root.getElementById('game-area').getElementsByTagName('canvas')[0],
 			event_log: root.getElementById('event-log'),
 			code_editor: root.getElementById('code-editor'),
-			short_documentation: root.getElementById('short-documentation-content'),
+			short_documentation: root.getElementById('help-content'),
 			buttons: {
 				start: root.getElementById('btn-start'),
 				reset: root.getElementById('btn-reset'),
@@ -227,7 +227,7 @@ class Autos {
 		this.currentLevelNumber = levelNumber;
 		this.setDescription(level.name, level.description);
 		this.setCode(level.codeSample);
-		this.setShortDocumentation(level.shortDocumentation);
+		this.setHelpText(level.helpText);
 	}
 
 	setDescription(mapName, description) {
@@ -264,7 +264,7 @@ class Autos {
 		return this.editor.getValue();
 	}
 
-	setShortDocumentation(shortDoc) {
+	setHelpText(shortDoc) {
 		this.elements.short_documentation.innerHTML = shortDoc;
 	}
 

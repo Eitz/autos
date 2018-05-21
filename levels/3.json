@@ -1,73 +1,32 @@
 {
-  "name": "Desafio #3: Caminhos bloqueados",
-  "description": "Neste desafio você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Algumas podem ser contra-mão e você não poderá utilizá-las.",
+  "name": "Challenge #3: Blocked paths",
+  "description": "In this challenge you must <b>take the single <c>Vehicle</c> from <c>City</c> “A” to <c>City</c> “D”</b>. This is different from the last challenge because now some roads are only one way. Pay attention to that!",
   "cities": [
-    {
-      "id": "A",
-      "x": 50,
-      "y": 225
-    },
-    {
-      "id": "B",
-      "x": 325,
-      "y": 300
-    },
-    {
-      "id": "C",
-      "x": 325,
-      "y": 150
-    },
-    {
-      "id": "D",
-      "x": 575,
-      "y": 225
-    }
+    { "id": "A", "x": 50, "y": 225 },
+    { "id": "B", "x": 325, "y": 300 },
+    { "id": "C", "x": 325, "y": 150 },
+    { "id": "D", "x": 575, "y": 225 }
   ],
   "vehicles": [
-    {
-      "id": "1",
-      "type": "1",
-      "city": "A"
-    }
+    { "id": "1", "type": "1", "city": "A" }
   ],
   "roads": [
-    {
-      "id": "1",
-      "from": "A",
-      "to": "B",
-      "hideInfo": true
-    },
-    {
-      "id": "1",
-      "from": "C",
-      "to": "A",
-      "hideInfo": true
-    },
-    {
-      "id": "1",
-      "from": "B",
-      "to": "C",
-      "hideInfo": true
-    },
-    {
-      "id": "1",
-      "from": "C",
-      "to": "D",
-      "hideInfo": true
-    },
-    {
-      "id": "1",
-      "from": "D",
-      "to": "B",
-      "hideInfo": true
-    }
+    { "id": "1", "from": "A", "to": "B", "hideInfo": true },
+    { "id": "1", "from": "C", "to": "A", "hideInfo": true },
+    { "id": "1", "from": "B", "to": "C", "hideInfo": true },
+    { "id": "1", "from": "C", "to": "D", "hideInfo": true },
+    { "id": "1", "from": "D", "to": "B", "hideInfo": true }
   ],
   "passengers": [],
-  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Autos functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\tv.on('visitCity', function(city) {\r\n\t\t\r\n\t});\r\n}",
-  "shortDocumentation": "<p>In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\tv.on('visitCity', function(city) {\n\t\t\n\t});\n}",
+  "helpText": [
+    "In this challenge your task is to move the single <c>Vehicle</c> from <c>City</c> \"A\" to <c>City</c> \"D\";",
+    "<c>Road</c>s now may be one way! You can check this by looking at the arrows in each <c>Road</c>.",
+    "To move a <c>Vehicle</c> use the method <m c=\"Vehicle\">moveTo</m>. This method also accepts arrays of IDs or <c>City</c> instances."
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single car to city \"D\"",
+      "text" : "Deliver the single car from City \"A\" to City \"D\"",
       "function" : "function (vehicles, cities, passengers, game) { return vehicles[0].lastCity.id == 'D'; }"
     },
     "defeat" : {

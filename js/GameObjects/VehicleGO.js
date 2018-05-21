@@ -105,9 +105,9 @@ class VehicleGO extends GameObject {
       let road = Autos.Instance().gameFunctions.GetRoadBetween(this.lastCity.IEObject, city.IEObject);
       if (!road) {
         if (city == this.lastCity) {
-          Autos.Instance().log.warning((`${this.IEObject} tried to <b>moveTo</b> a <c>City it already is in: '${this.lastCity.IEObject}'`)); 
+          Autos.Instance().log.warning((`${this.IEObject} tried to <m c="Vehicle">moveTo</m> a <c>City</c> it already is in: '${this.lastCity.IEObject}'`)); 
         } else {
-          Autos.Instance().log.error(new CommandError(`${this.IEObject} recieved an unreachable <c>City</c> on <b>moveTo</b>: '${this.lastCity.IEObject}' -> '${city.IEObject}'`));
+          Autos.Instance().log.error(new CommandError(`${this.IEObject} recieved an unreachable <c>City</c> on <m c="Vehicle">moveTo</m>: '${this.lastCity.IEObject}' -> '${city.IEObject}'`));
         }
         this._travelTo.shift();
         return;
@@ -262,7 +262,7 @@ class VehicleGO extends GameObject {
       else
         return false;
     }
-    Autos.Instance().log.debug(`${this.IEObject} updated target <c>City</c> to <b>moveTo</b>: '${this._travelTo.map((el => el.IEObject.toString())).join(',')}'`);
+    Autos.Instance().log.debug(`${this.IEObject} updated target <c>City</c> to <m c="Vehicle">moveTo</m>: '${this._travelTo.map((el => el.IEObject.toString())).join(',')}'`);
     return true;
   }
 }

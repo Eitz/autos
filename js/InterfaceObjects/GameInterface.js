@@ -5,7 +5,7 @@
  * @param {City[]} cities List of {@link City}s that are in this level.
  * @param {Passenger[]} passengers List of {@link Passenger}s that are in this level.
  * @param {Game} game Helper class that provides helpful methods and properties.
- * @description This functions get's executed automaticaly when the player presses the "Start" button.
+ * @description This functions gets executed automaticaly when the player presses the "Start" button.
  * @example
  * function init (vehicles, cities, passengers, game) {
  *	let v = vehicles[0];
@@ -20,7 +20,7 @@
  * @param {City[]} cities List of {@link City}s that are in this level.
  * @param {Passenger[]} passengers List of {@link Passenger}s that are in this level.
  * @param {Game} game Helper class that provides helpful methods and properties.
- * @description This function get's executed every frame. Not generally used, but it exists.
+ * @description This function gets executed every frame. Not generally used, but it exists.
  * @example
  * function update (vehicles, cities, passengers, game) {
  *	let v = vehicles[0];
@@ -36,6 +36,6 @@ class GameInterface {
   }
 
   toString() {
-    return `{${this.constructor.name}#${this.id}}`;
+    return `{<c>${this.constructor.name}</c>#${this.id}}`;
   }
 }

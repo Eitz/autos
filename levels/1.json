@@ -1,45 +1,24 @@
 {
-  "name": "Desafio #1: Aprendendo a dirigir",
-  "description": "Como uma introdução ao jogo, seu único objetivo é levar o veículo de “A” para “B” para avançar para o próximo desafio.",
+  "name": "Challenge #1: Learning how to drive.",
+  "description": "Welcome to Autos! As an introduction to the game, your single objective in this challenge is to <b>move the <c>Vehicle</c> to <c>City</c> “B”</b>. Write your code in the side panel and press <b>Start</b>!.",
   "cities": [
-    {
-      "id": "A",
-      "name": "Itajaí",
-      "x": 130,
-      "y": 150
-    },
-    {
-      "id": "B",
-      "name": "Itapema",
-      "x": 455,
-      "y": 280
-    }
+    { "id": "A", "x": 130, "y": 150 },
+    { "id": "B", "x": 455, "y": 280 }
   ],
   "vehicles": [
-    {
-      "id": "1",
-      "type": "1",
-      "city": "A"
-    }
+    { "id": "1", "type": "1", "city": "A" }
   ],
   "roads": [
-    {
-      "id": "1",
-      "from": "A",
-      "to": "B",
-      "hideInfo": true
-    },
-    {
-      "id": "2",
-      "from": "B",
-      "to": "A",
-      "hideInfo": true
-    }
+    { "id": "1", "from": "A", "to": "B", "hideInfo": true },
+    { "id": "2", "from": "B", "to": "A", "hideInfo": true }
   ],
   "passengers": [],
-  "codeSample": "\/**\r\n The function init runs when the game starts\r\n and recieves three parameters:\r\n \r\n vehicles: array of Vehicle in this challenge\r\n cities: array of City in this challenge\r\n game: Autos functions for calculating paths\r\n \r\n You can learn more about the game in the docs\r\n or just by looking below on the short docs\r\n*\/\r\n\r\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\r\n}",
-  "shortDocumentation": 
-    "<p>In this first challenge your task is to move the only vehicle from city A to city B.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City</p>",
+  "codeSample": "// executed at the start of the game\nfunction init (vehicles, cities, passengers, game) {\n\t// getting the first vehicle\n\tlet v = vehicles[0];\n\t// (maybe move it?)\n}",
+  "helpText": [
+    "The function <m c=\"global\">init</m> gets executed automatically when you press the \"Start\" button;",
+    "Whenever a method, class or property is mentioned here, in the console or in the description, it will have a link to its full documentation, like this: <c>Vehicle</c>;",
+    "You can move the single <c>Vehicle</c> from <c>City</c> A to <c>City</c> B by using the <c>Vehicle</c>'s method <m c=\"Vehicle\">moveTo</m>;"  
+  ],    
   "conditions" : {
     "victory": {
       "text" : "Deliver the single car to city \"B\"",

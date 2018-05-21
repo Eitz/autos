@@ -68,9 +68,9 @@ class Level extends GameObject {
     this.levelProps = Util.JSONtoObject(json);
     this.SetProperties({
       name: this.levelProps.name,
-      description: this.levelProps.description,
+      description: LinkWriter.Parse(this.levelProps.description),
       codeSample: this.levelProps.codeSample,
-      shortDocumentation: this.levelProps.shortDocumentation,
+      helpText: LinkWriter.Parse('<li>' + this.levelProps.helpText.join('</li><li>') + '</li>'),
       cities: CityGO.fromObject(this.levelProps.cities),
       vehicles: VehicleGO.fromObject(this.levelProps.vehicles),
       roads: RoadGO.fromObject(this.levelProps.roads),

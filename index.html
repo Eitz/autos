@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Autos - v0.1</title>
+		<title>Autos - A programming game in Javascript</title>
+		<meta rel="description" content="In Autos, you have to code you way through challenges. All using Javascript! Deliver vehicles, pick up passengers, win the game!" />
 
 		<!-- Vendor scripts -->
 		
@@ -22,6 +23,7 @@
 		<script src="vendor/code-mirror/addon/lint/lint.js"></script>
 		<script src="vendor/code-mirror/addon/lint/javascript-lint.js"></script>
 	
+		<script type="text/javascript" src="js/LinkWriter.js"></script>	
 		<script type="text/javascript" src="js/Modals.js"></script>	
 		<script type="text/javascript" src="js/IDGenerator.js"></script>	
 		<script type="text/javascript" src="js/Util.js"></script>
@@ -60,7 +62,7 @@
 	<!-- <body class="modal-on"> -->
 		<div id="game">
 			<h1>Autos</h1>
-			<h5>A programming game in Javascript made in Javascript</h5>
+			<h5>A programming game in Javascript (made with Javascript)</h5>
 			<section id="top-bar">
 				<div id="description">
 					<h1></h1>
@@ -93,11 +95,11 @@
 			</section>
 			<section id="right-block">
 				<div id="code-area"><textarea id="code-editor"></textarea></div>
-				<div id="short-documentation">
+				<div id="help">
 					<p>
-						<strong>Short Documentation</strong><small><a class="pull-right" href="docs/index.html">Full documentation here.</a></small>
+						<strong>Need Help?</strong> Here are some tips. ↓ <small><a target="_blank" class="pull-right" href="docs/index.html">Full documentation here.</a></small>
 					</p>
-					<div id="short-documentation-content"></div>
+					<ul id="help-content"></ul>
 				</div>
 			</section>
 			<!-- section id="full-docs"><iframe style="width:100%; height: 500px;" src="docs/documentacao.html"></iframe></section -->

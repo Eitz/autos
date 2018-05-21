@@ -102,6 +102,11 @@ class Vehicle extends GameInterface {
   /**
    * Method responsable for setting the destination of this vehicle. If the vehicle already has planned moves, the argument City is appended to this vehicle's {@link Vehicle#currentRoute|current route}. This method can receive both instances of {@link City} or only their IDs.
    * @param {City|City[]|String|String[]} targetCity Instance(s) of {@link City} or only their ID(s).
+   * @example
+   * // using a City instance
+   * vehicle.moveTo(city);
+   * // or by using only id
+   * vehicle.moveTo('C');
    */
   moveTo(targetCity) {
     let ok = true;
@@ -126,7 +131,7 @@ class Vehicle extends GameInterface {
     }
 
     if (!targetCity || !ok)
-      Autos.Instance().log.error(new CommandError(`${this} recieved an invalid city on <b>moveTo</b>: '${targetCity}'`));
+      Autos.Instance().log.error(new CommandError(`${this} recieved an invalid city on <m c="Vehicle">moveTo</m>: '${targetCity}'`));
   }
 
   /**

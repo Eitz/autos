@@ -38,7 +38,7 @@ class Logger {
   }
 
   getLogHTML(status, text) {
-    text = '[' + status  + '] ' + text;
+    text = '[' + status  + '] ' + LinkWriter.Parse(text.toString());
     return '<div class="log' + (status ? ' log-' + status.trim() : '') +'">' + text + '</div>';
   }
 }
