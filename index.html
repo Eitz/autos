@@ -69,11 +69,13 @@
 					<h3></h3>
 				</div>
 				<div id="progress-buttons">
-				<div class="stats">
-					<strong>Time: </strong><span id="time-count">0</span><br />
-					<strong>Passengers Delivered:</strong> <span id="passengers-delivered-count">0</span>
-				</div>
+				<img class="legend" src="img/legend.png" />
 				<div class="buttons">
+						<small class="pull-right">
+							Action Buttons
+							&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace; <!-- hack -->
+							<br /><br />
+						</small>
 						<div>
 							<button id="btn-start" class="primary" onclick="Autos.Instance().Start();">Start</button>
 							<button id="btn-reset" disabled onclick="Autos.Instance().Reset();">Reset</button>

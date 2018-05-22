@@ -7,14 +7,14 @@
     "randomFactorMS": 500
   },
   "cities": [
-    { "id": "A", "x": 100, "y": 120 },
-    { "id": "B", "x": 260, "y": 170 },
-    { "id": "C", "x": 220, "y": 300, "renderBottom": true },
-    { "id": "D", "x": 420, "y": 180, "renderBottom": true },
-    { "id": "E", "x": 340, "y": 50 },
-    { "id": "F", "x": 390, "y": 310, "renderBottom": true },
-    { "id": "G", "x": 580, "y": 180, "renderBottom": true },
-    { "id": "H", "x": 460, "y": 60 }    
+    { "id": "A", "x": 100, "y": 140 },
+    { "id": "B", "x": 260, "y": 190 },
+    { "id": "C", "x": 220, "y": 320, "renderBottom": true },
+    { "id": "D", "x": 420, "y": 200, "renderBottom": true },
+    { "id": "E", "x": 340, "y": 70 },
+    { "id": "F", "x": 390, "y": 330, "renderBottom": true },
+    { "id": "G", "x": 580, "y": 200, "renderBottom": true },
+    { "id": "H", "x": 460, "y": 80 }    
   ],
   "vehicles": [
     { "type": 1, "city": "A" },

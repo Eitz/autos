@@ -12,12 +12,90 @@ class Level extends GameObject {
     this.roads = [];
     /** @type {PassengerGO[]} */
     this.passengers = [];
-
-
+    this.renderOrder = 0;
+    this.gameStats = Autos.Instance().gameStats;
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} ctx
+   */
   Render(ctx) {
+    let vCondition = "Win: " + this.conditions.victory.text;
+    let dCondition = "Lose: " + this.conditions.defeat.text;
+
+    this.RenderVictoryCondition(ctx, vCondition, new Vector2(15, 5));
+    this.RenderDefeatCondition(ctx, dCondition, new Vector2(ctx.canvas.width, 5));
     
+    if (this.levelProps.passengers.length)
+      this.RenderPassengersDelivered(ctx, this.gameStats.passengersDelivered, new Vector2(15, ctx.canvas.height - 15));
+    
+    this.RenderCurrentTime(ctx, this.gameStats.elapsedTimeSeconds, new Vector2(ctx.canvas.width, ctx.canvas.height - 15));
+  }
+
+  RenderVictoryCondition(ctx, text, position) {
+    let startingTextAlign = ctx.textAlign;
+    
+    ctx.fillStyle = '#393';
+    ctx.fillRect(position.x, position.y, 10, 10);
+    
+    ctx.textAlign = 'left';
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText(text, position.x + 15, position.y + 9);
+    
+    ctx.textAlign = startingTextAlign;
+  }
+  RenderDefeatCondition(ctx, text, position) {
+    let startingTextAlign = ctx.textAlign;
+    
+    ctx.textAlign = 'right';
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText(text, position.x, position.y+9);
+
+    ctx.fillStyle = '#F66';
+    let textWidth = ctx.measureText(text).width;
+    ctx.fillRect(position.x - textWidth - 15, position.y, 10, 10);
+    
+    ctx.textAlign = startingTextAlign;    
+  }
+
+  RenderPassengersDelivered(ctx, text, position) {
+    let startingTextAlign = ctx.textAlign;
+
+    text = "Passengers delivered: " + text;
+    
+    ctx.fillStyle = '#FFF';
+    ctx.fillRect(position.x, position.y, 10, 10);
+    
+    ctx.textAlign = 'left';
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText(text, position.x + 15, position.y + 9);
+    
+    ctx.textAlign = startingTextAlign;
+  }
+
+  RenderCurrentTime(ctx, text, position) {
+
+    if (text < 10)
+      text = "0"+text;
+
+    text = "Elapsed time: " + text + "s";
+
+    let startingTextAlign = ctx.textAlign;
+    
+    ctx.textAlign = 'right';
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText(text, position.x, position.y+9);
+
+    ctx.fillStyle = '#000';
+    let textWidth = ctx.measureText(text).width;
+    ctx.fillRect(position.x - textWidth - 15, position.y, 10, 10);
+    
+    ctx.textAlign = startingTextAlign;    
   }
 
   Update(dt) {

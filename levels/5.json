@@ -30,7 +30,7 @@
   ],
   "conditions" : {
     "victory": {
-      "text" : "Delivery of the <c>Passenger</c> to city \"D\"",
+      "text" : "Deliver the Passenger to city \"D\"",
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered > 0; }"
     },
     "defeat" : {

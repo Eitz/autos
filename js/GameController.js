@@ -144,6 +144,7 @@ class GameController {
 
   SetLevel(level) {
     this.currentLevel = level;
+    this.AddGameObject(level);
   }
 
   SetConditions(victory, defeat) {

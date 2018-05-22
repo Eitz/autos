@@ -29,7 +29,7 @@
       "function" : "function (vehicles, cities, passengers, game) { return vehicles[0].lastCity.id == 'C'; }"
     },
     "defeat" : {
-      "text" : "Timer goes over 15 seconds",
+      "text" : "Timer must not go over 15 seconds",
       "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 15; }"
     }
   }

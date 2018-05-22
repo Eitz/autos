@@ -28,11 +28,11 @@
   ],
   "conditions" : {
     "victory": {
-      "text" : "Delivery of the single passenger to <c>City</c> \"A\"",
+      "text" : "Deliver the single passenger to City \"A\"",
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered > 0; }"
     },
     "defeat" : {
-      "text" : "Timer should not go over 10 seconds",
+      "text" : "Timer must not go over 10 seconds",
       "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 10; }"
     }
   }

@@ -46,7 +46,7 @@
       "function" : "function (vehicles, cities, passengers, game) { console.log(game); return game.passengersDelivered == 4 }"
     },
     "defeat" : {
-      "text" : "Timer goes over 12 seconds",
+      "text" : "Timer must not go over 12 seconds",
       "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 12; }"
     }
   }

@@ -356,3 +356,14 @@ body.modal-on {
 .doc-link.doc-event {
   color: #8A716A;
 }
+
+.legend {
+  border: 2px solid #8A716A;
+  margin-left: 1px !important;
+  margin-top: -4px !important;
+  padding: 9px 3px !important;
+}
+
+.text-center {
+  text-align: center;
+}

@@ -4,9 +4,9 @@
   "randomCityIds": false,
   "randomPassengers": {},
   "cities": [
-    { "id": "A", "x": 160, "y": 80 },
+    { "id": "A", "x": 280, "y": 70 },
     { "id": "B", "x": 260, "y": 160 },
-    { "id": "C", "x": 90, "y": 300, "renderBottom": true },
+    { "id": "C", "x": 90, "y": 200, "renderBottom": true },
     { "id": "D", "x": 415, "y": 210, "renderBottom": true },
     { "id": "E", "x": 440, "y": 80 },
     { "id": "F", "x": 420, "y": 340 },
@@ -36,7 +36,8 @@
     { "from" : "I", "to" : "J" },
     { "from" : "J", "to" : "F" },
     { "from" : "D", "to" : "I" },
-    { "from" : "A", "to" : "E" }
+    { "from" : "A", "to" : "E" },
+    { "from" : "E", "to" : "A" }
   ],
   "passengers": [
     { "from" : "C", "to" : "A" },
