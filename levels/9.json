@@ -43,7 +43,7 @@
     { "from" : "E", "to" : "C" },
     { "from" : "C", "to" : "D" }
   ],
-  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
+  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\n\t\n}",
   "helpText": [
     "<c>Passenger</c>s appear every +-1.5 seconds;",
     "Check the <m c=\"Vehicle\">type</m> of each <c>Vehicle</c> to differ cars from buses.",
