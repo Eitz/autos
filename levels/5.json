@@ -1,78 +1,41 @@
 {
-  "name": "Desafio #5: Considering alternatives + First Passenger",
-  "description": "<b>Introdução:</b> você deve levar o veículo de “A” para “D” para concluir o objetivo e avançar para o próximo desafio. Utilize as melhores ruas pois não temos tempo a perder.",
+  "name": "Challenge #5: Considering alternatives",
+  "description": "New concept! <c>Road</c>s now may be a little slower (or faster) to travel. Choose your path wisely! Your task now is to <b>transport the <c>Passenger</c> from <c>City</c> \"A\" to \"D\"</b>. Also, you should be <b>as fast as possible</b>.",
   "cities": [
-    {
-      "id": "A",
-      "x": 100,
-      "y": 315,
-      "renderBottom": true
-    },
-    {
-      "id": "B",
-      "x": 325,
-      "y": 300
-    },
-    {
-      "id": "C",
-      "x": 325,
-      "y": 100
-    },
-    {
-      "id": "D",
-      "x": 575,
-      "y": 125
-    }
+    { "id": "A", "x": 100, "y": 315, "renderBottom": true },
+    { "id": "B", "x": 325, "y": 300 },
+    { "id": "C", "x": 325, "y": 100 },
+    { "id": "D", "x": 575, "y": 125 }
   ],
   "vehicles": [
-    {
-      "type": 1,
-      "city": "A"
-    }],
+    { "type": 1, "city": "A" }
+  ],
   "roads": [
-    {
-      "from": "A",
-      "to": "B"
-    },
-    {
-      "from": "B",
-      "to": "C"
-    },
-    {
-      "from": "C",
-      "to": "D"
-    },
-    {
-      "from": "A",
-      "to": "C",
-      "dampering": 0.5
-    },
-    {
-      "from": "C",
-      "to": "B"
-    },
-    {
-      "from": "B",
-      "to": "D",
-      "dampering": 0.5
-    }
+    { "from": "A", "to": "B" },
+    { "from": "B", "to": "C" },
+    { "from": "C", "to": "D" },
+    { "from": "C", "to": "B" },
+    { "from": "A", "to": "C", "dampering": 0.5 },
+    { "from": "B", "to": "D", "dampering": 0.5 }
   ],
   "passengers": [{
     "from": "A",
     "to": "D"
   }],
-  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
+  "codeSample": "function init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\t\n\tv.on('idle', function(city) {\n\t\t\n\t});\n}\n",
   "helpText": [
-"In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City"
-],
+    "Every <c>City</c> instance has a property called <m c=\"City\">roads</m>. It is a list of <c>Road</c>s that run from the city to other cities;",
+    "The <c>Game</c> instance (last parameter of function <m c=\"global\">init</m>) has a method - <m c=\"Game\">GetTimeBetween</m> - that can provide the time to travel from a <c>City</c> to another;",
+    "This challenge has a time limit of 5 seconds. Your <c>Vehicle</c> better choose the best path!."
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single car to city \"D\"",
-      "function" : "function (vehicles, cities, passengers, game) { return vehicles[0].lastCity.id == 'D'; }"
+      "text" : "Delivery of the <c>Passenger</c> to city \"D\"",
+      "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered > 0; }"
     },
     "defeat" : {
-      "text" : "Timer goes over 5 seconds",
-      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeMS > 5000; }"
+      "text" : "Timer must not go over 7 seconds",
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 7; }"
     }
   }
 }

@@ -38,6 +38,9 @@ class Logger {
   }
 
   getLogHTML(status, text) {
+    if (text instanceof Array) {
+      text = `[${text.toString()}]`;
+    }
     text = '[' + status  + '] ' + LinkWriter.Parse(text.toString());
     return '<div class="log' + (status ? ' log-' + status.trim() : '') +'">' + text + '</div>';
   }

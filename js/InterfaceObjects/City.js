@@ -61,7 +61,7 @@ class City extends GameInterface {
  * @param {('newPassenger')} name Name of this event
  * @param {Function} onNewPassenger - Function that is called when this this city gets a new {@link Passenger}, receives as argument the {@link Passenger}.
  * @example
- * function init (vehicles, cities, passengers, game, stats) {
+ * function init (vehicles, cities, passengers, game) {
  *    let city = cities[0];
  *    city.on('newPassenger', function(passenger) {
  *      // do something?

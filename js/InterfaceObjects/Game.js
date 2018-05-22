@@ -67,7 +67,8 @@ class Game {
   }
 
   /**
-   * Use this method write to the console at the bottom of the screen.
+   * Use this property to get a reference to the console (at the bottom of the screen) and to write to it. View the below example for use cases.
+   * 
    * @example <caption>You have to specify a logging level to write, as exemplified below </caption>
    * 
    * game.log.error("This is a error message");
@@ -98,7 +99,7 @@ class Game {
    * Quantity of passengers already delivered.
    * @type {Integer}
    */
-  get passengersDeliverd() {
+  get passengersDelivered() {
     return this.autos.gameStats.passengersDelivered;
   } 
 }

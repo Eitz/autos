@@ -1,57 +1,20 @@
 {
   "name": "Challenge #8: Passengers... passengers everywhere!",
-  "description": "And they keep coming! Deliver them all before the timer runs out!",
+  "description": "In this challenge <c>Passenger</c>s will keep coming randomly between each <c>City</c>. You have two <c>Vehicle</c>s to help you deliver them. Your objective is <b>to deliver 20 <c>Passenger</c>s under 60 seconds</b>.",
   "randomPassengers": {
-    "delayMS": 2000,
+    "delayMS": 1500,
     "cities": [],
     "randomFactorMS": 500
   },
   "cities": [
-    {
-      "id": "A",
-      "x": 160,
-      "y": 80
-    },
-    {
-      "id": "B",
-      "x": 260,
-      "y": 160
-    },
-    {
-      "id": "C",
-      "x": 90,
-      "y": 300,
-      "renderBottom": true
-    },
-    {
-      "id": "D",
-      "x": 415,
-      "y": 210,
-      "renderBottom": true
-    },
-    {
-      "id": "E",
-      "x": 440,
-      "y": 80
-    },
-    {
-      "id": "F",
-      "x": 420,
-      "y": 340,
-      "renderBottom": true
-    },
-    {
-      "id": "G",
-      "x": 540,
-      "y": 220,
-      "renderBottom": true
-    },
-    {
-      "id": "H",
-      "x": 560,
-      "y": 90,
-      "renderBottom": true
-    }    
+    { "id": "A", "x": 160, "y": 80 },
+    { "id": "B", "x": 260, "y": 160 },
+    { "id": "C", "x":  90, "y": 300, "renderBottom": true },
+    { "id": "D", "x": 415, "y": 210, "renderBottom": true },
+    { "id": "E", "x": 440, "y": 80 },
+    { "id": "F", "x": 420, "y": 340, "renderBottom": true },
+    { "id": "G", "x": 540, "y": 220, "renderBottom": true },
+    { "id": "H", "x": 560, "y": 90, "renderBottom": true }    
   ],
   "vehicles": [
     { "type": 1, "city": "A" },
@@ -78,11 +41,14 @@
   ],
   "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
   "helpText": [
-"In this challenge your task is to move the single passenger to his desired destination.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City"
-],
+    "<c>Passenger</c>s appear every +-1.5 seconds;",
+    "Use both of your <c>Vehicle</c>s for optimal delivery;",
+    "Remember that the <c>Vehicle</c> has three events: <e c=\"Vehicle\">visitCity</e>, <e c=\"Vehicle\">idle</e> and <e c=\"Vehicle\">loadPassenger</e>",
+    "<c>City</c> class also has its own event when a <c>Passenger</c> appears: <e c=\"City\">newPassenger</e>;"
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single passenger to his desired destination.",
+      "text" : "Deliver 20 passengers to their desired destination.",
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered >= 20 }"
     },
     "defeat" : {

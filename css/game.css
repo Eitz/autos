@@ -129,7 +129,7 @@ html, body {
 #game #left-block,
 #game #right-block {
   margin-top: 14px;
-  height: 480px;
+  height: 440px;
   display: inline-block;
 }
 
@@ -338,6 +338,21 @@ body.modal-on {
 }
 
 .doc-link {
-  color: inherit;
   font-weight: 500;
+}
+
+.outside-link {
+  color: inherit;
+}
+
+.doc-link.doc-class {
+  font-weight: 700;
+  color: #3D348B;
+}
+
+.doc-link.doc-method {
+  color: #6D64AB;
+}
+.doc-link.doc-event {
+  color: #8A716A;
 }

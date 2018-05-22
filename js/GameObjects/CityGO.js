@@ -63,7 +63,7 @@ class CityGO extends GameObject {
   }
 
   removePassenger(passenger) {
-    this.passengers = this.passengers.filter(p => p !== passenger);
+    this.passengers.splice(this.passengers.indexOf(passenger), 1);
   }
 
   AddVehicle(vehicle) {
@@ -71,7 +71,7 @@ class CityGO extends GameObject {
   }
 
   RemoveVehicle(vehicle) {
-    this.vehicles = this.vehicles.filter(v => v !== vehicle);
+    this.vehicles.splice(this.vehicles.indexOf(vehicle), 1);
   }
 
   addRoad(road) {

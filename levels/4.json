@@ -1,78 +1,38 @@
 {
-  "name": "Desafio #4: O Primeiro passageiro",
-  "description": "Neste desafio você deve levar o passageiro até sua cidade de destino.",
+  "name": "Challenge #4: The First Passenger",
+  "description": "In this challenge you are tasked with <b>taking the single <c>Passenger</c> from <c>City</c> “D” to <c>City</c> “A”</b>. You have to <b>use the <c>Vehicle</c></b> that is already in the city.",
   "cities": [
-    {
-      "id": "A",
-      "x": 50,
-      "y": 225
-    },
-    {
-      "id": "B",
-      "x": 325,
-      "y": 300
-    },
-    {
-      "id": "C",
-      "x": 325,
-      "y": 150
-    },
-    {
-      "id": "D",
-      "x": 575,
-      "y": 225
-    }
+    { "id": "A", "x": 50, "y": 225 },
+    { "id": "B", "x": 325, "y": 300 },
+    { "id": "C", "x": 325, "y": 150 },
+    { "id": "D", "x": 575, "y": 225 }
   ],
   "vehicles": [
-    {
-      "type": "1",
-      "city": "D"
-    }
+    { "type": "1", "city": "D" }
   ],
   "roads": [
-    {
-      "from": "A",
-      "to": "B",
-      "hideInfo": true
-    },
-    {
-      "from": "C",
-      "to": "A",
-      "hideInfo": true
-    },
-    {
-      "from": "B",
-      "to": "C",
-      "hideInfo": true
-    },
-    {
-      "from": "C",
-      "to": "D",
-      "hideInfo": true
-    },
-    {
-      "from": "D",
-      "to": "B",
-      "hideInfo": true
-    }
+    { "from": "A", "to": "B", "hideInfo": true },
+    { "from": "C", "to": "A", "hideInfo": true },
+    { "from": "B", "to": "C", "hideInfo": true },
+    { "from": "C", "to": "D", "hideInfo": true },
+    { "from": "D", "to": "B", "hideInfo": true }
   ],
   "passengers": [
-    {
-      "from": "D",
-      "to": "A"
-    }
+    { "from": "D", "to": "A" }
   ],
-  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\tv.on('visitCity', function(city) {\r\n\t\t\r\n\t});\r\n}",
+  "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\tv.on('visitCity', function(city) {\n\t\t\n\t});\n}",
   "helpText": [
-"In this challenge your task is to move the only vehicle from city A to city C.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City"
-],
+    "The layout of cities is exactly the same as the previous challenge, so - being that way - some <c>Road</c>s are one-way only;",
+    "The <c>Vehicle</c> class has the method <m c=\"Vehicle\">load</m> that can pick up <c>Passenger</c>s that are in the same <c>City</c> as the <c>Vehicle</c>;",
+    "To unload a <c>Passenger</c>, use the method <m c=\"Vehicle\">unload</m> from the <c>Vehicle</c> class;"
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single passenger to \"A\"",
+      "text" : "Delivery of the single passenger to <c>City</c> \"A\"",
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered > 0; }"
     },
     "defeat" : {
-      "text" : "Timer goes over 10 seconds",
+      "text" : "Timer should not go over 10 seconds",
       "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 10; }"
     }
   }

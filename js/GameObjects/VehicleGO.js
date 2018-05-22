@@ -225,7 +225,7 @@ class VehicleGO extends GameObject {
   removePassenger(passenger) {
     if (passenger) {
       passenger.__gameObject__.unload(this.lastCity);  
-      this.passengers = this.passengers.filter(p => p !== passenger);
+      this.passengers.splice(this.passengers.indexOf(passenger), 1);
     } else {
       for (let p of this.passengers) {
         p.__gameObject__.unload(this.lastCity);

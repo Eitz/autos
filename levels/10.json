@@ -1,62 +1,19 @@
 {
-  "name": "Challenge #10: The hardest fast run!",
-  "description": "What is the best route to deliver the passengers?!",
+  "name": "Challenge #10: Optimal delivery.",
+  "description": "What is the best route to deliver all <c>Passenger</c>s?! Your objetive: <b>Find out the best route to deliver all 10 <c>Passenger</c>s</b>. Don't forget the one who is isolated at <c>City</c> \"J\"! Also, no random <c>Passenger</c>s this time.",
   "randomCityIds": false,
   "randomPassengers": {},
   "cities": [
-    {
-      "id": "A",
-      "x": 160,
-      "y": 80
-    },
-    {
-      "id": "B",
-      "x": 260,
-      "y": 160
-    },
-    {
-      "id": "C",
-      "x": 90,
-      "y": 300,
-      "renderBottom": true
-    },
-    {
-      "id": "D",
-      "x": 415,
-      "y": 210,
-      "renderBottom": true
-    },
-    {
-      "id": "E",
-      "x": 440,
-      "y": 80
-    },
-    {
-      "id": "F",
-      "x": 420,
-      "y": 340
-    },
-    {
-      "id": "G",
-      "x": 540,
-      "y": 220
-    },
-    {
-      "id": "H",
-      "x": 560,
-      "y": 90
-    },
-    {
-      "id": "I",
-      "x": 340,
-      "y": 280
-    },
-    {
-      "id": "J",
-      "x": 310,
-      "y": 360,
-      "renderBottom": true
-    }
+    { "id": "A", "x": 160, "y": 80 },
+    { "id": "B", "x": 260, "y": 160 },
+    { "id": "C", "x": 90, "y": 300, "renderBottom": true },
+    { "id": "D", "x": 415, "y": 210, "renderBottom": true },
+    { "id": "E", "x": 440, "y": 80 },
+    { "id": "F", "x": 420, "y": 340 },
+    { "id": "G", "x": 540, "y": 220 },
+    { "id": "H", "x": 560, "y": 90 },
+    { "id": "I", "x": 340, "y": 280 },
+    { "id": "J", "x": 310, "y": 360, "renderBottom": true }
   ],
   "vehicles": [
     { "type": 2, "city": "C" }
@@ -95,16 +52,20 @@
   ],
   "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
   "helpText": [
-"In this challenge your task is to move the single passenger to his desired destination.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City"
-],
+    "This is the classic <a class=\"outside-link\" href=\"https://en.wikipedia.org/wiki/Travelling_salesman_problem\" target=\"_blank\">Travelling Salesman Problem</a>;",
+    "Only the best route will win this challenge.",
+    "The optimal route will win this challenge in under 30 seconds",
+    "This is the last challenge, the Big boss! Don't give up.",
+    "Good luck!"
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single passenger to his desired destination.",
-      "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered >= 20 }"
+      "text" : "Deliver all the passengers to their desired destination.",
+      "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered == 10 }"
     },
     "defeat" : {
-      "text" : "Timer goes over 30 seconds",
-      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 60; }"
+      "text" : "Timer must not go over 30 seconds",
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 30; }"
     }
   }
 }

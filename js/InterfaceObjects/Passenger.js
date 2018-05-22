@@ -6,7 +6,7 @@
  * @hideconstructor
  *
  * @example <caption>Example of {@link Vehicle} taking a passenger and delivering him to his desired {@link City}</caption>
- * function init (vehicles, cities, passengers, game, stats) {
+ * function init (vehicles, cities, passengers, game) {
  *    
  *    // assuming they are in the same city
  *    let vehicle = vehicle[0];

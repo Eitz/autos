@@ -58,6 +58,9 @@ class Vehicle extends GameInterface {
      /**
       * Contains the information about this type of vehicle: capacity and type name.
       * @const {VehicleType}
+      * @example
+      * game.log.debug(vehicle.type.name); // outputs "car" or "bus"
+      * game.log.debug(vehicle.type.capacity); // outputs 4 or 10
       */
     this.type = vehicleGO.type;
 

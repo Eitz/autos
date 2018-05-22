@@ -22,6 +22,7 @@ class PassengerGO extends GameObject {
     this.size = 4;
     
     this.IEObject = new Passenger(this);
+    game.passengers.push(this.IEObject);
     this.fromCity.addPassenger(this.IEObject);
   }
 
@@ -57,6 +58,8 @@ class PassengerGO extends GameObject {
   load(vehicleGO) {
     this.onBoard = vehicleGO.IEObject;
     this.fromCity.removePassenger(this.IEObject);
+    let game = Autos.Instance();
+    game.passengers.splice(game.passengers.indexOf(this.IEObject), 1)
   }
 
   unload(city) {
@@ -65,6 +68,7 @@ class PassengerGO extends GameObject {
       let game = Autos.Instance();
       game.gameStats.addPassenger();
       game.controller.RemoveGameObject(this);
+      game.passengers.splice(game.passengers.indexOf(this.IEObject), 1)
     } else {
       this.lastCity = city;
       city.addPassenger(this.IEObject);

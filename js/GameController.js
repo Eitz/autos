@@ -17,7 +17,7 @@ class GameController {
   }
 
   RemoveGameObject(gameObject) {
-    this.gameObjects = this.gameObjects.filter(g => g !== gameObject);
+    this.gameObjects.splice(this.gameObjects.indexOf(gameObject), 1);
   }
 
   ReorderGameObjects() {

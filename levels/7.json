@@ -1,137 +1,53 @@
 {
-  "name": "Challenge #7: Delivery madness",
-  "description": "Description Description Description",
+  "name": "Challenge #7: Multiple passengers",
+  "description": "In this challenge four <c>Passenger</c>s are are spread between several different cities. <b>They all want to go to <c>City</c> \"D\"</b>. Make it happen in <b>under 12 seconds</b>! That's your objective.",
   "cities": [
-    {
-      "id": "A",
-      "x": 335,
-      "y": 320,
-      "renderBottom": true
-    },
-    {
-      "id": "B",
-      "x": 230,
-      "y": 215
-    },
-    {
-      "id": "C",
-      "x": 525,
-      "y": 300,
-      "renderBottom": true
-    },
-    {
-      "id": "D",
-      "x": 475,
-      "y": 50
-    },
-    {
-      "id": "E",
-      "x": 120,
-      "y": 110
-    },
-    {
-      "id": "F",
-      "x": 380,
-      "y": 200
-    }
+    { "id": "A", "x": 335, "y": 320, "renderBottom": true },
+    { "id": "B", "x": 230, "y": 215 },
+    { "id": "C", "x": 525, "y": 300, "renderBottom": true },
+    { "id": "D", "x": 475, "y": 50 },
+    { "id": "E", "x": 120, "y": 110 },
+    { "id": "F", "x": 380, "y": 200 }
   ],
   "vehicles": [
-    {
-      "type": 1,
-      "city": "A"
-    }],
+    { "type": 1, "city": "A" }
+  ],
   "roads": [
-    {
-      "from" : "A",
-      "to" : "B"
-    },
-    {
-      "from" : "B",
-      "to" : "A"
-    },
-    {
-      "from" : "A",
-      "to" : "C",
-      "dampering": 1.25
-    },
-    {
-      "from" : "C",
-      "to" : "A",
-      "dampering": 1.25
-    },
-    {
-      "from" : "D",
-      "to" : "C"
-    },
-    {
-      "from" : "C",
-      "to" : "D"
-    },
-    {
-      "from" : "B",
-      "to" : "F"
-    },
-    {
-      "from" : "F",
-      "to" : "B"
-    },
-    {
-      "from" : "C",
-      "to" : "F",
-      "dampering": 0.75
-    },
-    {
-      "from" : "F",
-      "to" : "C",
-      "dampering": 0.75
-    },
-    {
-      "from" : "D",
-      "to" : "F"
-    },
-    {
-      "from" : "F",
-      "to" : "D"
-    },
-    {
-      "from" : "E",
-      "to" : "B"
-    },
-    {
-      "from" : "B",
-      "to" : "E"
-    }
+    { "from" : "A", "to" : "B" },
+    { "from" : "B", "to" : "A" },
+    { "from" : "A", "to" : "C", "dampering": 1.25 },
+    { "from" : "C", "to" : "A", "dampering": 1.25 },
+    { "from" : "D", "to" : "C" },
+    { "from" : "C", "to" : "D" },
+    { "from" : "B", "to" : "F" },
+    { "from" : "F", "to" : "B" },
+    { "from" : "C", "to" : "F", "dampering": 0.75 },
+    { "from" : "F", "to" : "C", "dampering": 0.75 },
+    { "from" : "D", "to" : "F" },
+    { "from" : "F", "to" : "D" },
+    { "from" : "E", "to" : "B" },
+    { "from" : "B", "to" : "E" }
   ],
   "passengers": [
-    {
-      "from": "A",
-      "to": "D"
-    },
-    {
-      "from": "E",
-      "to": "D"
-    },
-    {
-      "from": "B",
-      "to": "D"
-    },
-    {
-      "from": "C",
-      "to": "D"
-    }
+    { "from": "A", "to": "D" },
+    { "from": "E", "to": "D" },
+    { "from": "B", "to": "D" },
+    { "from": "C", "to": "D" }
   ],
   "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\r\n\tlet v = vehicles[0];\r\n\t\/*\tThe class Vehicle has some events that\r\n\t\tcan help you out while moving your\r\n\t\tvehicles from city to city.\r\n\t\t\r\n\t\tThe \"visitCity\" event is triggered\r\n\t\tevery time the vehicle visits a city.\r\n\t*\/\r\n\t\r\n\tv.on('idle', function(city) {\r\n\t\tv.moveTo(['B','C','D','C','A']);\r\n\t});\r\n}",
   "helpText": [
-"In this challenge your task is to move the single passenger to his desired destination.</p><p><strong>Vehicle</strong> Class<p><p><strong>moveTo(targetCity)</strong> Method<br />- targetCity can be an string with the city ID or an instance of City"
-],
+    "Supplying arrays as arguments to <c>Vehicle</c>'s <m c=\"Vehicle\">moveTo</m>, <m c=\"Vehicle\">load</m> and <m c=\"Vehicle\">unload</m> is an good way to make this challenge easy;",
+    "The <m c=\"Vehicle\">unload</m> method can be called without arguments to drop everyone from the <c>Vehicle</c>;",
+    "There's only a single winning path in this challenge;"
+  ],
   "conditions" : {
     "victory": {
-      "text" : "Deliver the single passenger to his desired destination.",
-      "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered == 4 }"
+      "text" : "Deliver all the passengers to their desired destination.",
+      "function" : "function (vehicles, cities, passengers, game) { console.log(game); return game.passengersDelivered == 4 }"
     },
     "defeat" : {
-      "text" : "Timer goes over 8 seconds",
-      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeMS > 8; }"
+      "text" : "Timer goes over 12 seconds",
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 12; }"
     }
   }
 }

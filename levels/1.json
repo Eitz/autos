@@ -13,10 +13,10 @@
     { "id": "2", "from": "B", "to": "A", "hideInfo": true }
   ],
   "passengers": [],
-  "codeSample": "// executed at the start of the game\nfunction init (vehicles, cities, passengers, game) {\n\t// getting the first vehicle\n\tlet v = vehicles[0];\n\t// (maybe move it?)\n}",
+  "codeSample": "// executed at the start of the game\nfunction init (vehicles, cities, passengers, game) {\n\t// getting the first vehicle\n\tlet v = vehicles[0];\n\t// (maybe move it?)\n}\n",
   "helpText": [
     "The function <m c=\"global\">init</m> gets executed automatically when you press the \"Start\" button;",
-    "Whenever a method, class or property is mentioned here, in the console or in the description, it will have a link to its full documentation, like this: <c>Vehicle</c>;",
+    "Whenever a method, class or property is mentioned here, in the console or in the description, it will have a link to its full documentation, like this: class <c>Vehicle</c>, function <m c=\"global\">init</m>;",
     "You can move the single <c>Vehicle</c> from <c>City</c> A to <c>City</c> B by using the <c>Vehicle</c>'s method <m c=\"Vehicle\">moveTo</m>;"  
   ],    
   "conditions" : {
