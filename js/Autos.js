@@ -49,6 +49,8 @@ class Autos {
 			btn.disabled = btn.classList.contains('primary');
 		}
 		
+		this.elements.buttons.speed[this.elements.buttons.speed.length-1].disabled = true;
+		
 		this.vehicles = [];
 		this.cities = [];
 		this.passengers = [];
@@ -100,13 +102,14 @@ class Autos {
 	}
 
 	Start() {
+		this.elements.buttons.speed[this.elements.buttons.speed.length-1].disabled = false;
 		this.elements.buttons.reset.classList.remove('primary');
 		this.elements.buttons.start.disabled = true;
 		this.elements.buttons.reset.disabled = false;
 		this.elements.buttons.start.classList.remove('primary');
 		for (let btn of this.elements.buttons.speed) {
 			btn.disabled = btn.classList.contains('primary');
-		}		
+		}
 		this.log.debug(`The game has started!`);
 		this.controller.Start();
 		let gameCode = this.GetCode();
@@ -204,7 +207,7 @@ class Autos {
 		this.elements.buttons.start.classList.add('primary');
 		for (let btn of this.elements.buttons.speed) {
 			btn.disabled = true;
-		}		
+		}
 		this.controller.Stop();
 		this.Setup(this.cachedChallenge);
 	}

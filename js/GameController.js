@@ -41,6 +41,28 @@ class GameController {
 
   Pause() {
     this.isGameRunning = false;
+    this.RenderPause();
+  }
+
+  RenderPause() {
+    
+    let sizeX = 120;
+    let sizeY = 40;
+
+    let pos = new Vector2(
+      this.canvas.width/2, this.canvas.height/2
+    );
+
+    this.ctx2D.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    this.ctx2D.fillRect(pos.x - sizeX/2 - 3, pos.y - sizeY/2-3, sizeX+6, sizeY+6);
+
+    this.ctx2D.fillStyle = 'rgba(61,52,139, 0.6)';
+    this.ctx2D.fillRect(pos.x - sizeX/2, pos.y - sizeY/2, sizeX, sizeY);
+
+    this.ctx2D.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    this.ctx2D.textAlign = 'center'
+    this.ctx2D.font = 'bold 14px Arial';
+    this.ctx2D.fillText("Game Paused", pos.x, pos.y+5);
   }
 
   Unpause() {
