@@ -53,7 +53,7 @@
   ],
   "codeSample": "\nfunction init (vehicles, cities, passengers, game) {\n\t\n}",
   "helpText": [
-    "This is the classic <a class=\"outside-link\" href=\"https://en.wikipedia.org/wiki/Travelling_salesman_problem\" target=\"_blank\">Travelling Salesman Problem</a>;",
+    "This is similar to the classic <a class=\"outside-link\" href=\"https://en.wikipedia.org/wiki/Travelling_salesman_problem\" target=\"_blank\">Travelling Salesman Problem</a>;",
     "Only the best route will win this challenge.",
     "The optimal route will win this challenge in under 30 seconds",
     "This is the last challenge, the Big boss! Don't give up.",

@@ -6,8 +6,8 @@ function init (vehicles, cities, passengers, game) {
 	let startingCity = v.currentCity;
 	let middleCities = startingCity.connectedCities;
 	
-	let t1 = util.GetTimeBetween(startingCity, middleCities[0]);
-	let t2 = util.GetTimeBetween(startingCity, middleCities[1]);
+	let t1 = game.GetTimeBetween(startingCity, middleCities[0]);
+	let t2 = game.GetTimeBetween(startingCity, middleCities[1]);
 	
 	let middleCity;
 	if (t1 < t2) {

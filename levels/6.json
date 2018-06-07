@@ -22,7 +22,7 @@
   "passengers": [
     { "from": "A", "to": "D" }
   ],
-  "codeSample": "function init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\t\n\tv.on('idle', function(city) {\n\t\t\n\t});\n}\n",
+  "codeSample": "function init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\t\n\tv.on('visitCity', function(city) {\n\t\t\n\t});\n}\n",
   "helpText": [
     "The <c>City</c>'s property <m c=\"City\">id</m> will randomly change each run, so, pay attention to not hardcode it;",
     "Use the List of cities from <m c=\"global\">init</m> to your favor;",
