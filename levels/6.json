@@ -24,9 +24,10 @@
   ],
   "codeSample": "function init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\t\n\tv.on('visitCity', function(city) {\n\t\t\n\t});\n}\n",
   "helpText": [
+    "Every <c>City</c> instance has a property called <m c=\"City\">connectedCities</m>. It is a list of <c>City</c>(es) that are connected to this city;",
     "The <c>City</c>'s property <m c=\"City\">id</m> will randomly change each run, so, pay attention to not hardcode it;",
     "Use the List of cities from <m c=\"global\">init</m> to your favor;",
-    "Destination and starting <c>City</c> are the key in this challenge."
+    "Destination and starting <c>City</c> are the key in this challenge. Every <c>Passenger</c> has a property <m c=\"Passenger\">to</m> which contains the instance of <c>City</c> he wants to go."
   ],
   "conditions" : {
     "victory": {

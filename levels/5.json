@@ -24,9 +24,10 @@
   }],
   "codeSample": "function init (vehicles, cities, passengers, game) {\n\tlet v = vehicles[0];\n\t\n\t\n\tv.on('visitCity', function(city) {\n\t\t\n\t});\n}\n",
   "helpText": [
-    "Every <c>City</c> instance has a property called <m c=\"City\">roads</m>. It is a list of <c>Road</c>s that run from the city to other cities;",
+    "Every <c>City</c> instance has a property called <m c=\"City\">connectedCities</m>. It is a list of <c>City</c>(es) that are connected to this city;",
     "The <c>Game</c> instance (last parameter of function <m c=\"global\">init</m>) has a method - <m c=\"Game\">GetTimeBetween</m> - that can provide the time to travel from a <c>City</c> to another;",
-    "This challenge has a time limit of 5 seconds. Your <c>Vehicle</c> better choose the best path!."
+    "This challenge has a time limit of 7 seconds. Your <c>Vehicle</c> better choose the best path!.",
+    "Every <c>Passenger</c> has a property <m c=\"Game\">to</m> which contains the instance of <c>City</c> he wants to go."
   ],
   "conditions" : {
     "victory": {
