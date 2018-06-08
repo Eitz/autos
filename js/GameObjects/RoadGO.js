@@ -104,7 +104,7 @@ class RoadGO extends GameObject {
 
   RenderTime(ctx, fontSize, x, y) {
     if (this.shouldRenderInfo && this.renderThisSide) {
-      let t = this.GetTravelTime(Autos.Instance().vehicleVelocity);
+      let t = this.GetTravelTime(Autos.Instance().vehicleVelocity) + "";
       t = t.replace('.00', '');
       
       let bold = '';
@@ -219,7 +219,7 @@ class RoadGO extends GameObject {
     /** @type {Vector2} */
     let b = this.to.pos;
 
-    return (Math.hypot(b.x-a.x, b.y-a.y) / velocity / 1000 / this.dampering ).toFixed(2);
+    return parseFloat((Math.hypot(b.x-a.x, b.y-a.y) / velocity / 1000 / this.dampering ).toFixed(2));
   }
 
   GetMiddlePointInSegment(n, nMax) {

@@ -143,7 +143,7 @@ class Vehicle extends GameInterface {
    * */
   load(passengers) {
     if (passengers && passengers instanceof Array) {
-      for (let p of passengers) {
+      for (let p of [...passengers]) {
         this.__gameObject__.addPassenger(p);
       }
     } else {
