@@ -16,8 +16,8 @@
     { "from": "B", "to": "C" },
     { "from": "C", "to": "D" },
     { "from": "C", "to": "B" },
-    { "from": "A", "to": "C", "dampering": 0.5 },
-    { "from": "B", "to": "D", "dampering": 0.5 }
+    { "from": "A", "to": "C", "dampering": 0.3 },
+    { "from": "B", "to": "D", "dampering": 0.3 }
   ],
   "passengers": [
     { "from": "A", "to": "D" }
@@ -34,8 +34,8 @@
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered > 0; }"
     },
     "defeat" : {
-      "text" : "Timer must not go over 10 seconds",
-      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 10; }"
+      "text" : "Timer must not go over 9 seconds",
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 9; }"
     }
   }
 }
