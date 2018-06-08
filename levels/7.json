@@ -43,7 +43,7 @@
   "conditions" : {
     "victory": {
       "text" : "Deliver all the passengers to their desired destination.",
-      "function" : "function (vehicles, cities, passengers, game) { console.log(game); return game.passengersDelivered == 4 }"
+      "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered == 4 }"
     },
     "defeat" : {
       "text" : "Timer must not go over 12 seconds",
