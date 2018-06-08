@@ -210,7 +210,7 @@ class VehicleGO extends GameObject {
       return;
     }
 
-    if (passenger.lastCity != this.lastCity.IEObject) {
+    if (passenger.lastCity != this.currentCity.IEObject) {
       let err = new CommandError(`${this.IEObject} tried to load a passenger that is not in this city: '${passenger}' from ${passenger.lastCity}`);
       Autos.Instance().log.error(err);
       return;
