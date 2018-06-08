@@ -153,13 +153,13 @@ class VehicleGO extends GameObject {
   ArriveCity(city) {
     this.pos.x = city.pos.x;
     this.pos.y = city.pos.y;
-    this.lastCity = city;
-    this.IEObject.lastCity = city.IEObject;
     this.currentCity = city.IEObject;
     this.IEObject.currentCity = city.IEObject;
     city.AddVehicle(this);
     this._travelTo.shift();
     this.trigger('visitCity', [city.IEObject]);
+    this.lastCity = city;
+    this.IEObject.lastCity = city.IEObject;
     this.IEObject.currentRoute.shift();
   }
 
