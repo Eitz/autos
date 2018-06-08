@@ -224,11 +224,11 @@ class VehicleGO extends GameObject {
 
   removePassenger(passenger) {
     if (passenger) {
-      passenger.__gameObject__.unload(this.currentCity);  
+      passenger.__gameObject__.unload(this.currentCity.__gameObject__);  
       this.passengers.splice(this.passengers.indexOf(passenger), 1);
     } else {
       for (let p of this.passengers) {
-        p.__gameObject__.unload(this.currentCity);
+        p.__gameObject__.unload(this.currentCity.__gameObject__);
       }
       this.passengers = [];
     }    
