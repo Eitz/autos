@@ -156,15 +156,24 @@ class Vehicle extends GameInterface {
    * @param {Passenger|Passenger[]} passengers - Passenger(s) to unload
    * */
   unload(passengers) {
-    if (this.currentCity)
+    if (this.currentCity) {
       if (passengers && passengers instanceof Array) {
         for (let p of passengers) {
-          this.__gameObject__.removePassenger(p);
+          if (p.onBoard == this) {
+            this.__gameObject__.removePassenger(p);
+          } else {
+            Autos.Instance().log.error(new CommandError(`${this} can't unload a passenger that is not on the Vehicle: '${p}'`));
+          }
         }
       } else {
-        this.__gameObject__.removePassenger(passengers);
+        console.log(passengers.onBoard, this)
+        if (passengers.onBoard == this) {
+          this.__gameObject__.removePassenger(passengers);
+        } else {
+          Autos.Instance().log.error(new CommandError(`${this} can't unload a passenger that is not on the Vehicle: '${passengers}'`));
+        }
       }
-    else {
+    } else {
       Autos.Instance().log.error(new CommandError(`${this} can't unload a passengers on the road!: '${passengers}'`));
     }
 

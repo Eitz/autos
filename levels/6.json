@@ -1,6 +1,6 @@
 {
   "name": "Challenge #6: Mistery Cities (?)",
-  "description": "It's the same objective as in the last challenge, except that in this one you can't see <c>City</c>'s ID before the game starts! <b>Deviver the <c>Passenger</c> wherever he demands.</b> That's your objective.",
+  "description": "It's the same objective as in the last challenge, except that in this one you can't see <c>City</c>'s ID before the game starts! <b>Deliver the <c>Passenger</c> wherever he demands.</b> That's your objective.",
   "randomCityIds": true,
   "cities": [
     { "id": "A", "x": 100, "y": 315, "renderBottom": true },
