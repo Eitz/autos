@@ -161,7 +161,7 @@ class Vehicle extends GameInterface {
     }
     if (this.currentCity) {
       if (passengers && passengers instanceof Array && passengers.length > 0) {
-        for (let p of passengers) {
+        for (let p of [...passengers]) {
           if (p.onBoard == this) {
             this.__gameObject__.removePassenger(p);
           } else {
