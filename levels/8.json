@@ -52,7 +52,7 @@
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered >= 20 }"
     },
     "defeat" : {
-      "text" : "Timer must not go over 30 seconds",
+      "text" : "Timer must not go over 60 seconds",
       "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 60; }"
     }
   }
