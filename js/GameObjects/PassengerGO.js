@@ -58,24 +58,25 @@ class PassengerGO extends GameObject {
   load(vehicleGO) {
     this.onBoard = vehicleGO.IEObject;
     this.IEObject.onBoard = this.onBoard;
-    this.fromCity.removePassenger(this.IEObject);
+    this.lastCity.removePassenger(this.IEObject);
     let game = Autos.Instance();
     game.passengers.splice(game.passengers.indexOf(this.IEObject), 1)
   }
 
   unload(city) {
-    if (city == this.toCity) {
-      let game = Autos.Instance();
+    let game = Autos.Instance();
+    if (city === this.toCity) {
       game.gameStats.addPassenger();
       game.controller.RemoveGameObject(this);
-      game.passengers.splice(game.passengers.indexOf(this.IEObject), 1)
     } else {
       this.lastCity = city;
+      this.IEObject.lastCity = city.IEObject;
       city.addPassenger(this.IEObject);
       this.pos = new Vector2(city.pos.x, city.pos.y);
+      game.passengers.push(this.IEObject);
     }
     this.onBoard = undefined;
-    this.IEObject.onBoard = this.onBoard;    
+    this.IEObject.onBoard = undefined;
   }
 
   getWaitingTimeInSeconds() {

@@ -55,7 +55,7 @@
   "helpText": [
     "This is similar to the classic <a class=\"outside-link\" href=\"https://en.wikipedia.org/wiki/Travelling_salesman_problem\" target=\"_blank\">Travelling Salesman Problem</a>;",
     "Only the best route will win this challenge.",
-    "The optimal route will win this challenge in under 30 seconds",
+    "The optimal route will win this challenge in about 15 seconds",
     "This is the last challenge, the Big boss! Don't give up.",
     "Good luck!"
   ],
@@ -65,8 +65,8 @@
       "function" : "function (vehicles, cities, passengers, game) { return game.passengersDelivered == 10 }"
     },
     "defeat" : {
-      "text" : "Timer must not go over 30 seconds",
-      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 30; }"
+      "text" : "Timer must not go over 15 seconds",
+      "function" : "function (vehicles, cities, passengers, game) { return game.elapsedTimeSeconds > 15; }"
     }
   }
 }
